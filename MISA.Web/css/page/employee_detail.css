@@ -1,0 +1,48 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    width: 1000px;
+    height: 800px;
+    margin: auto;
+    border: 1px solid black;
+    padding: 16px;
+}
+.header {
+    width: 100%;
+    height: 50px;
+}
+.main {
+    display: flex;
+    height: calc(100% - 50px);
+}
+.main .avatar {
+    width: 200px;
+    margin: 16px;
+}
+.main .content {
+    
+    height: 100%;
+    width: 100%; 
+}
+.avatar-img {
+    width: 200px;
+    height: 200px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url(/content/img/default-avatar.jpg);
+    border: 1px solid #bbbbbb;
+    border-radius: 200px;
+}
+.label-infor {
+    display: flex;
+    margin-top: 16px;
+    justify-content: space-between;
+}
+
+.label-infor .label span {
+    color: red;
+}

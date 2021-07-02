@@ -12,3 +12,14 @@ input::placeholder {
 .input-search {
     padding-left: 40px; 
 }
+input:focus {
+    border: 1px solid #019160;
+}
+.input-label {
+    width: 300px;
+    height: 40px;
+    padding-left: 16px;
+}
+.input-birth {
+    
+}
