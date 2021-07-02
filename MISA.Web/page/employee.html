@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    
+
     <title>Document</title>
     <link rel="stylesheet" href="/css/common/main.css">
     <link rel="stylesheet" href="/css/common/header.css">
@@ -13,7 +14,10 @@
     <link rel="stylesheet" href="/css/common/button.css">
     <link rel="stylesheet" href="/css/common/toolbar.css">
     <link rel="stylesheet" href="/css/common/input.css">
+    <link rel="stylesheet" href="/css/common/grid.css">
+    <link rel="stylesheet" href="/css/page/employee.css">
 </head>
+
 <body>
     <div class="navbar">
         <div class="logo-site">
@@ -23,23 +27,23 @@
         <div class="navbar-content">
             <div class="nav-item">
                 <div class="navbar-item-icon nav-item1"></div>
-                <div class="navbar-item-text">Tong quan</div>
+                <div class="navbar-item-text">Tổng quan</div>
             </div>
             <div class="nav-item">
                 <div class="navbar-item-icon nav-item2"></div>
-                <div class="navbar-item-text">Tong quan</div>
+                <div class="navbar-item-text">Báo cáo</div>
             </div>
             <div class="nav-item">
                 <div class="navbar-item-icon nav-item3"></div>
-                <div class="navbar-item-text">Tong quan</div>
+                <div class="navbar-item-text">Mua hàng</div>
             </div>
             <div class="nav-item">
                 <div class="navbar-item-icon nav-item4"></div>
-                <div class="navbar-item-text">Tong quan</div>
+                <div class="navbar-item-text">Danh mục nhân viên</div>
             </div>
             <div class="nav-item">
                 <div class="navbar-item-icon nav-item5"></div>
-                <div class="navbar-item-text">Tong quan</div>
+                <div class="navbar-item-text">Thiết lập hệ thống</div>
             </div>
         </div>
     </div>
@@ -58,19 +62,122 @@
         </div>
         <div class="filter-bar">
             <div class="filter-left">
-                <input type="text" placeholder="Tìm kiếm theo Mã, Tên nhân viên">
+                <input class="icon-search input-search" type="text" style="width: 250px;"
+                    placeholder="Tìm kiếm theo Mã, Tên nhân viên">
                 <select name="" id="">
+                    <option value="">Phòng đào tạo</option>
+                    <option value="">Phòng đào tạo</option>
                     <option value="">Phòng đào tạo</option>
                 </select>
             </div>
-            <div class="filter-right"></div>
+            <div class="filter-right">
+                <button class="m-second-button m-btn-refresh"></button>
+            </div>
         </div>
-        <div class="grid">
-
+        <div class="grid grid-employee">
+            <table border="0" cellspacing="0">
+                
+                    <tr>
+                        <th>Mã nhân viên</th>
+                        <th>Họ tên</th>
+                        <th>Giới tính</th>
+                        <th>Ngày sinh</th>
+                        <th>Điện thoại</th>
+                        <th>Email</th>
+                        <th>Chuc vu</th>
+                        <th>Phong ban</th>
+                        <th>Muc luong co ban</th>
+                        <th>Tinh trang cong viec</th>
+                    </tr>
+                
+                
+                    <tr>
+                        <td>NV-001</td>
+                        <td>Pham Nam Anh</td>
+                        <td>Nam</td>
+                        <td>29/09/2000</td>
+                        <td>0987654321</td>
+                        <td>namanh29tb@gmail.com</td>
+                        <td>Fresher</td>
+                        <td>Vien dao tao</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>NV-001</td>
+                        <td>Pham Nam Anh</td>
+                        <td>Nam</td>
+                        <td>29/09/2000</td>
+                        <td>0987654321</td>
+                        <td>namanh29tb@gmail.com</td>
+                        <td>Fresher</td>
+                        <td>Vien dao tao</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>NV-001</td>
+                        <td>Pham Nam Anh</td>
+                        <td>Nam</td>
+                        <td>29/09/2000</td>
+                        <td>0987654321</td>
+                        <td>namanh29tb@gmail.com</td>
+                        <td>Fresher</td>
+                        <td>Vien dao tao</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>NV-001</td>
+                        <td>Pham Nam Anh</td>
+                        <td>Nam</td>
+                        <td>29/09/2000</td>
+                        <td>0987654321</td>
+                        <td>namanh29tb@gmail.com</td>
+                        <td>Fresher</td>
+                        <td>Vien dao tao</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                
+            </table>
         </div>
         <div class="paging-bar">
-
+            <div class="page-num">
+                Hiển thị 1-10/1000 nhân viên
+            </div>
+            <div class="page-num">
+                <div class="page">
+                    <button><img src="/content/icon/btn-firstpage.svg" alt=""></button>
+                    
+                </div>
+                <div class="page">
+                    <button><img src="/content/icon/btn-prev-page.svg" alt=""></button>
+                </div>
+                <div class="page-num-item">
+                    <button>1</button>
+                </div>
+                <div class="page-num-item">
+                    <button>2</button>
+                </div>
+                <div class="page-num-item">
+                    <button>3</button>
+                </div>
+                <div class="page-num-item">
+                    <button>4</button>
+                </div>
+                <div class="page">
+                    <button><img src="/content/icon/btn-next-page.svg" alt=""></button>
+                </div>
+                <div class="page">
+                    <button><img src="/content/icon/btn-lastpage.svg" alt=""></button>
+                </div>
+            </div>
+            <div class="page-num">
+                10 nhân viên/trang
+            </div>
         </div>
     </div>
 </body>
+
 </html>

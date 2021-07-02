@@ -299,7 +299,7 @@ tr {
 }
 .page-num-item button:hover {
     background-color: #e5e5e5;
-    
+    cursor: pointer;
 }
 .page-num-item button:focus {
     background-color: #019160;

@@ -3,12 +3,15 @@
     display: flex;
     align-items: center;
     height: 40px;
-    border: 1px solid black;
+    
 }
-.filter-bar .filter-left {
-
+.filter-bar .filter-left select {
+    height: 40px;
+    border: 1px solid #bbbbbb;
+    outline: none;
 }
 .filter-bar .filter-right {
     position: absolute;
     right: 16px;
+    height: 40px;
 }

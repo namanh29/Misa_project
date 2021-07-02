@@ -1,11 +1,11 @@
 .content {
     position: absolute;
-    top: 61px;
+    top: 48px;
     left: 221px;
     width: calc(100% - 221px);
-    height: calc(100vh - 61px);
+    height: calc(100vh - 48px);
     background-color: #ffffff;
-    
+    padding: 0 16px;
 }
 /* Page tilte */
 .content .header-content {
@@ -28,10 +28,44 @@
 }
 
 /* Grid */
-.content .grid {
 
-}
 /* Paging-bar */
 .content .paging-bar {
-
+    height: 56px;
+    display: flex;
+    justify-content: space-between;
+}
+.page-num {
+    display: flex;
+    margin: auto 10px;
+}
+.page-num > div {
+    width: 30px;
+    height: 30px;
+    margin: auto 10px;
+    
+}
+.page > button {
+    border: none;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+.page-num-item > button {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #bbbbbb;
+    border-radius: 30px;
+    text-align: center;
+    line-height: 30px;
+    background-color: #ffffff;
+}
+.page-num-item button:hover {
+    background-color: #e5e5e5;
+    cursor: pointer;
+}
+.page-num-item button:focus {
+    background-color: #019160;
+    color: white;
 }
