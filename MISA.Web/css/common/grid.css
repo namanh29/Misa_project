@@ -2,60 +2,29 @@
     width: 100%;
     margin-top: 16px;
     height: 100%;
-    overflow-x: auto;
-}
-
-
-/* table {
-    width: 100%;
-    height: 100%;
-    overflow-x: scroll;
-    display: block;
-}
-
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-tbody {
-    display: block;
-    width: 100%;
-    height: 500px;
     overflow: auto;
 }
-thead {
-    display: block;
-    width: 100%;
-}
-thead tr{
-    width: 100%;
-    display: block;
-    
-} */
 
- /* th, td {
-    border-bottom: 1px solid #bbbbbb;
-    padding: 10px 16px;
-    text-align: left;
-    min-width: 200px;
-    text-overflow: ellipsis;
-} */
+.grid::-webkit-scrollbar-track {
+    width: 6px;
+    background-color: #bbb;
+}
+.grid::-webkit-scrollbar {
+    width: 5px !important;
+    height: 5px !important;
+}
+.grid::-webkit-scrollbar-thumb{
+    border-radius: 8px;
+    background-color: #808080;
+}
 
 table {
     
     width: 100%;
-    border-collapse: collapse;
-    
-    
+    border-collapse: collapse;   
     height: 100%;
 }
-/* thead, tbody {
-    display: block;
-}
-tbody {
-    overflow-y: scroll;
-    overflow-x: hidden;
-    height: 525px;
-} */
+
 table th {
     position: sticky;
     top: 0px;
@@ -68,7 +37,7 @@ tr, th, td {
 }
 
 td,th {
-    min-width: 200px
+    min-width: 150px
 }
 
 table tr:nth-child(odd) {

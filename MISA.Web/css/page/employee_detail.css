@@ -1,33 +1,33 @@
-* {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-}
 
 .container {
-    width: 1000px;
-    height: 800px;
+    width: 900px;
     margin: auto;
     border: 1px solid black;
-    padding: 16px;
+    position: relative;
 }
 .header {
     width: 100%;
-    height: 50px;
+    padding: 0 24px;
+}
+.header .header-title {
+    height: 24px;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 24px 0;
+    text-transform: uppercase;
 }
 .main {
     display: flex;
-    height: calc(100% - 50px);
+    padding: 24px;
 }
 .main .avatar {
     width: 200px;
-    margin: 16px;
+    margin-right: 16px;
 }
 .main .content {
-    
-    height: 100%;
     width: 100%; 
 }
+
 .avatar-img {
     width: 200px;
     height: 200px;
@@ -37,12 +37,41 @@
     border: 1px solid #bbbbbb;
     border-radius: 200px;
 }
+.infor-work {
+    margin-top: 24px;
+}
+.infor-common p, .infor-work p {
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
 .label-infor {
     display: flex;
     margin-top: 16px;
     justify-content: space-between;
 }
-
+.label-infor .label {
+    margin-bottom: 4px;
+}
 .label-infor .label span {
     color: red;
+}
+.footer {
+    align-items: center;
+    height: 60px;
+    width: 100%;
+    background-color: #e5e5e5;
+}
+.footer button {
+    float: right;
+    margin: 10px 24px;
+}
+
+hr {
+    margin-top: 8px;
+    width: 85px;
+    border: 3px solid #019160;
+}
+.avatar-des {
+    text-align: center;
 }

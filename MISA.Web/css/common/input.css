@@ -20,6 +20,14 @@ input:focus {
     height: 40px;
     padding-left: 16px;
 }
-.input-birth {
+select {
     
+    height: 40px;
+    outline: none;
+    border: 1px solid #bbbbbb;
+    border-radius: 4px;
+    padding-left: 16px;
+}
+select:focus {
+    border: 1px solid #019160;
 }

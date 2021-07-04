@@ -6,9 +6,8 @@
     
 }
 .filter-bar .filter-left select {
-    height: 40px;
-    border: 1px solid #bbbbbb;
-    outline: none;
+    width: 150px;
+    margin-left: 8px;
 }
 .filter-bar .filter-right {
     position: absolute;

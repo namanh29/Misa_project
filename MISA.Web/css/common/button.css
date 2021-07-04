@@ -13,9 +13,7 @@
     border: none;
     cursor: pointer;
 }
-.btn-default .icon-add {
-    background-position: center;
-}
+
 .btn-default:hover {
     background-color: #2fbe8e;
 }
@@ -41,4 +39,21 @@
     background-repeat: no-repeat;
     background-position: center;
     width: 40px;
+}
+.btn-cancel {
+    padding-left: 24px;
+    padding-right: 24px;
+}
+.btn-x {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    background-image: url('/content/icon/x.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    background-color: #ffffff;
+    cursor: pointer;
 }
