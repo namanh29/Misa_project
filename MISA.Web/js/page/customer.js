@@ -1,17 +1,16 @@
 $(document).ready(function(){
-    new EmployeeJS();
+    new CustomerJS();
 })
 
 /**
  * Class quản lý các sự kiện cho trang Employee
  * CreatedBy: PNANH (04/07/2021)
  */
-class EmployeeJS extends Base{
+class CustomerJS extends Base{
     constructor(){
         super();
         //this.loadData();
         this.getDataUrl();
-        this.initEvents();
     }
 
     getDataUrl(){
@@ -70,48 +69,6 @@ class EmployeeJS extends Base{
     //     })
     // }
 
-    initEvents(){
-        // $('tr').click(function () { 
-        //     alert("a");
-            
-        // });
-        $('tbody').on('click', 'tr', function(){
-            //alert("a");
-            // Xoa tat ca background color cua tr khac
-            let trSibling = $('tr').siblings();
-            $(trSibling).css('background', 'none')
-            // Hightlight row vua chon -> thay doi background color cua tr dang click
-            $(this).css('background', 'red')            
-        })
-        // $('tr').dbclick(function(){
-        //     $('.m-dialog').show();
-        // })
-        $('#btn-add').click(function(){
-            $('.m-dialog').show();
-        })
-        $('.btn-x').click(function(){
-            $('.m-dialog').hide();
-        })
-        $('.btn-cancel').click(function(){
-            $('.m-dialog').hide();
-        })
-        $('#btn-select1').click(function(){
-            $('#dropdown-list1').toggle();
-        })
-        $('#dropdown-list1 .item-list').click(function(){
-            var text = $(this).text();
-            $('#dropdown1 input').val(text);
-            $('#dropdown-list1').hide();
-        })
-        $('#btn-select2').click(function(){
-            $('#dropdown-list2').toggle();
-        })
-        $('#dropdown-list2 .item-list').click(function(){
-            var text = $(this).text();
-            $('#dropdown2 input').val(text);
-            $('#dropdown-list2').hide();
-        })
-    }
     /**
      * Thêm dữ liệu
      * CreatedBy: PNANH (04/07/2021)
@@ -138,15 +95,12 @@ class EmployeeJS extends Base{
 }
 
 /**
- * 
- */
-
-
-/**
  * Load dữ liệu
  * CreatedBy: PNANH (04/07/2021)
  */
-
+function loadData(){
+    
+}
 /** -------------------------------------------
  * Format dữ liệu ngày tháng sang ngày/tháng/năm
  * @param {any} date tham số có kiểu dữ liệu bất kì
@@ -162,7 +116,7 @@ function formatDate(date) {
             year = date.getFullYear();
         day = day < 10 ? '0' + day : day;
         month = month < 10 ? '0' + month : month;
-        return `${day}/${month}/${year}`;
+        return day + '/' + month + '/' + year;
     }
 }
 
@@ -172,16 +126,12 @@ function formatDate(date) {
  * CreatedBy: PNANH (04/07/2021)
  */
 function formatMoney(money){
-    // if(money == null){
-    //     return "";
-    // }
-    // else {
-    //     var num = money.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
-    //     return num;
-    // }
-    if(money) {
-        return money.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+    if(money == null){
+        return "";
     }
-    return "";
+    else {
+        var num = money.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+        return num;
+    }
     
 }

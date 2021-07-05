@@ -39,11 +39,18 @@ tr, th, td {
 td,th {
     min-width: 150px
 }
-
+tr:hover {
+    background-color: #e5e5e5;
+}
 table tr:nth-child(odd) {
     background-color: #f2f2f2;
 }
-
+table tr:nth-child(odd):hover {
+    background-color: #e5e5e5;
+}
 tr {
     border-bottom: 1px solid #bbbbbb;
+}
+tr:hover {
+    background-color: #e5e5e5;
 }

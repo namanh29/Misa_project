@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/common/main.css">
+    <link rel="stylesheet" href="/css/common/header.css">
+    <link rel="stylesheet" href="/css/common/navbar.css">
+    <link rel="stylesheet" href="/css/common/employee.css">
+    <link rel="stylesheet" href="/css/common/content.css">
+    <link rel="stylesheet" href="/css/common/icon.css">
+    <link rel="stylesheet" href="/css/common/button.css">
+    <link rel="stylesheet" href="/css/common/toolbar.css">
+    <link rel="stylesheet" href="/css/common/input.css">
+    <link rel="stylesheet" href="/css/common/grid.css">
+    <link rel="stylesheet" href="/css/page/employee.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="logo-site">
+            <div class="toggle-icon"></div>
+            <div class="cukcuk-logo"></div>
+        </div>
+        <div class="navbar-content">
+            <a href="#" class="nav-item">
+                <div class="navbar-item-icon nav-item1"></div>
+                <div class="navbar-item-text">Tổng quan</div>
+            </a>
+            <a href="#" class="nav-item">
+                <div class="navbar-item-icon nav-item2"></div>
+                <div class="navbar-item-text">Báo cáo</div>
+            </a>
+            <a href="#" class="nav-item">
+                <div class="navbar-item-icon nav-item3"></div>
+                <div class="navbar-item-text">Mua hàng</div>
+            </a>
+            <a href="/page/employee.html" class="nav-item">
+                <div class="navbar-item-icon nav-item4"></div>
+                <div class="navbar-item-text">Danh mục nhân viên</div>
+            </a>
+            <a href="/page/customer.html" class="nav-item">
+                <div class="navbar-item-icon nav-item4"></div>
+                <div class="navbar-item-text">Danh mục khách hàng</div>
+            </a>
+            <a href="#" class="nav-item">
+                <div class="navbar-item-icon nav-item5"></div>
+                <div class="navbar-item-text">Thiết lập hệ thống</div>
+            </a>
+        </div>
+    </div>
+    <div class="header">
+        <div class="header-title">Nhà hàng biển đông</div>
+        <div>
+            <div class="avatar-img"></div>
+            <div>Nguyễn Văn Mạnh</div>
+            <div class="option"></div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="header-content">
+            <div class="title">Danh sách nhân viên</div>
+            <div class="content-feature">
+                <button class="btn-default">
+                    <div class="icon-add"></div>
+                    <div class="btn-text">Thêm nhân viên</div>
+                </button>
+            </div>
+        </div>
+        <div class="filter-bar">
+            <div class="filter-left">
+                <input class="icon-search input-search" type="text" style="width: 275px;"
+                    placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại">
+                <select name="" id="">
+                    <option value="">Tất cả phòng ban</option>
+                    <option value="">Phòng đào tạo</option>
+                    <option value="">Phòng đào tạo</option>
+                </select>
+                <select name="" id="">
+                    <option value="">Tất cả vị trí</option>
+                    <option value="">Giám đốc</option>
+                    <option value="">Nhân viên</option>
+                </select>
+            </div>
+            <div class="filter-right">
+                <button class="m-second-button m-btn-refresh"></button>
+            </div>
+        </div>
+        <div class="grid grid-employee">
+            <table border="0" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th fieldName="EmployeeCode">Mã nhân viên</th>
+                        <th fieldName="FullName">Họ tên</th>
+                        <th fieldName="GenderName">Giới tính</th>
+                        <th fieldName="DateOfBirth">Ngày sinh</th>
+                        <th fieldName="PhoneNumber">Điện thoại</th>
+                        <th fieldName="Email">Email</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- <tr>
+                        <td>NV-001</td>
+                        <td>Pham Nam Anh</td>
+                        <td>Nam</td>
+                        <td>29/09/2000</td>
+                        <td>0987654321</td>
+                        <td>namanh29tb@gmail.com</td>
+                        <td>Fresher</td>
+                        <td>Vien dao tao</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>NV-001</td>
+                        <td>Pham Nam Anh</td>
+                        <td>Nam</td>
+                        <td>29/09/2000</td>
+                        <td>0987654321</td>
+                        <td>namanh29tb@gmail.com</td>
+                        <td>Fresher</td>
+                        <td>Vien dao tao</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>NV-001</td>
+                        <td>Pham Nam Anh</td>
+                        <td>Nam</td>
+                        <td>29/09/2000</td>
+                        <td>0987654321</td>
+                        <td>namanh29tb@gmail.com</td>
+                        <td>Fresher</td>
+                        <td>Vien dao tao</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>NV-001</td>
+                        <td>Pham Nam Anh</td>
+                        <td>Nam</td>
+                        <td>29/09/2000</td>
+                        <td>0987654321</td>
+                        <td>namanh29tb@gmail.com</td>
+                        <td>Fresher</td>
+                        <td>Vien dao tao</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>NV-001</td>
+                        <td>Pham Nam Anh</td>
+                        <td>Nam</td>
+                        <td>29/09/2000</td>
+                        <td>0987654321</td>
+                        <td>namanh29tb@gmail.com</td>
+                        <td>Fresher</td>
+                        <td>Vien dao tao</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>NV-001</td>
+                        <td>Pham Nam Anh</td>
+                        <td>Nam</td>
+                        <td>29/09/2000</td>
+                        <td>0987654321</td>
+                        <td>namanh29tb@gmail.com</td>
+                        <td>Fresher</td>
+                        <td>Vien dao tao</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>NV-001</td>
+                        <td>Pham Nam Anh</td>
+                        <td>Nam</td>
+                        <td>29/09/2000</td>
+                        <td>0987654321</td>
+                        <td>namanh29tb@gmail.com</td>
+                        <td>Fresher</td>
+                        <td>Vien dao tao</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>NV-001</td>
+                        <td>Pham Nam Anh</td>
+                        <td>Nam</td>
+                        <td>29/09/2000</td>
+                        <td>0987654321</td>
+                        <td>namanh29tb@gmail.com</td>
+                        <td>Fresher</td>
+                        <td>Vien dao tao</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>NV-001</td>
+                        <td>Pham Nam Anh</td>
+                        <td>Nam</td>
+                        <td>29/09/2000</td>
+                        <td>0987654321</td>
+                        <td>namanh29tb@gmail.com</td>
+                        <td>Fresher</td>
+                        <td>Vien dao tao</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>NV-001</td>
+                        <td>Pham Nam Anh</td>
+                        <td>Nam</td>
+                        <td>29/09/2000</td>
+                        <td>0987654321</td>
+                        <td>namanh29tb@gmail.com</td>
+                        <td>Fresher</td>
+                        <td>Vien dao tao</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>NV-001</td>
+                        <td>Pham Nam Anh</td>
+                        <td>Nam</td>
+                        <td>29/09/2000</td>
+                        <td>0987654321</td>
+                        <td>namanh29tb@gmail.com</td>
+                        <td>Fresher</td>
+                        <td>Vien dao tao</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>NV-001</td>
+                        <td>Pham Nam Anh</td>
+                        <td>Nam</td>
+                        <td>29/09/2000</td>
+                        <td>0987654321</td>
+                        <td>namanh29tb@gmail.com</td>
+                        <td>Fresher</td>
+                        <td>Vien dao tao</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>NV-001</td>
+                        <td>Pham Nam Anh</td>
+                        <td>Nam</td>
+                        <td>29/09/2000</td>
+                        <td>0987654321</td>
+                        <td>namanh29tb@gmail.com</td>
+                        <td>Fresher</td>
+                        <td>Vien dao tao</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>NV-001</td>
+                        <td>Pham Nam Anh</td>
+                        <td>Nam</td>
+                        <td>29/09/2000</td>
+                        <td>0987654321</td>
+                        <td>namanh29tb@gmail.com</td>
+                        <td>Fresher</td>
+                        <td>Vien dao tao</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>NV-001</td>
+                        <td>Pham Nam Anh</td>
+                        <td>Nam</td>
+                        <td>29/09/2000</td>
+                        <td>0987654321</td>
+                        <td>namanh29tb@gmail.com</td>
+                        <td>Fresher</td>
+                        <td>Vien dao tao</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>NV-001</td>
+                        <td>Pham Nam Anh</td>
+                        <td>Nam</td>
+                        <td>29/09/2000</td>
+                        <td>0987654321</td>
+                        <td>namanh29tb@gmail.com</td>
+                        <td>Fresher</td>
+                        <td>Vien dao tao</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>NV-001</td>
+                        <td>Pham Nam Anh</td>
+                        <td>Nam</td>
+                        <td>29/09/2000</td>
+                        <td>0987654321</td>
+                        <td>namanh29tb@gmail.com</td>
+                        <td>Fresher</td>
+                        <td>Vien dao tao</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>NV-001</td>
+                        <td>Pham Nam Anh</td>
+                        <td>Nam</td>
+                        <td>29/09/2000</td>
+                        <td>0987654321</td>
+                        <td>namanh29tb@gmail.com</td>
+                        <td>Fresher</td>
+                        <td>Vien dao tao</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>NV-001</td>
+                        <td>Pham Nam Anh</td>
+                        <td>Nam</td>
+                        <td>29/09/2000</td>
+                        <td>0987654321</td>
+                        <td>namanh29tb@gmail.com</td>
+                        <td>Fresher</td>
+                        <td>Vien dao tao</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>NV-001</td>
+                        <td>Pham Nam Anh</td>
+                        <td>Nam</td>
+                        <td>29/09/2000</td>
+                        <td>0987654321</td>
+                        <td>namanh29tb@gmail.com</td>
+                        <td>Fresher</td>
+                        <td>Vien dao tao</td>
+                        <td></td>
+                        <td></td>
+                    </tr> -->
+                </tbody>
+            </table>
+        </div>
+        <div class="paging-bar">
+            <div class="page-num">
+                Hiển thị 1-10/1000 nhân viên
+            </div>
+            <div class="page-num">
+                <div class="page">
+                    <button><img src="/content/icon/btn-firstpage.svg" alt=""></button>
+                    
+                </div>
+                <div class="page">
+                    <button><img src="/content/icon/btn-prev-page.svg" alt=""></button>
+                </div>
+                <div class="page-num-item">
+                    <button>1</button>
+                </div>
+                <div class="page-num-item">
+                    <button>2</button>
+                </div>
+                <div class="page-num-item">
+                    <button>3</button>
+                </div>
+                <div class="page-num-item">
+                    <button>4</button>
+                </div>
+                <div class="page">
+                    <button><img src="/content/icon/btn-next-page.svg" alt=""></button>
+                </div>
+                <div class="page">
+                    <button><img src="/content/icon/btn-lastpage.svg" alt=""></button>
+                </div>
+            </div>
+            <div class="page-num">
+                10 nhân viên/trang
+            </div>
+        </div>
+    </div>
+
+    <script src="/lib/jquery-3.6.0.min.js"></script>
+    <script src="/js/common/common.js"></script>
+    <script src="/js/common/base.js"></script>
+    <script src="/js/page/customer.js"></script>
+</body>
+
+</html>

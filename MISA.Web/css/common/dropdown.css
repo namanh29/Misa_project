@@ -1,0 +1,36 @@
+.dropdown {
+    height: 40px;
+    
+    display: flex;
+    position: relative;
+}
+.dropdown .dropdown-btn-select {
+    width: 40px;
+    height: 40px;
+    background-image: url('/content/icon/refresh.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    outline: none;
+    border: 1px solid #bbbbbb;
+    cursor: pointer;
+}
+.dropdown-list {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    left: 0;
+    z-index: 100;
+    background-color: white;
+    display: none;
+    
+}
+.dropdown-list .item-list{
+    height: 40px;
+    border: 1px solid #bbbbbb;
+    text-align: center;
+    line-height: 40px;
+}
+.dropdown-list .item-list:hover {
+    background-color: #e9ebee;
+    cursor: pointer;
+}

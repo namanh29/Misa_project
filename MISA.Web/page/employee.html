@@ -6,16 +6,22 @@
 
     <title>Document</title>
     <link rel="stylesheet" href="/css/common/main.css">
+    <link rel="stylesheet" href="/css/common/dialog.css">
     <link rel="stylesheet" href="/css/common/header.css">
     <link rel="stylesheet" href="/css/common/navbar.css">
     <link rel="stylesheet" href="/css/common/employee.css">
     <link rel="stylesheet" href="/css/common/content.css">
     <link rel="stylesheet" href="/css/common/icon.css">
     <link rel="stylesheet" href="/css/common/button.css">
+    <link rel="stylesheet" href="/css/common/dropdown.css">
     <link rel="stylesheet" href="/css/common/toolbar.css">
     <link rel="stylesheet" href="/css/common/input.css">
     <link rel="stylesheet" href="/css/common/grid.css">
     <link rel="stylesheet" href="/css/page/employee.css">
+    <link rel="stylesheet" href="/css/page/employee_detail.css">
+    <link rel="stylesheet" href="/content/font/fontawesome-5.15.1/css/fontawesome.css">
+    <link rel="stylesheet" href="/content/font/fontawesome-5.15.1/css/regular.css">
+    
 </head>
 
 <body>
@@ -37,11 +43,11 @@
                 <div class="navbar-item-icon nav-item3"></div>
                 <div class="navbar-item-text">Mua hàng</div>
             </a>
-            <a href="#" class="nav-item">
+            <a href="/page/employee.html" class="nav-item">
                 <div class="navbar-item-icon nav-item4"></div>
                 <div class="navbar-item-text">Danh mục nhân viên</div>
             </a>
-            <a href="#" class="nav-item">
+            <a href="/page/customer.html" class="nav-item">
                 <div class="navbar-item-icon nav-item4"></div>
                 <div class="navbar-item-text">Danh mục khách hàng</div>
             </a>
@@ -63,7 +69,7 @@
         <div class="header-content">
             <div class="title">Danh sách nhân viên</div>
             <div class="content-feature">
-                <button class="btn-default">
+                <button class="btn-default" id="btn-add">
                     <div class="icon-add"></div>
                     <div class="btn-text">Thêm nhân viên</div>
                 </button>
@@ -73,16 +79,32 @@
             <div class="filter-left">
                 <input class="icon-search input-search" type="text" style="width: 275px;"
                     placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại">
-                <select name="" id="">
+                <!-- <select name="" id="">
                     <option value="">Tất cả phòng ban</option>
                     <option value="">Phòng đào tạo</option>
                     <option value="">Phòng đào tạo</option>
-                </select>
-                <select name="" id="">
+                </select> -->
+                <div class="dropdown" id="dropdown1">
+                    <input type="text">
+                    <button class="dropdown-btn-select" id="btn-select1"></button>
+                    <div class="dropdown-list" id="dropdown-list1">
+                        <div class="item-list">Tất cả phòng ban</div>
+                        <div class="item-list">Viện đào tạo</div>
+                    </div>
+                </div>
+                <!-- <select name="" id="">
                     <option value="">Tất cả vị trí</option>
                     <option value="">Giám đốc</option>
                     <option value="">Nhân viên</option>
-                </select>
+                </select> -->
+                <div class="dropdown" id="dropdown2">
+                    <input type="text">
+                    <button class="dropdown-btn-select" id="btn-select2"></button>
+                    <div class="dropdown-list" id="dropdown-list2">
+                        <div class="item-list">Tất cả vị trí</div>
+                        <div class="item-list">Giám đốc</div>
+                    </div>
+                </div>
             </div>
             <div class="filter-right">
                 <button class="m-second-button m-btn-refresh"></button>
@@ -95,13 +117,13 @@
                         <th fieldName="EmployeeCode">Mã nhân viên</th>
                         <th fieldName="FullName">Họ tên</th>
                         <th fieldName="GenderName">Giới tính</th>
-                        <th>Ngày sinh</th>
-                        <th>Điện thoại</th>
-                        <th>Email</th>
-                        <th>Chức vụ</th>
-                        <th>Phòng ban</th>
-                        <th>Mức lương cơ bản</th>
-                        <th>Tình trạng công việc</th>
+                        <th class="text-align-center" fieldName="DateOfBirth" formatType="ddmmyyyy">Ngày sinh</th>
+                        <th fieldName="PhoneNumber">Điện thoại</th>
+                        <th fieldName="Email">Email</th>
+                        <th fieldName="PositionName">Chức vụ</th>
+                        <th fieldName="DepartmentName">Phòng ban</th>
+                        <th class="text-align-right" fieldName="Salary" formatType="MoneyVnd">Mức lương cơ bản</th>
+                        <th fieldName="WorkStatus">Tình trạng công việc</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -117,222 +139,7 @@
                         <td></td>
                         <td></td>
                     </tr>
-                    <tr>
-                        <td>NV-001</td>
-                        <td>Pham Nam Anh</td>
-                        <td>Nam</td>
-                        <td>29/09/2000</td>
-                        <td>0987654321</td>
-                        <td>namanh29tb@gmail.com</td>
-                        <td>Fresher</td>
-                        <td>Vien dao tao</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>NV-001</td>
-                        <td>Pham Nam Anh</td>
-                        <td>Nam</td>
-                        <td>29/09/2000</td>
-                        <td>0987654321</td>
-                        <td>namanh29tb@gmail.com</td>
-                        <td>Fresher</td>
-                        <td>Vien dao tao</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>NV-001</td>
-                        <td>Pham Nam Anh</td>
-                        <td>Nam</td>
-                        <td>29/09/2000</td>
-                        <td>0987654321</td>
-                        <td>namanh29tb@gmail.com</td>
-                        <td>Fresher</td>
-                        <td>Vien dao tao</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>NV-001</td>
-                        <td>Pham Nam Anh</td>
-                        <td>Nam</td>
-                        <td>29/09/2000</td>
-                        <td>0987654321</td>
-                        <td>namanh29tb@gmail.com</td>
-                        <td>Fresher</td>
-                        <td>Vien dao tao</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>NV-001</td>
-                        <td>Pham Nam Anh</td>
-                        <td>Nam</td>
-                        <td>29/09/2000</td>
-                        <td>0987654321</td>
-                        <td>namanh29tb@gmail.com</td>
-                        <td>Fresher</td>
-                        <td>Vien dao tao</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>NV-001</td>
-                        <td>Pham Nam Anh</td>
-                        <td>Nam</td>
-                        <td>29/09/2000</td>
-                        <td>0987654321</td>
-                        <td>namanh29tb@gmail.com</td>
-                        <td>Fresher</td>
-                        <td>Vien dao tao</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>NV-001</td>
-                        <td>Pham Nam Anh</td>
-                        <td>Nam</td>
-                        <td>29/09/2000</td>
-                        <td>0987654321</td>
-                        <td>namanh29tb@gmail.com</td>
-                        <td>Fresher</td>
-                        <td>Vien dao tao</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>NV-001</td>
-                        <td>Pham Nam Anh</td>
-                        <td>Nam</td>
-                        <td>29/09/2000</td>
-                        <td>0987654321</td>
-                        <td>namanh29tb@gmail.com</td>
-                        <td>Fresher</td>
-                        <td>Vien dao tao</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>NV-001</td>
-                        <td>Pham Nam Anh</td>
-                        <td>Nam</td>
-                        <td>29/09/2000</td>
-                        <td>0987654321</td>
-                        <td>namanh29tb@gmail.com</td>
-                        <td>Fresher</td>
-                        <td>Vien dao tao</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>NV-001</td>
-                        <td>Pham Nam Anh</td>
-                        <td>Nam</td>
-                        <td>29/09/2000</td>
-                        <td>0987654321</td>
-                        <td>namanh29tb@gmail.com</td>
-                        <td>Fresher</td>
-                        <td>Vien dao tao</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>NV-001</td>
-                        <td>Pham Nam Anh</td>
-                        <td>Nam</td>
-                        <td>29/09/2000</td>
-                        <td>0987654321</td>
-                        <td>namanh29tb@gmail.com</td>
-                        <td>Fresher</td>
-                        <td>Vien dao tao</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>NV-001</td>
-                        <td>Pham Nam Anh</td>
-                        <td>Nam</td>
-                        <td>29/09/2000</td>
-                        <td>0987654321</td>
-                        <td>namanh29tb@gmail.com</td>
-                        <td>Fresher</td>
-                        <td>Vien dao tao</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>NV-001</td>
-                        <td>Pham Nam Anh</td>
-                        <td>Nam</td>
-                        <td>29/09/2000</td>
-                        <td>0987654321</td>
-                        <td>namanh29tb@gmail.com</td>
-                        <td>Fresher</td>
-                        <td>Vien dao tao</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>NV-001</td>
-                        <td>Pham Nam Anh</td>
-                        <td>Nam</td>
-                        <td>29/09/2000</td>
-                        <td>0987654321</td>
-                        <td>namanh29tb@gmail.com</td>
-                        <td>Fresher</td>
-                        <td>Vien dao tao</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>NV-001</td>
-                        <td>Pham Nam Anh</td>
-                        <td>Nam</td>
-                        <td>29/09/2000</td>
-                        <td>0987654321</td>
-                        <td>namanh29tb@gmail.com</td>
-                        <td>Fresher</td>
-                        <td>Vien dao tao</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>NV-001</td>
-                        <td>Pham Nam Anh</td>
-                        <td>Nam</td>
-                        <td>29/09/2000</td>
-                        <td>0987654321</td>
-                        <td>namanh29tb@gmail.com</td>
-                        <td>Fresher</td>
-                        <td>Vien dao tao</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>NV-001</td>
-                        <td>Pham Nam Anh</td>
-                        <td>Nam</td>
-                        <td>29/09/2000</td>
-                        <td>0987654321</td>
-                        <td>namanh29tb@gmail.com</td>
-                        <td>Fresher</td>
-                        <td>Vien dao tao</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>NV-001</td>
-                        <td>Pham Nam Anh</td>
-                        <td>Nam</td>
-                        <td>29/09/2000</td>
-                        <td>0987654321</td>
-                        <td>namanh29tb@gmail.com</td>
-                        <td>Fresher</td>
-                        <td>Vien dao tao</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                
                     <tr>
                         <td>NV-001</td>
                         <td>Pham Nam Anh</td>
@@ -355,7 +162,7 @@
             <div class="page-num">
                 <div class="page">
                     <button><img src="/content/icon/btn-firstpage.svg" alt=""></button>
-                    
+
                 </div>
                 <div class="page">
                     <button><img src="/content/icon/btn-prev-page.svg" alt=""></button>
@@ -385,6 +192,134 @@
         </div>
     </div>
 
+    <div class="m-dialog dialog-detail">
+        <div class="dialog-modal"></div>
+        <div class="dialog-content">
+            <div class="dialog-header">
+                <div class="header-title">Thông tin nhân viên</div>
+                <button class="btn-x"></button>
+            </div>
+            <div class="dialog-main">
+                <div class="dialog-avatar">
+                    <div class="avatar-img">
+                    </div>
+                    <div class="avatar-des">
+                        <p>(Vui lòng chọn ảnh có định</p>
+                        <p>dạng</p>
+                        <p>.jpg, .jpeg, .png, .gif. )</p>
+                    </div>
+                </div>
+                
+                <div class="dialog-infor">
+                    <div class="infor-common">
+                        <p>A. Thông tin chung:</p>
+                        <hr>
+                        <div class="label-infor">
+                            <div>
+                                <div class="label">Mã nhân viên (<span>*</span>)</div>
+                                <input class="input-label" type="text">
+                            </div>
+                            <div>
+                                <div class="label">Họ và tên (<span>*</span>)</div>
+                                <input class="input-label" type="text">
+                            </div>
+                        </div>
+                        <div class="label-infor">
+                            <div>
+                                <div class="label">Ngày sinh</div>
+                                <input class="input-label" type="date">
+                            </div>
+                            <div>
+                                <div class="label">Giới tính</div>
+                                <select class="input-label" name="" id="">
+                                    <option value="">Nam</option>
+                                    <option value="">Nữ</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="label-infor">
+                            <div>
+                                <div class="label">Số CMTND/ Căn cước (<span>*</span>)</div>
+                                <input class="input-label" type="text">
+                            </div>
+                            <div>
+                                <div class="label">Ngày cấp</div>
+                                <input class="input-label" type="date">
+                            </div>
+                        </div>
+                        <div class="label-infor">
+                            <div>
+                                <div class="label">Nơi cấp</div>
+                                <input class="input-label" type="text">
+                            </div>
+                            
+                        </div>
+                        <div class="label-infor">
+                            <div>
+                                <div class="label">Email (<span>*</span>)</div>
+                                <input class="input-label" type="text">
+                            </div>
+                            <div>
+                                <div class="label">Số điện thoại (<span>*</span>)</div>
+                                <input class="input-label" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="infor-work">
+                        <p>B. THÔNG TIN CÔNG VIỆC</p>
+                        <hr>
+                        <div class="label-infor">
+                            <div>
+                                <div class="label">Vị trí</div>
+                                <select class="input-label" name="" id="">
+                                    <option value="">Giám đốc</option>
+                                    <option value="">Nhân viên</option>
+                                </select>
+                            </div>
+                            <div>
+                                <div class="label">Phòng ban</div>
+                                <select class="input-label" name="" id="">
+                                    <option value="">Phòng nhân sự</option>
+                                    <option value="">Phòng nhân sự</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="label-infor">
+                            <div>
+                                <div class="label">Mã số thuế cá nhân</div>
+                                <input class="input-label" type="text">
+                            </div>
+                            <div>
+                                <div class="label">Mức lương cơ bản</div>
+                                <input class="input-label" type="text">
+                            </div>
+                        </div>
+                        <div class="label-infor">
+                            <div>
+                                <div class="label">Ngày gia nhâp công ty</div>
+                                <input class="input-label" type="date">
+                            </div>
+                            <div>
+                                <div class="label">Tình trạng công việc</div>
+                                <select class="input-label" name="" id="">
+                                    <option value="">Đang làm việc</option>
+                                    <option value="">Đang làm việc</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dialog-footer">
+                <button class="btn-default">
+                    <div class="icon-save"><i class="far fa-save"></i></div>
+                    <div class="btn-text">Lưu</div>
+                </button>
+                <button class="m-second-button btn-cancel">Hủy</button>
+                
+            </div>
+        </div>
+    </div>
     <script src="/lib/jquery-3.6.0.min.js"></script>
     <script src="/js/common/common.js"></script>
     <script src="/js/common/base.js"></script>
