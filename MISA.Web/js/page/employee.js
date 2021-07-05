@@ -10,44 +10,59 @@ class EmployeeJS extends Base{
     constructor(){
         super();
         this.loadData();
-        
     }
 
     /**
      * Load dữ liệu
      * CreatedBy: PNANH (04/07/2021)
      */
-    loadData(){
-        // Lấy dữ liệu về
-        $.ajax({
-            url: "",
-            method: "GET",
-        }).done(function(res) {
-            var data = res;
-            $.each(data, function(index, item){
-                var dateOfBirth = item['DateOfBirth'];
-                dateOfBirth = formatDate(dateOfBirth);
-                var salary = item['Salary'];
-                salary = formatMoney(salary);
-                var tr = $(`<tr>
-                                <td><div><span>`+ item['EmployeeCode'] +`</span></div></td>
-                                <td><div><span>`+ item['FullName'] +`</span></div></td>
-                                <td><div><span>`+ item['GenderName'] +`</span></div></td>
-                                <td><div><span>`+ dateOfBirth +`</span></div></td>
-                                <td><div><span>`+ item['PhoneNumber'] +`</span></div></td>
-                                <td><div><span>`+ item['Email'] +`</span></div></td>
-                                <td><div><span>`+ item['PositionName'] +`</span></div></td>
-                                <td><div><span>`+ item['DepartmentName'] +`</span></div></td>
-                                <td><div><span>`+ salary +`</span></div></td>
-                                <td><div><span>`+ item['WorkStatusName'] +`</span></div></td>
-                            </tr>`)
+    // loadData(){
+    //     // Lấy dữ liệu về
+    //     $.ajax({
+    //         url: "http://cukcuk.manhnv.net/v1/Employees",
+    //         method: "GET",
+    //     }).done(function(res) {
+    //         var data = res;
+    //         $.each(data, function(index, item){
+    //             var dateOfBirth = item['DateOfBirth'];
+    //             dateOfBirth = formatDate(dateOfBirth);
+    //             var salary = item['Salary'];
+    //             salary = formatMoney(salary);
+    //             var gender = item.GenderName;
+    //             if(gender == null){
+    //                 gender = "";
+    //             }
+    //             var position = item.PositionName;
+    //             if(position == null){
+    //                 position = "";
+    //             }
+    //             var department = item.DepartmentName;
+    //             if(department == null){
+    //                 department = "";
+    //             }
+    //             var workStatus = item.WorkStatus;
+    //             if (workStatus == null){
+    //                 workStatus = "";
+    //             }
+    //             var tr = $(`<tr>
+    //                             <td><div><span>`+ item['EmployeeCode'] +`</span></div></td>
+    //                             <td><div><span>`+ item['FullName'] +`</span></div></td>
+    //                             <td><div><span>`+ gender +`</span></div></td>
+    //                             <td><div><span>`+ dateOfBirth +`</span></div></td>
+    //                             <td><div><span>`+ item['PhoneNumber'] +`</span></div></td>
+    //                             <td><div><span>`+ item['Email'] +`</span></div></td>
+    //                             <td><div><span>`+ position +`</span></div></td>
+    //                             <td><div><span>`+ department +`</span></div></td>
+    //                             <td><div><span>`+ salary +`</span></div></td>
+    //                             <td><div><span>`+ workStatus +`</span></div></td>
+    //                         </tr>`)
 
-                $('table tbody').append(tr);
-            })
-        }).fail(function(res) {
+    //             $('table tbody').append(tr);
+    //         })
+    //     }).fail(function(res) {
 
-        })
-    }
+    //     })
+    // }
 
     /**
      * Thêm dữ liệu
@@ -106,6 +121,12 @@ function formatDate(date) {
  * CreatedBy: PNANH (04/07/2021)
  */
 function formatMoney(money){
-    var num = money.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
-    return num;
+    if(money == null){
+        return "";
+    }
+    else {
+        var num = money.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
+        return num;
+    }
+    
 }

@@ -46,7 +46,11 @@
             color: #000000;
             cursor: pointer;
         }
-
+        .navbar .navbar-content .nav-item:active {
+            background-color: #019601;
+            color: #ffffff;
+            cursor: pointer;
+        }
         .nav-item .navbar-item-icon {
             width: 20px;
             height: 20px;
