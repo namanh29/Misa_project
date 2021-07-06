@@ -1,36 +1,95 @@
 .dropdown {
     height: 40px;
-    
+    margin-left: 16px;
     display: flex;
     position: relative;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    padding-left: 16px;
+    
+}
+.dropdown:hover {
+    
+    cursor: pointer;
+}
+.dropdown .dropdown-text {
+    height: 100%;
+    width: 150px;
+    border: none;
+    line-height: 40px;
 }
 .dropdown .dropdown-btn-select {
     width: 40px;
-    height: 40px;
-    background-image: url('/content/icon/refresh.png');
-    background-repeat: no-repeat;
-    background-position: center;
+    height: 100%;
+    padding: 12px;
+    
     outline: none;
-    border: 1px solid #bbbbbb;
     cursor: pointer;
+    border: none;
+    background-color: #fff;
 }
+.dropdown .dropdown-icon {
+    width: 16px;
+    height: 16px;
+    /* background-image: url('/content/icon/refresh.png');
+    background-repeat: no-repeat;
+    background-position: center; */
+    margin: auto 12px;
+    text-align: center;
+}
+.arrow {
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+  }
+  
+  .right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+  }
+  
+  .left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+  }
+  
+  .up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+  }
+  
+  .down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
 .dropdown-list {
     position: absolute;
     right: 0;
-    top: 100%;
+    top: 41px;
     left: 0;
     z-index: 100;
     background-color: white;
     display: none;
-    
+    margin: auto;
 }
 .dropdown-list .item-list{
     height: 40px;
-    border: 1px solid #bbbbbb;
-    text-align: center;
+    padding-left: 16px;
     line-height: 40px;
+}
+.item-list-selected {
+    background-color: #019160 !important;
+    color: white;
 }
 .dropdown-list .item-list:hover {
     background-color: #e9ebee;
     cursor: pointer;
+}
+.dropdown-list .item-list:focus {
+    background-color: #019160;
+    cursor: pointer;
+}
+.dropdown-selected {
+    border: 1px solid #019160;
 }

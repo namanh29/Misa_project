@@ -5,6 +5,9 @@
     border-right: 1px solid #e5e5e5;
     height: 100vh;
 }
+.active {
+    background-color: #019160;
+}
     .navbar .logo-site {
         display: flex;
         width: 100%;

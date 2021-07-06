@@ -18,7 +18,7 @@
     /* height: 400px; */
     background-color: #ffffff;
     z-index: 1000;
-    
+    margin-left: calc(50% - 450px);
 }
 .dialog-header {
     width: 100%;
@@ -76,7 +76,7 @@
     align-items: center;
     height: 60px;
     width: 100%;
-    background-color: #e5e5e5;
+    background-color: #f4f4f4;
 }
 .dialog-footer button {
     float: right;

@@ -78,39 +78,91 @@ class EmployeeJS extends Base{
         $('tbody').on('click', 'tr', function(){
             //alert("a");
             // Xoa tat ca background color cua tr khac
-            let trSibling = $('tr').siblings();
-            $(trSibling).css('background', 'none')
+            let trSibling = $(this).siblings();
+            $(trSibling).removeClass('selected-row');
             // Hightlight row vua chon -> thay doi background color cua tr dang click
-            $(this).css('background', 'red')            
+            $(this).addClass('selected-row');            
         })
-        // $('tr').dbclick(function(){
-        //     $('.m-dialog').show();
-        // })
+        $('table tbody').on('dblclick', 'tr', function(){
+            $('.m-dialog').show();
+        })
         $('#btn-add').click(function(){
             $('.m-dialog').show();
         })
-        $('.btn-x').click(function(){
+        $('#btn-x-dialog').click(function(){
+            $('.popup').show();
+        })
+        $('#btn-cancel-dialog').click(function(){
             $('.m-dialog').hide();
         })
-        $('.btn-cancel').click(function(){
+        $('#btn-cancel-popup').click(function(){
+            $('.popup').hide();
+        })
+        $('#btn-close').click(function(){
+            $('.popup').hide();
             $('.m-dialog').hide();
         })
-        $('#btn-select1').click(function(){
-            $('#dropdown-list1').toggle();
+
+        // Xử lý dropdown
+        var textdefault = $('.dropdown .item-list-selected').text();
+        $('dropdown .dropdown-text').html(textdefault);
+
+        // Click vao dropdown
+        $('.dropdown').click(function(){
+            var dropdownList = $(this).find('.dropdown-list')
+            var icon = $(this).find('.dropdown-icon i')
+            
+            let dropdownSibling = $(this).siblings();
+            $(dropdownSibling).removeClass('dropdown-selected');
+            
+            if($(this).hasClass('dropdown-selected')){
+                $(this).removeClass('dropdown-selected')
+            }
+            else {
+                $(this).addClass('dropdown-selected')
+            }
+           
+            if(icon.hasClass('up')) {
+                icon.removeClass('up');
+                icon.addClass('down');
+            }
+            else {
+                icon.removeClass('down');
+                icon.addClass('up');
+            }
+            dropdownList.toggle();
+            
         })
-        $('#dropdown-list1 .item-list').click(function(){
+
+        // Click chọn item-list
+        $('.item-list').click(function(){
+            var dropdown = $(this).parent().parent();
+            
+            var icon = dropdown.find('dropdown-icon i');
             var text = $(this).text();
-            $('#dropdown1 input').val(text);
-            $('#dropdown-list1').hide();
+            let trSibling = $(this).siblings();
+            $(trSibling).removeClass('item-list-selected');
+            $(this).addClass('item-list-selected')
+            dropdown.find('.dropdown-text').html(text);
+            // $('#dropdown-list1').hide();
+            if(icon.hasClass('up')) {
+                icon.removeClass('up');
+                icon.addClass('down');
+            }
+            else {
+                icon.removeClass('down');
+                icon.addClass('up');
+            }
+            if(dropdown.hasClass('dropdown-selected')){
+                dropdown.removeClass('dropdown-selected');
+                
+            }
+            
+            
+            
         })
-        $('#btn-select2').click(function(){
-            $('#dropdown-list2').toggle();
-        })
-        $('#dropdown-list2 .item-list').click(function(){
-            var text = $(this).text();
-            $('#dropdown2 input').val(text);
-            $('#dropdown-list2').hide();
-        })
+        
+
     }
     /**
      * Thêm dữ liệu

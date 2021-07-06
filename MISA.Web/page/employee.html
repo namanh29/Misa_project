@@ -7,6 +7,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="/css/common/main.css">
     <link rel="stylesheet" href="/css/common/dialog.css">
+    <link rel="stylesheet" href="/css/common/popup.css">
     <link rel="stylesheet" href="/css/common/header.css">
     <link rel="stylesheet" href="/css/common/navbar.css">
     <link rel="stylesheet" href="/css/common/employee.css">
@@ -85,10 +86,15 @@
                     <option value="">Phòng đào tạo</option>
                 </select> -->
                 <div class="dropdown" id="dropdown1">
-                    <input type="text">
-                    <button class="dropdown-btn-select" id="btn-select1"></button>
+                    <div class="dropdown-text">Tất cả phòng ban</div>
+                    <div class="dropdown-icon">
+                        <i class="arrow down"></i>
+                    </div>
+                    <!-- <button class="dropdown-btn-select" id="btn-select1">
+                        
+                    </button> -->
                     <div class="dropdown-list" id="dropdown-list1">
-                        <div class="item-list">Tất cả phòng ban</div>
+                        <div class="item-list item-list-selected">Tất cả phòng ban</div>
                         <div class="item-list">Viện đào tạo</div>
                     </div>
                 </div>
@@ -98,11 +104,17 @@
                     <option value="">Nhân viên</option>
                 </select> -->
                 <div class="dropdown" id="dropdown2">
-                    <input type="text">
-                    <button class="dropdown-btn-select" id="btn-select2"></button>
+                    <div class="dropdown-text">Tất cả vị trí</div>
+                    <div class="dropdown-icon">
+                        <i class="arrow down"></i>
+                    </div>
+                    <!-- <button class="dropdown-btn-select" id="btn-select1">
+                        
+                    </button> -->
                     <div class="dropdown-list" id="dropdown-list2">
-                        <div class="item-list">Tất cả vị trí</div>
+                        <div class="item-list item-list-selected">Tất cả vị trí</div>
                         <div class="item-list">Giám đốc</div>
+                        <div class="item-list">Nhân viên</div>
                     </div>
                 </div>
             </div>
@@ -112,6 +124,27 @@
         </div>
         <div class="grid grid-employee">
             <table border="0" cellspacing="0">
+                <colgroup>
+                    <col style=" width: 120px;">
+                    <col style=" width: 170px;">
+                    <col style=" width: 130px;">
+                    <col style=" width: 120px;">
+                    <col style=" width: 120px;">
+                    <col style=" width: 260px;">
+                    <col style=" width: 120px;">
+                    <col style=" width: 120px;">
+                    <col style=" width: 130px;">
+                    <col style=" width: 130px;">
+                    <!-- <col style=" width: 100px;">
+                    <col style=" width: 100px;">
+                    <col style=" width: 100px;">
+                    <col style="background-color: red; width: 100px;">
+                    <col style="background-color: red; width: 100px;">
+                    <col style="background-color: red; width: 100px;">
+                    <col style="background-color: red; width: 100px;"> --> 
+
+
+                </colgroup>
                 <thead>
                     <tr>
                         <th fieldName="EmployeeCode">Mã nhân viên</th>
@@ -197,7 +230,7 @@
         <div class="dialog-content">
             <div class="dialog-header">
                 <div class="header-title">Thông tin nhân viên</div>
-                <button class="btn-x"></button>
+                <button id="btn-x-dialog" class="btn-x"></button>
             </div>
             <div class="dialog-main">
                 <div class="dialog-avatar">
@@ -315,8 +348,29 @@
                     <div class="icon-save"><i class="far fa-save"></i></div>
                     <div class="btn-text">Lưu</div>
                 </button>
-                <button class="m-second-button btn-cancel">Hủy</button>
+                <button id="btn-cancel-dialog" class="m-second-button btn-cancel">Hủy</button>
                 
+            </div>
+        </div>
+    </div>
+
+    <div class="popup">
+        <div class="popup-modal"></div>
+        <div class="popup-content">
+            <div class="popup-body">
+                <div class="popup-header">Đóng form thông tin chung</div>
+                <button id="btn-x-popup" class="btn-x"></button>
+                <div class="popup-main">
+                    <div class="popup-icon"></div>
+                    <div class="popup-infor">
+                        <p>Bạn có chắc muốn đóng form nhập <b>"Thông tin chung của</b></p>
+                        <p><b>thủ tục 603"</b> hay không?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="popup-footer">
+                <button id="btn-cancel-popup" class="m-second-button btn-cancel">Tiếp tục nhập</button>
+                <button id="btn-close" class="btn-close">Đóng</button>
             </div>
         </div>
     </div>

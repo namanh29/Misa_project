@@ -58,7 +58,7 @@ class Base {
                         $(tr).append(td);
                         
                     })
-                    console.log(tr.html());
+                    // console.log(tr.html());
                     $('table tbody').append(tr);
                 })
             }).fail(function(res){
