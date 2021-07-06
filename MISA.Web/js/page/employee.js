@@ -1,5 +1,13 @@
 $(document).ready(function(){
     new EmployeeJS();
+    dialogDetail = $('.m-dialog').dialog({
+        autoOpen: false,
+        fluid: true,
+        minWidth: 700,
+        resizeable: true,
+        position: ({my: "center", at: "center"}),
+        modal: true
+    })
 })
 
 /**
@@ -70,50 +78,67 @@ class EmployeeJS extends Base{
     //     })
     // }
 
+    /**
+     * Khởi tạo các sự kiện cho button, dropdown
+     * CreatedBy: PNANH (6/7/2021)
+     */
     initEvents(){
-        // $('tr').click(function () { 
-        //     alert("a");
-            
-        // });
+        // 
+        $('.nav-item').click(function(){
+            let navSibling = $(this).siblings();
+            navSibling.removeClass('active')
+            $(this).addClass('active');
+        })
+        // Click vào 1 hàng trong bảng
         $('tbody').on('click', 'tr', function(){
-            //alert("a");
             // Xoa tat ca background color cua tr khac
             let trSibling = $(this).siblings();
             $(trSibling).removeClass('selected-row');
             // Hightlight row vua chon -> thay doi background color cua tr dang click
             $(this).addClass('selected-row');            
         })
+        // Double click vào 1 hàng trong bảng --> Hiển thị form chi tiết
         $('table tbody').on('dblclick', 'tr', function(){
             $('.m-dialog').show();
         })
+        // Sự kiện khi click vào button "thêm"
         $('#btn-add').click(function(){
             $('.m-dialog').show();
         })
+        // Sự kiện khi click "x" trên form chi tiết
         $('#btn-x-dialog').click(function(){
             $('.popup').show();
         })
+        // Sự kiện khi click Hủy trên form chi tiết
         $('#btn-cancel-dialog').click(function(){
-            $('.m-dialog').hide();
+            $('.popup').show();
         })
+        // Sự kiện khi click Tiếp tục nhận trên popup
         $('#btn-cancel-popup').click(function(){
             $('.popup').hide();
         })
+        // Sự kiện khi click Đóng trên popup
         $('#btn-close').click(function(){
             $('.popup').hide();
             $('.m-dialog').hide();
+        })
+        // Sự kiện khi click "x" trên form chi tiết
+        $('#btn-x-popup').click(function(){
+            $('.popup').hide();
         })
 
         // Xử lý dropdown
         var textdefault = $('.dropdown .item-list-selected').text();
         $('dropdown .dropdown-text').html(textdefault);
 
-        // Click vao dropdown
-        $('.dropdown').click(function(){
-            var dropdownList = $(this).find('.dropdown-list')
+        // Click vao dropdown-select
+        $('.dropdown-select').click(function(){
+            var dropdownList = $(this).parent().find('.dropdown-list')
+            dropdownList.toggle();
             var icon = $(this).find('.dropdown-icon i')
             
-            let dropdownSibling = $(this).siblings();
-            $(dropdownSibling).removeClass('dropdown-selected');
+            // let dropdownSibling = $(this).siblings();
+            // $(dropdownSibling).removeClass('dropdown-selected');
             
             if($(this).hasClass('dropdown-selected')){
                 $(this).removeClass('dropdown-selected')
@@ -130,21 +155,26 @@ class EmployeeJS extends Base{
                 icon.removeClass('down');
                 icon.addClass('up');
             }
-            dropdownList.toggle();
+            
             
         })
 
         // Click chọn item-list
         $('.item-list').click(function(){
             var dropdown = $(this).parent().parent();
-            
-            var icon = dropdown.find('dropdown-icon i');
+            var dropdownSelect = dropdown.find('.dropdown-select')
+            var icon = dropdown.find('.dropdown-icon i');
             var text = $(this).text();
             let trSibling = $(this).siblings();
             $(trSibling).removeClass('item-list-selected');
             $(this).addClass('item-list-selected')
             dropdown.find('.dropdown-text').html(text);
-            // $('#dropdown-list1').hide();
+            
+            if(dropdownSelect.hasClass('dropdown-selected')){
+                dropdownSelect.removeClass('dropdown-selected');
+                
+            }
+
             if(icon.hasClass('up')) {
                 icon.removeClass('up');
                 icon.addClass('down');
@@ -153,16 +183,11 @@ class EmployeeJS extends Base{
                 icon.removeClass('down');
                 icon.addClass('up');
             }
-            if(dropdown.hasClass('dropdown-selected')){
-                dropdown.removeClass('dropdown-selected');
-                
-            }
             
-            
+            $(this).parent().hide();
             
         })
         
-
     }
     /**
      * Thêm dữ liệu

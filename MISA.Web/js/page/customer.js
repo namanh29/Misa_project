@@ -11,12 +11,20 @@ class CustomerJS extends Base{
         super();
         //this.loadData();
         this.getDataUrl();
+        this.initEvents();
     }
 
     getDataUrl(){
         return "http://cukcuk.manhnv.net/v1/Employees";
     }
 
+    initEvents(){
+        $('.nav-item').click(function(){
+            let navSibling = $(this).siblings();
+            navSibling.removeClass('active')
+            $(this).addClass('active');
+        })
+    }
     /**
      * Load dữ liệu
      * CreatedBy: PNANH (04/07/2021)

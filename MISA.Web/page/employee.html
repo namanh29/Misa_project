@@ -44,7 +44,7 @@
                 <div class="navbar-item-icon nav-item3"></div>
                 <div class="navbar-item-text">Mua hàng</div>
             </a>
-            <a href="/page/employee.html" class="nav-item">
+            <a href="/page/employee.html" class="nav-item active">
                 <div class="navbar-item-icon nav-item4"></div>
                 <div class="navbar-item-text">Danh mục nhân viên</div>
             </a>
@@ -86,10 +86,13 @@
                     <option value="">Phòng đào tạo</option>
                 </select> -->
                 <div class="dropdown" id="dropdown1">
-                    <div class="dropdown-text">Tất cả phòng ban</div>
-                    <div class="dropdown-icon">
-                        <i class="arrow down"></i>
+                    <div class="dropdown-select">
+                        <div class="dropdown-text">Tất cả phòng ban</div>
+                        <div class="dropdown-icon">
+                            <i class="arrow down"></i>
+                        </div>
                     </div>
+                    
                     <!-- <button class="dropdown-btn-select" id="btn-select1">
                         
                     </button> -->
@@ -104,9 +107,11 @@
                     <option value="">Nhân viên</option>
                 </select> -->
                 <div class="dropdown" id="dropdown2">
-                    <div class="dropdown-text">Tất cả vị trí</div>
-                    <div class="dropdown-icon">
-                        <i class="arrow down"></i>
+                    <div class="dropdown-select">
+                        <div class="dropdown-text">Tất cả vị trí</div>
+                        <div class="dropdown-icon">
+                            <i class="arrow down"></i>
+                        </div>
                     </div>
                     <!-- <button class="dropdown-btn-select" id="btn-select1">
                         
@@ -264,10 +269,26 @@
                             </div>
                             <div>
                                 <div class="label">Giới tính</div>
-                                <select class="input-label" name="" id="">
+                                <!-- <select class="input-label" name="" id="">
                                     <option value="">Nam</option>
                                     <option value="">Nữ</option>
-                                </select>
+                                </select> -->
+                                <div class="dropdown input-label" id="dropdown2">
+                                    <div class="dropdown-select">
+                                        <div class="dropdown-text">Nam</div>
+                                        <div class="dropdown-icon">
+                                            <i class="arrow down"></i>
+                                        </div>
+                                    </div>
+                                    <!-- <button class="dropdown-btn-select" id="btn-select1">
+                                        
+                                    </button> -->
+                                    <div class="dropdown-list" id="dropdown-list2">
+                                        <div class="item-list item-list-selected">Nam</div>
+                                        <div class="item-list">Nữ</div>
+                                        <div class="item-list">Khác</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="label-infor">
@@ -304,17 +325,49 @@
                         <div class="label-infor">
                             <div>
                                 <div class="label">Vị trí</div>
-                                <select class="input-label" name="" id="">
+                                <!-- <select class="input-label" name="" id="">
                                     <option value="">Giám đốc</option>
                                     <option value="">Nhân viên</option>
-                                </select>
+                                </select> -->
+                                <div class="dropdown input-label" id="dropdown2">
+                                    <div class="dropdown-select">
+                                        <div class="dropdown-text">Tất cả vị trí</div>
+                                        <div class="dropdown-icon">
+                                            <i class="arrow down"></i>
+                                        </div>
+                                    </div>
+                                    <!-- <button class="dropdown-btn-select" id="btn-select1">
+                                        
+                                    </button> -->
+                                    <div class="dropdown-list" id="dropdown-list2">
+                                        <div class="item-list item-list-selected">Tất cả vị trí</div>
+                                        <div class="item-list">Giám đốc</div>
+                                        <div class="item-list">Nhân viên</div>
+                                    </div>
+                                </div>
                             </div>
                             <div>
                                 <div class="label">Phòng ban</div>
-                                <select class="input-label" name="" id="">
+                                <!-- <select class="input-label" name="" id="">
                                     <option value="">Phòng nhân sự</option>
                                     <option value="">Phòng nhân sự</option>
-                                </select>
+                                </select> -->
+                                <div class="dropdown input-label" id="dropdown1">
+                                    <div class="dropdown-select">
+                                        <div class="dropdown-text">Tất cả phòng ban</div>
+                                        <div class="dropdown-icon">
+                                            <i class="arrow down"></i>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- <button class="dropdown-btn-select" id="btn-select1">
+                                        
+                                    </button> -->
+                                    <div class="dropdown-list" id="dropdown-list1">
+                                        <div class="item-list item-list-selected">Tất cả phòng ban</div>
+                                        <div class="item-list">Viện đào tạo</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="label-infor">
@@ -334,10 +387,26 @@
                             </div>
                             <div>
                                 <div class="label">Tình trạng công việc</div>
-                                <select class="input-label" name="" id="">
+                                <!-- <select class="input-label" name="" id="">
                                     <option value="">Đang làm việc</option>
                                     <option value="">Đang làm việc</option>
-                                </select>
+                                </select> -->
+                                <div class="dropdown input-label" id="dropdown2">
+                                    <div class="dropdown-select">
+                                        <div class="dropdown-text">Đang làm việc </div>
+                                        <div class="dropdown-icon">
+                                            <i class="arrow down"></i>
+                                        </div>
+                                    </div>
+                                    <!-- <button class="dropdown-btn-select" id="btn-select1">
+                                        
+                                    </button> -->
+                                    <div class="dropdown-list" id="dropdown-list2">
+                                        <div class="item-list item-list-selected">Đang làm việc</div>
+                                        <div class="item-list">Nghỉ hưu</div>
+                                        
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

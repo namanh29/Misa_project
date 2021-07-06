@@ -6,7 +6,8 @@
     height: 100vh;
 }
 .active {
-    background-color: #019160;
+    background-color: #019601 !important;
+    color: #ffffff !important;
 }
     .navbar .logo-site {
         display: flex;
