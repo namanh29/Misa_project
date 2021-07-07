@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="/css/page/employee_detail.css">
     <link rel="stylesheet" href="/content/font/fontawesome-5.15.1/css/fontawesome.css">
     <link rel="stylesheet" href="/content/font/fontawesome-5.15.1/css/regular.css">
+    <link rel="stylesheet" href="/lib/jquery-ui-1.12.1.custom/jquery-ui.min.css">
     
 </head>
 
@@ -124,7 +125,7 @@
                 </div>
             </div>
             <div class="filter-right">
-                <button class="m-second-button m-btn-refresh"></button>
+                <button id="btn-refresh" class="m-second-button m-btn-refresh"></button>
             </div>
         </div>
         <div class="grid grid-employee">
@@ -140,13 +141,7 @@
                     <col style=" width: 120px;">
                     <col style=" width: 130px;">
                     <col style=" width: 130px;">
-                    <!-- <col style=" width: 100px;">
-                    <col style=" width: 100px;">
-                    <col style=" width: 100px;">
-                    <col style="background-color: red; width: 100px;">
-                    <col style="background-color: red; width: 100px;">
-                    <col style="background-color: red; width: 100px;">
-                    <col style="background-color: red; width: 100px;"> --> 
+                    
 
 
                 </colgroup>
@@ -230,17 +225,16 @@
         </div>
     </div>
 
-    <div class="m-dialog dialog-detail">
-        <div class="dialog-modal"></div>
+    <div class="m-dialog dialog-detail" title="Thông tin nhân viên">
+        <!-- <div class="dialog-modal"></div> -->
         <div class="dialog-content">
-            <div class="dialog-header">
+            <!-- <div class="dialog-header">
                 <div class="header-title">Thông tin nhân viên</div>
                 <button id="btn-x-dialog" class="btn-x"></button>
-            </div>
+            </div> -->
             <div class="dialog-main">
                 <div class="dialog-avatar">
-                    <div class="avatar-img">
-                    </div>
+                    <div class="avatar-img"></div>
                     <div class="avatar-des">
                         <p>(Vui lòng chọn ảnh có định</p>
                         <p>dạng</p>
@@ -255,17 +249,17 @@
                         <div class="label-infor">
                             <div>
                                 <div class="label">Mã nhân viên (<span>*</span>)</div>
-                                <input class="input-label" type="text">
+                                <input id="txtEmployeeCode" class="input-label" type="text" required>
                             </div>
                             <div>
                                 <div class="label">Họ và tên (<span>*</span>)</div>
-                                <input class="input-label" type="text">
+                                <input id="txtFullName" class="input-label" type="text" required>
                             </div>
                         </div>
                         <div class="label-infor">
                             <div>
                                 <div class="label">Ngày sinh</div>
-                                <input class="input-label" type="date">
+                                <input id="dtDateOfbirth" class="input-label" type="date">
                             </div>
                             <div>
                                 <div class="label">Giới tính</div>
@@ -275,7 +269,7 @@
                                 </select> -->
                                 <div class="dropdown input-label" id="dropdown2">
                                     <div class="dropdown-select">
-                                        <div class="dropdown-text">Nam</div>
+                                        <div id="ddDGender" class="dropdown-text">Nam</div>
                                         <div class="dropdown-icon">
                                             <i class="arrow down"></i>
                                         </div>
@@ -294,28 +288,28 @@
                         <div class="label-infor">
                             <div>
                                 <div class="label">Số CMTND/ Căn cước (<span>*</span>)</div>
-                                <input class="input-label" type="text">
+                                <input id="txtIdentityNumber" class="input-label" type="text" required>
                             </div>
                             <div>
                                 <div class="label">Ngày cấp</div>
-                                <input class="input-label" type="date">
+                                <input id="dtIdentityDate" class="input-label" type="date">
                             </div>
                         </div>
                         <div class="label-infor">
                             <div>
                                 <div class="label">Nơi cấp</div>
-                                <input class="input-label" type="text">
+                                <input id="txtIdentityPlace" class="input-label" type="text">
                             </div>
                             
                         </div>
                         <div class="label-infor">
                             <div>
                                 <div class="label">Email (<span>*</span>)</div>
-                                <input class="input-label" type="text">
+                                <input id="txtEmail" class="input-label" type="email" required>
                             </div>
                             <div>
                                 <div class="label">Số điện thoại (<span>*</span>)</div>
-                                <input class="input-label" type="text">
+                                <input id="txtPhoneNumber" class="input-label" type="text" required>
                             </div>
                         </div>
                     </div>
@@ -331,7 +325,7 @@
                                 </select> -->
                                 <div class="dropdown input-label" id="dropdown2">
                                     <div class="dropdown-select">
-                                        <div class="dropdown-text">Tất cả vị trí</div>
+                                        <div id="ddPositionName" class="dropdown-text">Tất cả vị trí</div>
                                         <div class="dropdown-icon">
                                             <i class="arrow down"></i>
                                         </div>
@@ -354,7 +348,7 @@
                                 </select> -->
                                 <div class="dropdown input-label" id="dropdown1">
                                     <div class="dropdown-select">
-                                        <div class="dropdown-text">Tất cả phòng ban</div>
+                                        <div id="ddDepartmentName" class="dropdown-text">Tất cả phòng ban</div>
                                         <div class="dropdown-icon">
                                             <i class="arrow down"></i>
                                         </div>
@@ -373,17 +367,17 @@
                         <div class="label-infor">
                             <div>
                                 <div class="label">Mã số thuế cá nhân</div>
-                                <input class="input-label" type="text">
+                                <input id="txtTaxCode" class="input-label" type="text">
                             </div>
                             <div>
                                 <div class="label">Mức lương cơ bản</div>
-                                <input class="input-label" type="text">
+                                <input id="txtSalary" class="input-label" type="text">
                             </div>
                         </div>
                         <div class="label-infor">
                             <div>
                                 <div class="label">Ngày gia nhâp công ty</div>
-                                <input class="input-label" type="date">
+                                <input id="dtJoinDate" class="input-label" type="date">
                             </div>
                             <div>
                                 <div class="label">Tình trạng công việc</div>
@@ -393,7 +387,7 @@
                                 </select> -->
                                 <div class="dropdown input-label" id="dropdown2">
                                     <div class="dropdown-select">
-                                        <div class="dropdown-text">Đang làm việc </div>
+                                        <div id="txtWorkStatus" class="dropdown-text">Đang làm việc </div>
                                         <div class="dropdown-icon">
                                             <i class="arrow down"></i>
                                         </div>
@@ -413,7 +407,7 @@
                 </div>
             </div>
             <div class="dialog-footer">
-                <button class="btn-default">
+                <button id="btn-save" class="btn-default">
                     <div class="icon-save"><i class="far fa-save"></i></div>
                     <div class="btn-text">Lưu</div>
                 </button>
@@ -444,6 +438,8 @@
         </div>
     </div>
     <script src="/lib/jquery-3.6.0.min.js"></script>
+    <script src="/lib/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+    sc
     <script src="/js/common/common.js"></script>
     <script src="/js/common/base.js"></script>
     <script src="/js/page/employee.js"></script>

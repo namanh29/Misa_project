@@ -13,12 +13,12 @@
     z-index: 999;
 }
 .m-dialog .dialog-content {
-    position: absolute; 
-    width: 900px;
+    /* position: absolute;  */
+    /* width: 900px; */
     /* height: 400px; */
     background-color: #ffffff;
     z-index: 1000;
-    margin-left: calc(50% - 450px);
+    /* margin-left: calc(50% - 450px);  */
 }
 .dialog-header {
     width: 100%;

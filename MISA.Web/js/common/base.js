@@ -2,6 +2,7 @@ class Base {
     constructor(){
         this.getDataUrl();
         this.loadData();
+        this.initEventsCommon();
     }
     
     /**
@@ -10,7 +11,7 @@ class Base {
      * @returns 
      */
     getDataUrl(){
-        return "";
+        return "http://cukcuk.manhnv.net/v1/Employees";
     }
     
     /**
@@ -69,4 +70,14 @@ class Base {
         }
         
     }
+//#region 
+    initEventsCommon(){
+        // Click vào button refresh
+        var me = this;
+        $('#btn-refresh').click(function(){
+            alert("a");
+            me.loadData();
+        })
+    }
 }
+//#endregion

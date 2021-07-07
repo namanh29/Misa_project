@@ -2,10 +2,10 @@ $(document).ready(function(){
     new EmployeeJS();
     dialogDetail = $('.m-dialog').dialog({
         autoOpen: false,
-        fluid: true,
-        minWidth: 700,
-        resizeable: true,
-        position: ({my: "center", at: "center"}),
+        // fluid: true,
+        width: 900,
+        
+         resizeable: true,
         modal: true
     })
 })
@@ -20,6 +20,7 @@ class EmployeeJS extends Base{
         //this.loadData();
         this.getDataUrl();
         this.initEvents();
+        
     }
 
     getDataUrl(){
@@ -83,12 +84,13 @@ class EmployeeJS extends Base{
      * CreatedBy: PNANH (6/7/2021)
      */
     initEvents(){
-        // 
+        // Sự kiện khi click vào navbar
         $('.nav-item').click(function(){
             let navSibling = $(this).siblings();
             navSibling.removeClass('active')
             $(this).addClass('active');
         })
+        
         // Click vào 1 hàng trong bảng
         $('tbody').on('click', 'tr', function(){
             // Xoa tat ca background color cua tr khac
@@ -103,7 +105,7 @@ class EmployeeJS extends Base{
         })
         // Sự kiện khi click vào button "thêm"
         $('#btn-add').click(function(){
-            $('.m-dialog').show();
+            dialogDetail.dialog('open');
         })
         // Sự kiện khi click "x" trên form chi tiết
         $('#btn-x-dialog').click(function(){
@@ -125,6 +127,90 @@ class EmployeeJS extends Base{
         // Sự kiện khi click "x" trên form chi tiết
         $('#btn-x-popup').click(function(){
             $('.popup').hide();
+        })
+        // Click button Luu tren form chi tiet
+        $('#btn-save').click(function(){
+            // validate dữ liệu
+            var inputValidates = $('input[required], input[type="email"]');
+            $.each(inputValidates, function(index, input){
+                $(input).trigger('blur');
+            })
+
+            var inputNotValids = $('input[validate="false"]');
+            if(inputNotValids && inputNotValids.length > 0){
+                alert("Dữ liệu không hợp lệ, vui lòng kiểm tra lại.");
+                inputNotValids[0].focus();
+                return;
+            }
+            // thu thập thông tin dữ liệu đc nhập --> build thành object
+            var employee = {
+                
+                "EmployeeCode": $('#txtEmployeeCode').val(),
+                
+                "FullName": $('#txtFullName').val(),
+                
+                "DateOfBirth": $('#dtDateOfBirth').val(),
+                "PhoneNumber": $('#txtPhoneNumber').val(),
+                "Email": $('#txtEmail').val(),
+                
+                "IdentityNumber": $('#txtIdentityNumber').val(),
+                "IdentityDate": $('#dtIdentityDate').val(),
+                "IdentityPlace": $('#txtIdentityPlace').val(),
+                
+                
+                "WorkStatus": $('#txtWorkStatus').text(),
+                "PersonalTaxCode": $('#txtTaxCode').val(),
+                "Salary": $('#txtSalary').val(),
+                
+                "PositionName": $('#ddPositionName').text(),
+                
+                "DepartmentName": $('#ddDepartmentName').text(),
+                
+                "GenderName": $('#ddGender').text(),
+                
+                "JoinDate": $('#dtJoinDate').val()
+                
+            }
+            // gọi service tương ứng thực hiện lưu dữ liệu
+            $.ajax()
+            // Sau khi lưu thành công: 
+            // + đưa ra thông báo thành công
+            // + ẩn fom chi tiết
+            // + load lại dữ liệu
+        })
+
+        /**
+         * Bắt buộc nhập
+         * CreatedBy: PNANH (7/7/2021)
+         */
+        $('[required]').blur(function(){
+            // Kiểm tra dữ liệu đã nhập, nếu trống thì cảnh báo
+            var value = $(this).val();
+            if(!value){
+                $(this).addClass('border-red');
+                $(this).attr('title', 'Trường này không được để trống');
+                $(this).attr('validate', false);
+            }
+            else {
+                $(this).removeClass('border-red');
+                $(this).attr('title', '');
+                $(this).attr('validate', true);
+            }          
+        })
+
+        $('input[type="email"]').blur(function(){
+            var email = $(this).val();
+            var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            if (!regex.test(email)) {
+                $(this).addClass('border-red');
+                $(this).attr('title', 'Email không đúng định dạng');
+                $(this).attr('validate', false);
+            }
+            else {
+                $(this).removeClass('border-red');
+                $(this).attr('title', '');
+                $(this).attr('validate', true);
+            }
         })
 
         // Xử lý dropdown
@@ -213,16 +299,6 @@ class EmployeeJS extends Base{
 
     }
 }
-
-/**
- * 
- */
-
-
-/**
- * Load dữ liệu
- * CreatedBy: PNANH (04/07/2021)
- */
 
 /** -------------------------------------------
  * Format dữ liệu ngày tháng sang ngày/tháng/năm

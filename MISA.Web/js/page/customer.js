@@ -7,6 +7,8 @@ $(document).ready(function(){
  * CreatedBy: PNANH (04/07/2021)
  */
 class CustomerJS extends Base{
+    Title = "Danh sách khách hàng";
+    TableList = $('#tbListData');
     constructor(){
         super();
         //this.loadData();
