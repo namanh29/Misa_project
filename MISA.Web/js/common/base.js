@@ -2,7 +2,7 @@ class Base {
     constructor(){
         this.getDataUrl();
         this.loadData();
-        this.initEventsCommon();
+        //this.initEventsCommon();
     }
     
     /**
@@ -19,6 +19,7 @@ class Base {
      * CreatedBy: PNANH (5/7/2021)
      */
     loadData(){
+        $('table tbody').empty();
         try {
             // Lấy thông tin các cột dữ liệu
             var columns = $('table thead th');
@@ -34,7 +35,7 @@ class Base {
                     var tr = $(`<tr></tr>`);
                     // Lấy thông tin dữ liệu sẽ map vs các cột
                     $.each(columns, function(index, item){
-                        var td = $(`<td><div></div></td>`);
+                        var td = $(`<td></td>`);
                         var fieldName = $(item).attr('fieldName');
                         // var value = `${obj[fieldName]}`;
                         var value = obj[fieldName];
@@ -47,15 +48,12 @@ class Base {
                             case "MoneyVnd":
                                 td.addClass("text-align-right")
                                 value = formatMoney(value);
-                                break;
-                                    
+                                break;      
                             default:
                                 break;
                         }
                         
-                            
                         td.append(value);
-                        
                         $(tr).append(td);
                         
                     })
@@ -71,13 +69,14 @@ class Base {
         
     }
 //#region 
-    initEventsCommon(){
-        // Click vào button refresh
-        var me = this;
-        $('#btn-refresh').click(function(){
-            alert("a");
-            me.loadData();
-        })
-    }
+    // initEventsCommon(){
+    //     // Click vào button refresh
+    //     var me = this;
+        
+    //     $('#btn-refresh').click(function(){
+    //         alert("a");
+    //         me.loadData();
+    //     })
+    // }
 }
 //#endregion

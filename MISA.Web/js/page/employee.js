@@ -1,13 +1,13 @@
 $(document).ready(function(){
     new EmployeeJS();
-    dialogDetail = $('.m-dialog').dialog({
-        autoOpen: false,
-        // fluid: true,
-        width: 900,
+    // dialogDetail = $('.m-dialog').dialog({
+    //     autoOpen: false,
+    //     // fluid: true,
+    //     width: 900,
         
-         resizeable: true,
-        modal: true
-    })
+    //      resizeable: true,
+    //     modal: true
+    // })
 })
 
 /**
@@ -84,13 +84,17 @@ class EmployeeJS extends Base{
      * CreatedBy: PNANH (6/7/2021)
      */
     initEvents(){
+        var me = this;
         // Sự kiện khi click vào navbar
         $('.nav-item').click(function(){
             let navSibling = $(this).siblings();
             navSibling.removeClass('active')
             $(this).addClass('active');
         })
-        
+        $('#btn-refresh').click(function(){
+            alert("a");
+            me.loadData();
+        })
         // Click vào 1 hàng trong bảng
         $('tbody').on('click', 'tr', function(){
             // Xoa tat ca background color cua tr khac
@@ -105,7 +109,7 @@ class EmployeeJS extends Base{
         })
         // Sự kiện khi click vào button "thêm"
         $('#btn-add').click(function(){
-            dialogDetail.dialog('open');
+            $('.m-dialog').show();
         })
         // Sự kiện khi click "x" trên form chi tiết
         $('#btn-x-dialog').click(function(){
@@ -143,6 +147,44 @@ class EmployeeJS extends Base{
                 return;
             }
             // thu thập thông tin dữ liệu đc nhập --> build thành object
+            var workStatus, gender, positionId, departmentId;
+            // Id Tình trạng làm việc
+            if($('#txtWorkStatus').text() == "Đang làm việc"){
+                workStatus = 1;
+            }
+            else {
+                workStatus = 0;
+            }
+            // Id gender
+            if($('#ddGender').text() == "Nam") {
+                gender = 1;
+            }
+            else if ($('#ddGender').text() == "Nữ") {
+                gender = 0;
+            }
+            else {
+                gender = 2;
+            }
+            // Id vị trí
+            if($('#ddPositionName').text() == "Phòng Nhân sự"){
+                positionId = "5bd71cda-209f-2ade-54d1-35c781481818";
+            }
+            else if($('#ddPositionName').text() == "Phòng Tài Chính"){
+                positionId = "589edf01-198a-4ff5-958e-fb52fd75a1d4";
+            }
+            else {
+                positionId = "548dce5f-5f29-4617-725d-e2ec561b0f41";
+            }
+            // Id phòng ban
+            if($('#ddDepartmentName').text() == "Phòng đào tạo"){
+                departmentId = "17120d02-6ab5-3e43-18cb-66948daf6128";
+            }
+            else if($('#ddDepartmentName').text() == "Phòng Công nghệ"){
+                departmentId = "4e272fc4-7875-78d6-7d32-6a1673ffca7c";
+            }
+            else {
+                departmentId = "469b3ece-744a-45d5-957d-e8c757976496";
+            }
             var employee = {
                 
                 "EmployeeCode": $('#txtEmployeeCode').val(),
@@ -158,25 +200,38 @@ class EmployeeJS extends Base{
                 "IdentityPlace": $('#txtIdentityPlace').val(),
                 
                 
-                "WorkStatus": $('#txtWorkStatus').text(),
+                "WorkStatus": workStatus,
                 "PersonalTaxCode": $('#txtTaxCode').val(),
                 "Salary": $('#txtSalary').val(),
-                
-                "PositionName": $('#ddPositionName').text(),
-                
-                "DepartmentName": $('#ddDepartmentName').text(),
-                
-                "GenderName": $('#ddGender').text(),
-                
+                "PositionId" : positionId,
+                // "PositionName": $('#ddPositionName').text(),
+                "DepartmentId" : departmentId,
+                // "DepartmentName": $('#ddDepartmentName').text(),
+                "Gender": gender,
+                // "GenderName": $('#ddGender').text(),
                 "JoinDate": $('#dtJoinDate').val()
                 
             }
+            debugger;
             // gọi service tương ứng thực hiện lưu dữ liệu
-            $.ajax()
-            // Sau khi lưu thành công: 
-            // + đưa ra thông báo thành công
-            // + ẩn fom chi tiết
-            // + load lại dữ liệu
+            $.ajax({
+                url: "http://cukcuk.manhnv.net/v1/Employees",
+                type: "POST",
+                data: JSON.stringify(employee),
+                contentType: 'application/json-patch+json'
+            }).done(function(res){
+                // Sau khi lưu thành công: 
+                // + đưa ra thông báo thành công
+                alert('Thêm thành công!');
+                // + ẩn fom chi tiết
+                $('.m-dialog').hide();
+                // + load lại dữ liệu
+                me.loadData();
+                
+            }).fail(function(res){
+
+            })
+            
         })
 
         /**
@@ -325,13 +380,6 @@ function formatDate(date) {
  * CreatedBy: PNANH (04/07/2021)
  */
 function formatMoney(money){
-    // if(money == null){
-    //     return "";
-    // }
-    // else {
-    //     var num = money.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
-    //     return num;
-    // }
     if(money) {
         return money.toFixed(0).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
     }
