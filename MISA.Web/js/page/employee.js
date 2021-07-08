@@ -101,15 +101,114 @@ class EmployeeJS extends Base{
             let trSibling = $(this).siblings();
             $(trSibling).removeClass('selected-row');
             // Hightlight row vua chon -> thay doi background color cua tr dang click
-            $(this).addClass('selected-row');            
+            $(this).addClass('selected-row');   
+
         })
         // Double click vào 1 hàng trong bảng --> Hiển thị form chi tiết
         $('table tbody').on('dblclick', 'tr', function(){
+            // Lấy khóa chính của bản ghi
+            var recordId = $(this).attr('recordId');
+            console.log(recordId);
+            // Gọi service lấy thông tin chi tiết qua id
+            $.ajax({
+                url: "http://cukcuk.manhnv.net/v1/Employees/"+`${recordId}`,
+                type: "GET",
+            }).done(function(res){
+                // Binding lên form thông tin
+                console.log(res);
+                var inputs = $('input[fieldName], div[fieldName]');
+                var entity = {};
+                $.each(inputs, function(index, input){
+                    var propertyName = $(this).attr('fieldName');
+                    var value;
+                    if($(input).hasClass('input-label')){
+                        value = res[propertyName];
+                        $(this).val(value);
+                    } else {
+                        value = $(this).parent().parent().find('.item-list-selected').attr('key');
+                    }
+                    
+                    
+                    
+                })
+            }).fail(function(res){
+
+            })
             $('.m-dialog').show();
+            // Lấy dữ liệu vào form thông tin
+
         })
         // Sự kiện khi click vào button "thêm"
         $('#btn-add').click(function(){
+            // Hiển thị form thông tin
             $('.m-dialog').show();
+            // Load dữ liệu cho các dropdown
+            var ddListDepartment = $('#ddListDepartment');
+            ddListDepartment.empty();
+            // Lấy dữ liệu các phòng ban
+            $.ajax({
+                type: "GET",
+                url: "http://cukcuk.manhnv.net/api/Department",
+                
+            }).done(function(res){
+                if(res){
+                    $.each(res, function(index, item){
+                        var option, key;
+                        if(index == 0){
+                            option = $(`<div class="item-list item-list-selected" key="${item.DepartmentId}">${item.DepartmentName}</div>`);
+                            
+ 
+                        } else {
+                            option = $(`<div class="item-list" key="${item.DepartmentId}">${item.DepartmentName}</div>`);
+                        }
+                        
+
+                        ddListDepartment.append(option);
+                        console.log(option);
+                    })
+                    // Xử lý dropdown
+                    var textdefault = ddListDepartment.find('.item-list-selected').text();
+                    var dropdownText = ddListDepartment.parent().find('.dropdown-text');
+                    dropdownText.text(textdefault);
+                    
+                    //debugger;
+                }
+            }).fail(function(res){
+
+            })
+
+            var ddListPosition = $('#ddListPosition');
+            ddListPosition.empty();
+            // Lấy dữ liệu các vị trí
+            $.ajax({
+                type: "GET",
+                url: "http://cukcuk.manhnv.net/v1/Positions",
+                
+            }).done(function(res){
+                if(res){
+                    $.each(res, function(index, item){
+                        var option;
+                        if(index == 0){
+                            option = $(`<div class="item-list item-list-selected" key="${item.PositionId}">${item.PositionName}</div>`);
+                            
+                        } else {
+                            option = $(`<div class="item-list" key="${item.PositionId}">${item.PositionName}</div>`);
+                        }
+                        
+                        ddListPosition.append(option);
+                        console.log(option);
+                    })
+                    // Xử lý dropdown
+                    var textdefault = ddListPosition.find('.item-list-selected').text();
+                    var dropdownText = ddListPosition.parent().find('.dropdown-text');
+                    dropdownText.text(textdefault);
+                    //debugger;
+                }
+            }).fail(function(res){
+
+            })
+
+
         })
         // Sự kiện khi click "x" trên form chi tiết
         $('#btn-x-dialog').click(function(){
@@ -147,77 +246,46 @@ class EmployeeJS extends Base{
                 return;
             }
             // thu thập thông tin dữ liệu đc nhập --> build thành object
-            var workStatus, gender, positionId, departmentId;
-            // Id Tình trạng làm việc
-            if($('#txtWorkStatus').text() == "Đang làm việc"){
-                workStatus = 1;
-            }
-            else {
-                workStatus = 0;
-            }
-            // Id gender
-            if($('#ddGender').text() == "Nam") {
-                gender = 1;
-            }
-            else if ($('#ddGender').text() == "Nữ") {
-                gender = 0;
-            }
-            else {
-                gender = 2;
-            }
-            // Id vị trí
-            if($('#ddPositionName').text() == "Phòng Nhân sự"){
-                positionId = "5bd71cda-209f-2ade-54d1-35c781481818";
-            }
-            else if($('#ddPositionName').text() == "Phòng Tài Chính"){
-                positionId = "589edf01-198a-4ff5-958e-fb52fd75a1d4";
-            }
-            else {
-                positionId = "548dce5f-5f29-4617-725d-e2ec561b0f41";
-            }
-            // Id phòng ban
-            if($('#ddDepartmentName').text() == "Phòng đào tạo"){
-                departmentId = "17120d02-6ab5-3e43-18cb-66948daf6128";
-            }
-            else if($('#ddDepartmentName').text() == "Phòng Công nghệ"){
-                departmentId = "4e272fc4-7875-78d6-7d32-6a1673ffca7c";
-            }
-            else {
-                departmentId = "469b3ece-744a-45d5-957d-e8c757976496";
-            }
-            var employee = {
+            // var workStatus, gender, positionId, departmentId;
+            // // Id Tình trạng làm việc
+            // if($('#txtWorkStatus').text() == "Đang làm việc"){
+            //     workStatus = 1;
+            // }
+            // else {
+            //     workStatus = 0;
+            // }
+            // // Id gender
+            // if($('#ddGender').text() == "Nam") {
+            //     gender = 1;
+            // }
+            // else if ($('#ddGender').text() == "Nữ") {
+            //     gender = 0;
+            // }
+            // else {
+            //     gender = 2;
+            // }
+            
+            var inputs = $('input[fieldName], div[fieldName]');
+            var entity = {};
+            $.each(inputs, function(index, input){
+                var propertyName = $(this).attr('fieldName');
+                var value;
+                if($(input).hasClass('input-label')){
+                    value = $(this).val();
+                } else {
+                    value = $(this).parent().parent().find('.item-list-selected').attr('key');
+                }
                 
-                "EmployeeCode": $('#txtEmployeeCode').val(),
+                entity[propertyName] = value;
                 
-                "FullName": $('#txtFullName').val(),
-                
-                "DateOfBirth": $('#dtDateOfBirth').val(),
-                "PhoneNumber": $('#txtPhoneNumber').val(),
-                "Email": $('#txtEmail').val(),
-                
-                "IdentityNumber": $('#txtIdentityNumber').val(),
-                "IdentityDate": $('#dtIdentityDate').val(),
-                "IdentityPlace": $('#txtIdentityPlace').val(),
-                
-                
-                "WorkStatus": workStatus,
-                "PersonalTaxCode": $('#txtTaxCode').val(),
-                "Salary": $('#txtSalary').val(),
-                "PositionId" : positionId,
-                // "PositionName": $('#ddPositionName').text(),
-                "DepartmentId" : departmentId,
-                // "DepartmentName": $('#ddDepartmentName').text(),
-                "Gender": gender,
-                // "GenderName": $('#ddGender').text(),
-                "JoinDate": $('#dtJoinDate').val()
-                
-            }
+            })
+            console.log(entity);
             debugger;
             // gọi service tương ứng thực hiện lưu dữ liệu
             $.ajax({
                 url: "http://cukcuk.manhnv.net/v1/Employees",
                 type: "POST",
-                data: JSON.stringify(employee),
+                data: JSON.stringify(entity),
                 contentType: 'application/json-patch+json'
             }).done(function(res){
                 // Sau khi lưu thành công: 
@@ -231,7 +299,6 @@ class EmployeeJS extends Base{
             }).fail(function(res){
 
             })
-            
         })
 
         /**
@@ -264,13 +331,11 @@ class EmployeeJS extends Base{
             else {
                 $(this).removeClass('border-red');
                 $(this).attr('title', '');
-                $(this).attr('validate', true);
+                $(this).attr('validate', true); 
             }
         })
 
-        // Xử lý dropdown
-        var textdefault = $('.dropdown .item-list-selected').text();
-        $('dropdown .dropdown-text').html(textdefault);
+        
 
         // Click vao dropdown-select
         $('.dropdown-select').click(function(){
@@ -301,9 +366,9 @@ class EmployeeJS extends Base{
         })
 
         // Click chọn item-list
-        $('.item-list').click(function(){
+        $('.dropdown-list').on('click', '.item-list', function(){
             var dropdown = $(this).parent().parent();
-            var dropdownSelect = dropdown.find('.dropdown-select')
+            var dropdownSelect = dropdown.find('.dropdown-select');
             var icon = dropdown.find('.dropdown-icon i');
             var text = $(this).text();
             let trSibling = $(this).siblings();

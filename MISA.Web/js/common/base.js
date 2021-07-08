@@ -32,7 +32,7 @@ class Base {
                 // dataType: "json"
             }).done(function(res){
                 $.each(res, function(index, obj){
-                    var tr = $(`<tr></tr>`);
+                    var tr = $(`<tr recordId = "${obj.EmployeeId}"></tr>`);
                     // Lấy thông tin dữ liệu sẽ map vs các cột
                     $.each(columns, function(index, item){
                         var td = $(`<td></td>`);

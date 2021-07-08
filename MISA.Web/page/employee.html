@@ -249,17 +249,17 @@
                         <div class="label-infor">
                             <div>
                                 <div class="label">Mã nhân viên (<span>*</span>)</div>
-                                <input id="txtEmployeeCode" class="input-label" type="text" required>
+                                <input id="txtEmployeeCode" class="input-label" fieldName="EmployeeCode" type="text" required>
                             </div>
                             <div>
                                 <div class="label">Họ và tên (<span>*</span>)</div>
-                                <input id="txtFullName" class="input-label" type="text" required>
+                                <input id="txtFullName" class="input-label" fieldName="FullName" type="text" required>
                             </div>
                         </div>
                         <div class="label-infor">
                             <div>
                                 <div class="label">Ngày sinh</div>
-                                <input id="dtDateOfBirth" class="input-label" type="date">
+                                <input id="dtDateOfBirth" class="input-label" fieldName="DateOfBirth" type="date">
                             </div>
                             <div>
                                 <div class="label">Giới tính</div>
@@ -269,7 +269,7 @@
                                 </select> -->
                                 <div class="dropdown input-label" id="dropdown2">
                                     <div class="dropdown-select">
-                                        <div id="ddGender" class="dropdown-text">Nam</div>
+                                        <div id="ddGender" class="dropdown-text" fieldName="Gender">Nam</div>
                                         <div class="dropdown-icon">
                                             <i class="arrow down"></i>
                                         </div>
@@ -278,9 +278,9 @@
                                         
                                     </button> -->
                                     <div class="dropdown-list" id="dropdown-list2">
-                                        <div class="item-list item-list-selected">Nam</div>
-                                        <div class="item-list">Nữ</div>
-                                       
+                                        <div class="item-list item-list-selected" key=1>Nam</div>
+                                        <div class="item-list" key=0>Nữ</div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -288,28 +288,28 @@
                         <div class="label-infor">
                             <div>
                                 <div class="label">Số CMTND/ Căn cước (<span>*</span>)</div>
-                                <input id="txtIdentityNumber" class="input-label" type="text" required>
+                                <input id="txtIdentityNumber" class="input-label" fieldName="IdentityNumber" type="text" required>
                             </div>
                             <div>
                                 <div class="label">Ngày cấp</div>
-                                <input id="dtIdentityDate" class="input-label" type="date">
+                                <input id="dtIdentityDate" class="input-label" fieldName="IdentityDate" type="date">
                             </div>
                         </div>
                         <div class="label-infor">
                             <div>
                                 <div class="label">Nơi cấp</div>
-                                <input id="txtIdentityPlace" class="input-label" type="text">
+                                <input id="txtIdentityPlace" class="input-label" fieldName="IdentityPlace" type="text">
                             </div>
                             
                         </div>
                         <div class="label-infor">
                             <div>
                                 <div class="label">Email (<span>*</span>)</div>
-                                <input id="txtEmail" class="input-label" type="email" required>
+                                <input id="txtEmail" class="input-label" fieldName="Email" type="email" required>
                             </div>
                             <div>
                                 <div class="label">Số điện thoại (<span>*</span>)</div>
-                                <input id="txtPhoneNumber" class="input-label" type="text" required>
+                                <input id="txtPhoneNumber" class="input-label" fieldName="PhoneNumber" type="text" required>
                             </div>
                         </div>
                     </div>
@@ -325,7 +325,7 @@
                                 </select> -->
                                 <div class="dropdown input-label" id="dropdown2">
                                     <div class="dropdown-select">
-                                        <div id="ddPositionName" class="dropdown-text">Tất cả vị trí</div>
+                                        <div id="ddPositionName" class="dropdown-text" fieldName="PositionId"></div>
                                         <div class="dropdown-icon">
                                             <i class="arrow down"></i>
                                         </div>
@@ -333,10 +333,10 @@
                                     <!-- <button class="dropdown-btn-select" id="btn-select1">
                                         
                                     </button> -->
-                                    <div class="dropdown-list" id="dropdown-list2">
-                                        <div class="item-list item-list-selected">Phòng Nhân sự</div>
+                                    <div class="dropdown-list" id="ddListPosition">
+                                        <!-- <div class="item-list item-list-selected">Phòng Nhân sự</div>
                                         <div class="item-list">Phòng Tài Chính</div>
-                                        <div class="item-list">Phòng Nghiên Cứu</div>
+                                        <div class="item-list">Phòng Nghiên Cứu</div> -->
                                     </div>
                                 </div>
                             </div>
@@ -348,7 +348,7 @@
                                 </select> -->
                                 <div class="dropdown input-label" id="dropdown1">
                                     <div class="dropdown-select">
-                                        <div id="ddDepartmentName" class="dropdown-text">Phòng đào tạo</div>
+                                        <div id="ddDepartmentName" class="dropdown-text" fieldName="DepartmentId"></div>
                                         <div class="dropdown-icon">
                                             <i class="arrow down"></i>
                                         </div>
@@ -357,10 +357,10 @@
                                     <!-- <button class="dropdown-btn-select" id="btn-select1">
                                         
                                     </button> -->
-                                    <div class="dropdown-list" id="dropdown-list1">
-                                        <div class="item-list item-list-selected">Phòng đào tạo</div>
+                                    <div class="dropdown-list" id="ddListDepartment">
+                                        <!-- <div class="item-list item-list-selected">Phòng đào tạo</div>
                                         <div class="item-list">Phòng Công nghệ</div>
-                                        <div class="item-list">Phòng Nhân sự</div>
+                                        <div class="item-list">Phòng Nhân sự</div> -->
                                     </div>
                                 </div>
                             </div>
@@ -368,17 +368,17 @@
                         <div class="label-infor">
                             <div>
                                 <div class="label">Mã số thuế cá nhân</div>
-                                <input id="txtTaxCode" class="input-label" type="text">
+                                <input id="txtTaxCode" class="input-label" fieldName="PersonalTaxCode" type="text">
                             </div>
                             <div>
                                 <div class="label">Mức lương cơ bản</div>
-                                <input id="txtSalary" class="input-label" type="text">
+                                <input id="txtSalary" class="input-label" fieldName="Salary" type="text">
                             </div>
                         </div>
                         <div class="label-infor">
                             <div>
                                 <div class="label">Ngày gia nhâp công ty</div>
-                                <input id="dtJoinDate" class="input-label" type="date">
+                                <input id="dtJoinDate" class="input-label" fieldName="JoinDate" type="date">
                             </div>
                             <div>
                                 <div class="label">Tình trạng công việc</div>
@@ -388,7 +388,7 @@
                                 </select> -->
                                 <div class="dropdown input-label" id="dropdown2">
                                     <div class="dropdown-select">
-                                        <div id="txtWorkStatus" class="dropdown-text">Đang làm việc </div>
+                                        <div id="txtWorkStatus" class="dropdown-text" fieldName="WorkStatus">Đang làm việc </div>
                                         <div class="dropdown-icon">
                                             <i class="arrow down"></i>
                                         </div>
@@ -397,8 +397,8 @@
                                         
                                     </button> -->
                                     <div class="dropdown-list" id="dropdown-list2">
-                                        <div class="item-list item-list-selected">Đang làm việc</div>
-                                        <div class="item-list">Nghỉ hưu</div>
+                                        <div class="item-list item-list-selected" key=1>Đang làm việc</div>
+                                        <div class="item-list" key=0>Nghỉ hưu</div>
                                         
                                     </div>
                                 </div>

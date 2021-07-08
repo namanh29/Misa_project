@@ -16,12 +16,13 @@
 .m-dialog .dialog-content {
     position: absolute; 
     width: 900px;
-    top: 50%;
-    transform: translateY(-50%);
+    /* top: 50%;
+    transform: translateY(-50%); */
     background-color: #ffffff;
     z-index: 1000;
     margin-left: calc(50% - 450px); 
-    
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 .dialog-header {
     width: 100%;
