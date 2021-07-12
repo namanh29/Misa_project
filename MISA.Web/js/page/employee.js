@@ -19,6 +19,7 @@ class EmployeeJS extends Base{
         super();
         //this.loadData();
         this.getDataUrl();
+        this.getDataDropdowwn();
         this.initEvents();
         
     }
@@ -102,12 +103,41 @@ class EmployeeJS extends Base{
             $(trSibling).removeClass('selected-row');
             // Hightlight row vua chon -> thay doi background color cua tr dang click
             $(this).addClass('selected-row');   
-
+            
+            // Lấy khóa chính của bản ghi
+            var deleteId = $(this).attr('recordId');
+            me.deleteId = deleteId;
+            
         })
+
+        // Click vào button xóa
+        $('#btnDelete').click(function(){
+            var deleteId = me.deleteId;
+            // Gọi api xóa nhân viên
+            $.ajax({
+                url: "http://cukcuk.manhnv.net/v1/Employees/"+`${deleteId}`,
+                type: "Delete",
+                
+                contentType: 'application/json-patch+json'
+            }).done(function(res){
+                // Sau khi lưu thành công: 
+                // + đưa ra thông báo thành công
+                alert('Xóa thành công!');
+                
+                // + load lại dữ liệu
+                me.loadData();
+                
+            }).fail(function(res){
+
+            })
+        })
+
         // Double click vào 1 hàng trong bảng --> Hiển thị form chi tiết
         $('table tbody').on('dblclick', 'tr', function(){
+            me.FormMode = 'Edit';
             // Lấy khóa chính của bản ghi
             var recordId = $(this).attr('recordId');
+            me.recordId = recordId;
             console.log(recordId);
             // Gọi service lấy thông tin chi tiết qua id
             $.ajax({
@@ -115,20 +145,37 @@ class EmployeeJS extends Base{
                 type: "GET",
             }).done(function(res){
                 // Binding lên form thông tin
-                console.log(res);
+                //console.log(res);
                 var inputs = $('input[fieldName], div[fieldName]');
                 var entity = {};
                 $.each(inputs, function(index, input){
                     var propertyName = $(this).attr('fieldName');
-                    var value;
+                    var value = res[propertyName];
                     if($(input).hasClass('input-label')){
-                        value = res[propertyName];
+                        if($(input).attr('type') == "date" && value != null){            
+                            value = value.substr(0,10);
+                            //debugger;
+                        }
                         $(this).val(value);
                     } else {
-                        value = $(this).parent().parent().find('.item-list-selected').attr('key');
+                        var itemLists = $(this).parent().parent().find('.item-list');
+                        //console.log(itemLists);
+                        $.each(itemLists, function(index, item){
+                            if(value != null){
+                                $(item).removeClass('item-list-selected');
+                                if($(item).attr('key') == value){
+                                    $(item).addClass('item-list-selected');
+                                    // Xử lý dropdown
+                                    var textdefault = $(item).text();
+                                    var dropdownText = itemLists.parent().parent().find('.dropdown-text');
+                                    dropdownText.text(textdefault);
+                                }
+                            }
+                            
+                            console.log(item);
+                            
+                        })
                     }
-                    
-                    
                     
                 })
             }).fail(function(res){
@@ -140,74 +187,11 @@ class EmployeeJS extends Base{
         })
         // Sự kiện khi click vào button "thêm"
         $('#btn-add').click(function(){
+            me.FormMode = 'Add';
             // Hiển thị form thông tin
             $('.m-dialog').show();
             // Load dữ liệu cho các dropdown
-            var ddListDepartment = $('#ddListDepartment');
-            ddListDepartment.empty();
-            // Lấy dữ liệu các phòng ban
-            $.ajax({
-                type: "GET",
-                url: "http://cukcuk.manhnv.net/api/Department",
-                
-            }).done(function(res){
-                if(res){
-                    $.each(res, function(index, item){
-                        var option, key;
-                        if(index == 0){
-                            option = $(`<div class="item-list item-list-selected" key="${item.DepartmentId}">${item.DepartmentName}</div>`);
-                            
- 
-                        } else {
-                            option = $(`<div class="item-list" key="${item.DepartmentId}">${item.DepartmentName}</div>`);
-                        }
-                        
-
-                        ddListDepartment.append(option);
-                        console.log(option);
-                    })
-                    // Xử lý dropdown
-                    var textdefault = ddListDepartment.find('.item-list-selected').text();
-                    var dropdownText = ddListDepartment.parent().find('.dropdown-text');
-                    dropdownText.text(textdefault);
-                    
-                    //debugger;
-                }
-            }).fail(function(res){
-
-            })
-
-            var ddListPosition = $('#ddListPosition');
-            ddListPosition.empty();
-            // Lấy dữ liệu các vị trí
-            $.ajax({
-                type: "GET",
-                url: "http://cukcuk.manhnv.net/v1/Positions",
-                
-            }).done(function(res){
-                if(res){
-                    $.each(res, function(index, item){
-                        var option;
-                        if(index == 0){
-                            option = $(`<div class="item-list item-list-selected" key="${item.PositionId}">${item.PositionName}</div>`);
-                            
-                        } else {
-                            option = $(`<div class="item-list" key="${item.PositionId}">${item.PositionName}</div>`);
-                        }
-                        
-                        ddListPosition.append(option);
-                        console.log(option);
-                    })
-                    // Xử lý dropdown
-                    var textdefault = ddListPosition.find('.item-list-selected').text();
-                    var dropdownText = ddListPosition.parent().find('.dropdown-text');
-                    dropdownText.text(textdefault);
-                    //debugger;
-                }
-            }).fail(function(res){
-
-            })
-
+            me.getDataDropdowwn();
 
         })
         // Sự kiện khi click "x" trên form chi tiết
@@ -231,8 +215,10 @@ class EmployeeJS extends Base{
         $('#btn-x-popup').click(function(){
             $('.popup').hide();
         })
+
         // Click button Luu tren form chi tiet
         $('#btn-save').click(function(){
+
             // validate dữ liệu
             var inputValidates = $('input[required], input[type="email"]');
             $.each(inputValidates, function(index, input){
@@ -245,26 +231,8 @@ class EmployeeJS extends Base{
                 inputNotValids[0].focus();
                 return;
             }
-            // thu thập thông tin dữ liệu đc nhập --> build thành object
-            // var workStatus, gender, positionId, departmentId;
-            // // Id Tình trạng làm việc
-            // if($('#txtWorkStatus').text() == "Đang làm việc"){
-            //     workStatus = 1;
-            // }
-            // else {
-            //     workStatus = 0;
-            // }
-            // // Id gender
-            // if($('#ddGender').text() == "Nam") {
-            //     gender = 1;
-            // }
-            // else if ($('#ddGender').text() == "Nữ") {
-            //     gender = 0;
-            // }
-            // else {
-            //     gender = 2;
-            // }
-            
+
+            // Thu thập thông tin dữ liệu đc nhập --> build thành object
             var inputs = $('input[fieldName], div[fieldName]');
             var entity = {};
             $.each(inputs, function(index, input){
@@ -272,39 +240,68 @@ class EmployeeJS extends Base{
                 var value;
                 if($(input).hasClass('input-label')){
                     value = $(this).val();
-                } else {
+                } else if ($(input).hasClass('dropdown-text')) {
                     value = $(this).parent().parent().find('.item-list-selected').attr('key');
+                } else {
+                    value = $(this).attr('key');
                 }
                 
                 entity[propertyName] = value;
                 
             })
             console.log(entity);
-            debugger;
-            // gọi service tương ứng thực hiện lưu dữ liệu
-            $.ajax({
-                url: "http://cukcuk.manhnv.net/v1/Employees",
-                type: "POST",
-                data: JSON.stringify(entity),
-                contentType: 'application/json-patch+json'
-            }).done(function(res){
-                // Sau khi lưu thành công: 
-                // + đưa ra thông báo thành công
-                alert('Thêm thành công!');
-                // + ẩn fom chi tiết
-                $('.m-dialog').hide();
-                // + load lại dữ liệu
-                me.loadData();
-                
-            }).fail(function(res){
 
-            })
+            // gọi service tương ứng thực hiện lưu dữ liệu
+            
+            if(me.FormMode == 'Add'){
+                
+                
+                $.ajax({
+                    url: "http://cukcuk.manhnv.net/v1/Employees",
+                    type: "POST",
+                    data: JSON.stringify(entity),
+                    contentType: 'application/json-patch+json'
+                }).done(function(res){
+                    // Sau khi lưu thành công: 
+                    // + đưa ra thông báo thành công
+                    alert('Thêm thành công!');
+                    // + ẩn fom chi tiết
+                    $('.m-dialog').hide();
+                    // + load lại dữ liệu
+                    me.loadData();
+                    
+                }).fail(function(res){
+    
+                })
+            }
+            else {
+                var recordId = me.recordId;
+                $.ajax({
+                    url: "http://cukcuk.manhnv.net/v1/Employees/"+`${recordId}`,
+                    type: "PUT",
+                    data: JSON.stringify(entity),
+                    contentType: 'application/json-patch+json'
+                }).done(function(res){
+                    // Sau khi lưu thành công: 
+                    // + đưa ra thông báo thành công
+                    alert('Sửa thành công!');
+                    // + ẩn fom chi tiết
+                    $('.m-dialog').hide();
+                    // + load lại dữ liệu
+                    me.loadData();
+                    
+                }).fail(function(res){
+    
+                })
+            }
+            
         })
 
         /**
          * Bắt buộc nhập
          * CreatedBy: PNANH (7/7/2021)
          */
+        
         $('[required]').blur(function(){
             // Kiểm tra dữ liệu đã nhập, nếu trống thì cảnh báo
             var value = $(this).val();
@@ -395,6 +392,78 @@ class EmployeeJS extends Base{
         })
         
     }
+
+    /**
+     * Lấy dữ liệu cho các dropdown
+     * CreatedBy: PNANH (04/07/2021)
+     */
+    getDataDropdowwn(){
+        var ddListDepartment = $('#ddListDepartment');
+        ddListDepartment.empty();
+        // Lấy dữ liệu các phòng ban
+        $.ajax({
+            type: "GET",
+            url: "http://cukcuk.manhnv.net/api/Department",
+
+        }).done(function (res) {
+            if (res) {
+                $.each(res, function (index, item) {
+                    var option, key;
+                    if (index == 0) {
+                        option = $(`<div class="item-list item-list-selected" key="${item.DepartmentId}">${item.DepartmentName}</div>`);
+
+
+                    } else {
+                        option = $(`<div class="item-list" key="${item.DepartmentId}">${item.DepartmentName}</div>`);
+                    }
+
+
+                    ddListDepartment.append(option);
+                    //console.log(option);
+                })
+                // Xử lý dropdown
+                var textdefault = ddListDepartment.find('.item-list-selected').text();
+                var dropdownText = ddListDepartment.parent().find('.dropdown-text');
+                dropdownText.text(textdefault);
+
+                //debugger;
+            }
+        }).fail(function (res) {
+
+        })
+
+        var ddListPosition = $('#ddListPosition');
+        ddListPosition.empty();
+        // Lấy dữ liệu các vị trí
+        $.ajax({
+            type: "GET",
+            url: "http://cukcuk.manhnv.net/v1/Positions",
+
+        }).done(function (res) {
+            if (res) {
+                $.each(res, function (index, item) {
+                    var option;
+                    if (index == 0) {
+                        option = $(`<div class="item-list item-list-selected" key="${item.PositionId}">${item.PositionName}</div>`);
+
+                    } else {
+                        option = $(`<div class="item-list" key="${item.PositionId}">${item.PositionName}</div>`);
+                    }
+
+                    ddListPosition.append(option);
+                    //console.log(option);
+                })
+                // Xử lý dropdown
+                var textdefault = ddListPosition.find('.item-list-selected').text();
+                var dropdownText = ddListPosition.parent().find('.dropdown-text');
+                dropdownText.text(textdefault);
+                //debugger;
+            }
+        }).fail(function (res) {
+
+        })
+    }
+
     /**
      * Thêm dữ liệu
      * CreatedBy: PNANH (04/07/2021)

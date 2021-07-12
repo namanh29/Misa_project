@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/css/common/icon.css">
     <link rel="stylesheet" href="/css/common/button.css">
     <link rel="stylesheet" href="/css/common/dropdown.css">
+    <link rel="stylesheet" href="/css/common/combobox.css">
     <link rel="stylesheet" href="/css/common/toolbar.css">
     <link rel="stylesheet" href="/css/common/input.css">
     <link rel="stylesheet" href="/css/common/grid.css">
@@ -23,6 +24,7 @@
     <link rel="stylesheet" href="/content/font/fontawesome-5.15.1/css/fontawesome.css">
     <link rel="stylesheet" href="/content/font/fontawesome-5.15.1/css/regular.css">
     <link rel="stylesheet" href="/lib/jquery-ui-1.12.1.custom/jquery-ui.min.css">
+    
     
 </head>
 
@@ -97,7 +99,7 @@
                     <!-- <button class="dropdown-btn-select" id="btn-select1">
                         
                     </button> -->
-                    <div class="dropdown-list" id="dropdown-list1">
+                    <div class="dropdown-list" >
                         <div class="item-list item-list-selected">Tất cả phòng ban</div>
                         <div class="item-list">Viện đào tạo</div>
                     </div>
@@ -117,14 +119,17 @@
                     <!-- <button class="dropdown-btn-select" id="btn-select1">
                         
                     </button> -->
-                    <div class="dropdown-list" id="dropdown-list2">
+                    <div class="dropdown-list" >
                         <div class="item-list item-list-selected">Tất cả vị trí</div>
                         <div class="item-list">Giám đốc</div>
                         <div class="item-list">Nhân viên</div>
                     </div>
                 </div>
+                
+                
             </div>
             <div class="filter-right">
+                <button id="btnDelete" class="m-second-button">Xóa</button>
                 <button id="btn-refresh" class="m-second-button m-btn-refresh"></button>
             </div>
         </div>
@@ -263,26 +268,31 @@
                             </div>
                             <div>
                                 <div class="label">Giới tính</div>
-                                <!-- <select class="input-label" name="" id="">
-                                    <option value="">Nam</option>
-                                    <option value="">Nữ</option>
-                                </select> -->
-                                <div class="dropdown input-label" id="dropdown2">
+                                
+                                <!-- <div class="dropdown input-label" id="dropdown2">
                                     <div class="dropdown-select">
                                         <div id="ddGender" class="dropdown-text" fieldName="Gender">Nam</div>
                                         <div class="dropdown-icon">
                                             <i class="arrow down"></i>
                                         </div>
                                     </div>
-                                    <!-- <button class="dropdown-btn-select" id="btn-select1">
-                                        
-                                    </button> -->
+                                    
                                     <div class="dropdown-list" id="dropdown-list2">
                                         <div class="item-list item-list-selected" key=1>Nam</div>
                                         <div class="item-list" key=0>Nữ</div>
                                         
                                     </div>
+                                </div> -->
+                                <div class="combobox">
+                                    <input class="combobox-text" fieldName="Gender" type="text">
+                                    <button><i class="arrow down"></i></button>
+                                    <div class="combobox-list">
+                                        <!-- <div class="combobox-item">Nam</div>
+                                        <div class="combobox-item">Nữ</div>
+                                        <div class="combobox-item">Khác</div> -->
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
                         <div class="label-infor">
@@ -443,6 +453,7 @@
     sc
     <script src="/js/common/common.js"></script>
     <script src="/js/common/base.js"></script>
+    <script src="/js/common/combobox.js"></script>
     <script src="/js/page/employee.js"></script>
 </body>
 

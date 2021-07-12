@@ -33,5 +33,5 @@ select:focus {
 }
 
 .border-red {
-    border: 1px solid #ff4747 ; 
+    border: 1px solid #ff4747 !important; 
 }
