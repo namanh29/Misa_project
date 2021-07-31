@@ -1,31 +1,30 @@
 <template>
   <div id="app">
-    <TheHeader/>
+    
     <TheMenu/>
+    <TheHeader/>
     <ThePage/>
-  </div>
+    <ToastMessage :newToast="$store.state.toastMessage.toast"/>
+  </div> 
+  
+  
 </template>
 
 <script>
 import TheHeader from './components/layout/TheHeader.vue'
 import TheMenu from './components/layout/TheMenu.vue'
 import ThePage from './components/layout/ThePage.vue'
+import ToastMessage from './components/base/ToastMessage/index.vue'
 
 export default {
   name: 'App',
   components: {
-    TheHeader, TheMenu, ThePage
+    TheHeader, TheMenu,
+    ThePage, ToastMessage
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang='css' src='./css/layout/main.css'>
+  /* @import url('css/layout/main.css'); */
 </style>

@@ -19,7 +19,6 @@ class EmployeeJS extends Base{
         super();
         //this.loadData();
         this.getDataUrl();
-        this.getDataDropdowwn();
         this.initEvents();
         
     }
@@ -93,7 +92,7 @@ class EmployeeJS extends Base{
             $(this).addClass('active');
         })
         $('#btn-refresh').click(function(){
-            alert("a");
+            
             me.loadData();
         })
         // Click vào 1 hàng trong bảng
@@ -186,14 +185,8 @@ class EmployeeJS extends Base{
 
         })
         // Sự kiện khi click vào button "thêm"
-        $('#btn-add').click(function(){
-            me.FormMode = 'Add';
-            // Hiển thị form thông tin
-            $('.m-dialog').show();
-            // Load dữ liệu cho các dropdown
-            me.getDataDropdowwn();
+        $('#btn-add').click(me.btnAddOnClick.bind(me))
 
-        })
         // Sự kiện khi click "x" trên form chi tiết
         $('#btn-x-dialog').click(function(){
             $('.popup').show();
@@ -217,8 +210,77 @@ class EmployeeJS extends Base{
         })
 
         // Click button Luu tren form chi tiet
-        $('#btn-save').click(function(){
+        $('#btn-save').click(me.btnSaveOnClick.bind(me))
 
+        /**
+         * Bắt buộc nhập
+         * CreatedBy: PNANH (7/7/2021)
+         */
+        
+        $('[required]').blur(function(){
+            // Kiểm tra dữ liệu đã nhập, nếu trống thì cảnh báo
+            var value = $(this).val();
+            if(!value){
+                $(this).addClass('border-red');
+                $(this).attr('title', 'Trường này không được để trống');
+                $(this).attr('validate', false);
+            }
+            else {
+                $(this).removeClass('border-red');
+                $(this).attr('title', '');
+                $(this).attr('validate', true);
+            }          
+        })
+
+        $('input[type="email"]').blur(function(){
+            var email = $(this).val();
+            var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            if (!regex.test(email)) {
+                $(this).addClass('border-red');
+                $(this).attr('title', 'Email không đúng định dạng');
+                $(this).attr('validate', false);
+            }
+            else {
+                $(this).removeClass('border-red');
+                $(this).attr('title', '');
+                $(this).attr('validate', true); 
+            }
+        })
+
+        
+
+        // Click vao dropdown-select
+        
+        
+    }
+
+    
+
+    /**
+     * Hàm xử lý khi nhấn button "Thêm mới"
+     * CreatedBy: PNANH (13/7/2021)
+     */
+    btnAddOnClick(){
+        try {
+            var me = this;
+            me.FormMode = 'Add';
+            // Hiển thị form thông tin
+            $('.m-dialog').show();
+            $('input').val(null);
+            // Load dữ liệu cho các dropdown
+            //me.getDataDropdowwn();
+        } catch(e) {
+            console.log(e);
+        }
+    }
+
+    /**
+     * Hàm xử lý khi nhấn button "Lưu"
+     * CreatedBy: PNANH (13/7/2021)
+     */
+     btnSaveOnClick(){
+        try {
+            var me = this;
             // validate dữ liệu
             var inputValidates = $('input[required], input[type="email"]');
             $.each(inputValidates, function(index, input){
@@ -253,7 +315,7 @@ class EmployeeJS extends Base{
 
             // gọi service tương ứng thực hiện lưu dữ liệu
             
-            if(me.FormMode == 'Add'){
+            if(this.FormMode == 'Add'){
                 
                 
                 $.ajax({
@@ -294,174 +356,9 @@ class EmployeeJS extends Base{
     
                 })
             }
-            
-        })
-
-        /**
-         * Bắt buộc nhập
-         * CreatedBy: PNANH (7/7/2021)
-         */
-        
-        $('[required]').blur(function(){
-            // Kiểm tra dữ liệu đã nhập, nếu trống thì cảnh báo
-            var value = $(this).val();
-            if(!value){
-                $(this).addClass('border-red');
-                $(this).attr('title', 'Trường này không được để trống');
-                $(this).attr('validate', false);
-            }
-            else {
-                $(this).removeClass('border-red');
-                $(this).attr('title', '');
-                $(this).attr('validate', true);
-            }          
-        })
-
-        $('input[type="email"]').blur(function(){
-            var email = $(this).val();
-            var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-            if (!regex.test(email)) {
-                $(this).addClass('border-red');
-                $(this).attr('title', 'Email không đúng định dạng');
-                $(this).attr('validate', false);
-            }
-            else {
-                $(this).removeClass('border-red');
-                $(this).attr('title', '');
-                $(this).attr('validate', true); 
-            }
-        })
-
-        
-
-        // Click vao dropdown-select
-        $('.dropdown-select').click(function(){
-            var dropdownList = $(this).parent().find('.dropdown-list')
-            dropdownList.toggle();
-            var icon = $(this).find('.dropdown-icon i')
-            
-            // let dropdownSibling = $(this).siblings();
-            // $(dropdownSibling).removeClass('dropdown-selected');
-            
-            if($(this).hasClass('dropdown-selected')){
-                $(this).removeClass('dropdown-selected')
-            }
-            else {
-                $(this).addClass('dropdown-selected')
-            }
-           
-            if(icon.hasClass('up')) {
-                icon.removeClass('up');
-                icon.addClass('down');
-            }
-            else {
-                icon.removeClass('down');
-                icon.addClass('up');
-            }
-            
-            
-        })
-
-        // Click chọn item-list
-        $('.dropdown-list').on('click', '.item-list', function(){
-            var dropdown = $(this).parent().parent();
-            var dropdownSelect = dropdown.find('.dropdown-select');
-            var icon = dropdown.find('.dropdown-icon i');
-            var text = $(this).text();
-            let trSibling = $(this).siblings();
-            $(trSibling).removeClass('item-list-selected');
-            $(this).addClass('item-list-selected')
-            dropdown.find('.dropdown-text').html(text);
-            
-            if(dropdownSelect.hasClass('dropdown-selected')){
-                dropdownSelect.removeClass('dropdown-selected');
-                
-            }
-
-            if(icon.hasClass('up')) {
-                icon.removeClass('up');
-                icon.addClass('down');
-            }
-            else {
-                icon.removeClass('down');
-                icon.addClass('up');
-            }
-            
-            $(this).parent().hide();
-            
-        })
-        
-    }
-
-    /**
-     * Lấy dữ liệu cho các dropdown
-     * CreatedBy: PNANH (04/07/2021)
-     */
-    getDataDropdowwn(){
-        var ddListDepartment = $('#ddListDepartment');
-        ddListDepartment.empty();
-        // Lấy dữ liệu các phòng ban
-        $.ajax({
-            type: "GET",
-            url: "http://cukcuk.manhnv.net/api/Department",
-
-        }).done(function (res) {
-            if (res) {
-                $.each(res, function (index, item) {
-                    var option, key;
-                    if (index == 0) {
-                        option = $(`<div class="item-list item-list-selected" key="${item.DepartmentId}">${item.DepartmentName}</div>`);
-
-
-                    } else {
-                        option = $(`<div class="item-list" key="${item.DepartmentId}">${item.DepartmentName}</div>`);
-                    }
-
-
-                    ddListDepartment.append(option);
-                    //console.log(option);
-                })
-                // Xử lý dropdown
-                var textdefault = ddListDepartment.find('.item-list-selected').text();
-                var dropdownText = ddListDepartment.parent().find('.dropdown-text');
-                dropdownText.text(textdefault);
-
-                //debugger;
-            }
-        }).fail(function (res) {
-
-        })
-
-        var ddListPosition = $('#ddListPosition');
-        ddListPosition.empty();
-        // Lấy dữ liệu các vị trí
-        $.ajax({
-            type: "GET",
-            url: "http://cukcuk.manhnv.net/v1/Positions",
-
-        }).done(function (res) {
-            if (res) {
-                $.each(res, function (index, item) {
-                    var option;
-                    if (index == 0) {
-                        option = $(`<div class="item-list item-list-selected" key="${item.PositionId}">${item.PositionName}</div>`);
-
-                    } else {
-                        option = $(`<div class="item-list" key="${item.PositionId}">${item.PositionName}</div>`);
-                    }
-
-                    ddListPosition.append(option);
-                    //console.log(option);
-                })
-                // Xử lý dropdown
-                var textdefault = ddListPosition.find('.item-list-selected').text();
-                var dropdownText = ddListPosition.parent().find('.dropdown-text');
-                dropdownText.text(textdefault);
-                //debugger;
-            }
-        }).fail(function (res) {
-
-        })
+        } catch(e) {
+            console.log(e);
+        }
     }
 
     /**

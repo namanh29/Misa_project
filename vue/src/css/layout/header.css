@@ -8,26 +8,27 @@
     align-items: center;
     padding: 0 16px;
 }
-.header div {
+.header .header-user {
     display: flex;
     align-items: center;
 }
 .header .header-title {
     font-size: 15px;
     font-weight: bold;
-    margin-left: 8px;
+    
 }
+
 .avatar-img {
     width: 36px;
     height: 36px;
-    background-image: url('/content/icon/avatar-default.png');
+    background-image: url('../../assets/icon/avatar-default.png');
     background-size: contain;
     margin-right: 16px;
 }
 .option {
     width: 24px;
     height: 24px;
-    background-image: url('/content/icon/option.png');
+    background-image: url('../../assets/icon/option.png');
     background-size: contain;
     margin-left: 16px;
 }

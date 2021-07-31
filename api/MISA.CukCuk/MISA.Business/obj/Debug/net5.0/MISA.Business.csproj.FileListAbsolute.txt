@@ -1,0 +1,17 @@
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Business\obj\Debug\net5.0\MISA.Business.csproj.AssemblyReference.cache
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Business\obj\Debug\net5.0\MISA.Business.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Business\obj\Debug\net5.0\MISA.Business.AssemblyInfoInputs.cache
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Business\obj\Debug\net5.0\MISA.Business.AssemblyInfo.cs
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Business\obj\Debug\net5.0\MISA.Business.csproj.CoreCompileInputs.cache
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Business\bin\Debug\net5.0\MISA.Business.deps.json
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Business\bin\Debug\net5.0\MISA.Business.dll
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Business\bin\Debug\net5.0\ref\MISA.Business.dll
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Business\bin\Debug\net5.0\MISA.Business.pdb
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Business\bin\Debug\net5.0\MISA.Common.dll
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Business\bin\Debug\net5.0\MISA.DataAccess.dll
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Business\bin\Debug\net5.0\MISA.Common.pdb
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Business\bin\Debug\net5.0\MISA.DataAccess.pdb
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Business\obj\Debug\net5.0\MISA.Business.csproj.CopyComplete
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Business\obj\Debug\net5.0\MISA.Business.dll
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Business\obj\Debug\net5.0\ref\MISA.Business.dll
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Business\obj\Debug\net5.0\MISA.Business.pdb

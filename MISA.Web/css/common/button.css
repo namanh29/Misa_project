@@ -1,4 +1,5 @@
-.btn-default {
+/* Style button chứa icon */
+.btn-icon {
     display: flex;
     height: 40px;
     border-radius: 4px;
@@ -13,25 +14,43 @@
     border: none;
     cursor: pointer;
 }
-
+.btn-icon:hover {
+    background-color: #2fbe8e;
+}
+.btn-icon .btn-text {
+    margin-left: 8px;
+}
+/* Style button default */
+.btn-default {
+    height: 40px;
+    border-radius: 4px;
+    background-color: #019160;
+    color: #fff;
+    font-size: 13px;
+    padding-left: 24px;
+    padding-right: 24px;
+    text-align: center;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
 .btn-default:hover {
     background-color: #2fbe8e;
 }
-.btn-default .btn-text {
-    margin-left: 8px;
-}
 
 .m-second-button {
-    border: 1px solid #f4f4f4;
+    border: 1px solid #bbb;
     background-color: #f4f4f4;
     border-radius: 4px;
     height: 40px;
     text-align: center;
+    padding-left: 24px;
+    padding-right: 24px;
     outline: none;
     cursor: pointer;
 }
 .m-second-button:hover {
-    background-color: #e5e5e5;
+    background-color: #e9ebee;
 }
 .m-btn-refresh {
     background-image: url('/content/icon/refresh.png');
@@ -40,9 +59,9 @@
     width: 40px;
     margin-left: 16px;
 }
+
 .btn-cancel {
-    padding-left: 24px;
-    padding-right: 24px;
+    
 }
 .btn-x {
     width: 40px;
@@ -61,6 +80,9 @@
     background-color: #e5e5e5;
     border-radius: 4px;
 }
-#btnDelete {
-    padding: 0px 24px;
+
+
+.btn-close {
+    width: 100px;
+    margin-left: 8px;
 }

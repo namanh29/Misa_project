@@ -30,10 +30,10 @@ function checkValidate(){
         $.each(genders, function(index, item){
             if(text == item.text) {
                 $('.combobox').removeClass('border-red');
-                alert("a");
-                return;
+                
+                return false;
             }
-            if(text != item.text && index == genders.length){
+            if(text != item.text && index == genders.length-1){
                 $('.combobox').addClass('border-red');
             }
         })
@@ -53,9 +53,13 @@ function clickButtonCombobox() {
             if (index == 0) {
                 $(gender).addClass('autocomplete-active');
             }
+            
+            
             $('.combobox-list').append(gender);
         })
         clickComboboxItem();
+        var icon = $(`<i class="fas fa-check"></i>`);
+        $('.item-selected').append(icon);
         $('.combobox-list').toggle();
 
     })

@@ -1,0 +1,14 @@
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Common\bin\Debug\net5.0\MISA.Common.deps.json
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Common\bin\Debug\net5.0\MISA.Common.dll
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Common\bin\Debug\net5.0\ref\MISA.Common.dll
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Common\bin\Debug\net5.0\MISA.Common.pdb
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Common\obj\Debug\net5.0\MISA.Common.csproj.AssemblyReference.cache
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Common\obj\Debug\net5.0\MISA.Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Common\obj\Debug\net5.0\MISA.Common.AssemblyInfoInputs.cache
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Common\obj\Debug\net5.0\MISA.Common.AssemblyInfo.cs
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Common\obj\Debug\net5.0\MISA.Common.csproj.CoreCompileInputs.cache
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Common\obj\Debug\net5.0\MISA.Common.dll
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Common\obj\Debug\net5.0\ref\MISA.Common.dll
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Common\obj\Debug\net5.0\MISA.Common.pdb
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Common\obj\Debug\net5.0\MISA.Common.Properties.Resources.resources
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.Common\obj\Debug\net5.0\MISA.Common.csproj.GenerateResource.cache

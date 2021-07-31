@@ -1,0 +1,15 @@
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.DataAccess\obj\Debug\net5.0\MISA.DataAccess.csproj.AssemblyReference.cache
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.DataAccess\obj\Debug\net5.0\MISA.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.DataAccess\obj\Debug\net5.0\MISA.DataAccess.AssemblyInfoInputs.cache
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.DataAccess\obj\Debug\net5.0\MISA.DataAccess.AssemblyInfo.cs
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.DataAccess\obj\Debug\net5.0\MISA.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.DataAccess\bin\Debug\net5.0\MISA.DataAccess.deps.json
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.DataAccess\bin\Debug\net5.0\MISA.DataAccess.dll
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.DataAccess\bin\Debug\net5.0\ref\MISA.DataAccess.dll
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.DataAccess\bin\Debug\net5.0\MISA.DataAccess.pdb
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.DataAccess\bin\Debug\net5.0\MISA.Common.dll
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.DataAccess\bin\Debug\net5.0\MISA.Common.pdb
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.DataAccess\obj\Debug\net5.0\MISA.DataAccess.csproj.CopyComplete
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.DataAccess\obj\Debug\net5.0\MISA.DataAccess.dll
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.DataAccess\obj\Debug\net5.0\ref\MISA.DataAccess.dll
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api\MISA.CukCuk\MISA.DataAccess\obj\Debug\net5.0\MISA.DataAccess.pdb

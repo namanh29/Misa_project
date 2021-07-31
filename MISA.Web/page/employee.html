@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="/content/font/fontawesome-5.15.1/css/fontawesome.css">
     <link rel="stylesheet" href="/content/font/fontawesome-5.15.1/css/regular.css">
     <link rel="stylesheet" href="/lib/jquery-ui-1.12.1.custom/jquery-ui.min.css">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     
 </head>
 
@@ -73,7 +73,7 @@
         <div class="header-content">
             <div class="title">Danh sách nhân viên</div>
             <div class="content-feature">
-                <button class="btn-default" id="btn-add">
+                <button class="btn-icon" id="btn-add">
                     <div class="icon-add"></div>
                     <div class="btn-text">Thêm nhân viên</div>
                 </button>
@@ -146,9 +146,6 @@
                     <col style=" width: 120px;">
                     <col style=" width: 130px;">
                     <col style=" width: 130px;">
-                    
-
-
                 </colgroup>
                 <thead>
                     <tr>
@@ -166,19 +163,6 @@
                 </thead>
                 <tbody>
                     <!-- <tr>
-                        <td>NV-001</td>
-                        <td>Pham Nam Anh</td>
-                        <td>Nam</td>
-                        <td>29/09/2000</td>
-                        <td>0987654321</td>
-                        <td>namanh29tb@gmail.com</td>
-                        <td>Fresher</td>
-                        <td>Vien dao tao</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                
-                    <tr>
                         <td>NV-001</td>
                         <td>Pham Nam Anh</td>
                         <td>Nam</td>
@@ -382,7 +366,7 @@
                             </div>
                             <div>
                                 <div class="label">Mức lương cơ bản</div>
-                                <input id="txtSalary" class="input-label" fieldName="Salary" type="text">
+                                <input id="txtSalary" class="input-label" fieldName="Salary" type="text" placeholder="VND">
                             </div>
                         </div>
                         <div class="label-infor">
@@ -418,7 +402,7 @@
                 </div>
             </div>
             <div class="dialog-footer">
-                <button id="btn-save" class="btn-default">
+                <button id="btn-save" class="btn-icon">
                     <div class="icon-save"><i class="far fa-save"></i></div>
                     <div class="btn-text">Lưu</div>
                 </button>
@@ -435,7 +419,7 @@
                 <div class="popup-header">Đóng form thông tin chung</div>
                 <button id="btn-x-popup" class="btn-x"></button>
                 <div class="popup-main">
-                    <div class="popup-icon"></div>
+                    <div class="popup-icon"><i class="fas fa-exclamation-triangle"></i></div>
                     <div class="popup-infor">
                         <p>Bạn có chắc muốn đóng form nhập <b>"Thông tin chung của</b></p>
                         <p><b>thủ tục 603"</b> hay không?</p>
@@ -444,7 +428,7 @@
             </div>
             <div class="popup-footer">
                 <button id="btn-cancel-popup" class="m-second-button btn-cancel">Tiếp tục nhập</button>
-                <button id="btn-close" class="btn-close">Đóng</button>
+                <button id="btn-close" class="btn-default btn-close">Đóng</button>
             </div>
         </div>
     </div>
@@ -454,6 +438,7 @@
     <script src="/js/common/common.js"></script>
     <script src="/js/common/base.js"></script>
     <script src="/js/common/combobox.js"></script>
+    <script src="/js/common/dropdown.js"></script>
     <script src="/js/page/employee.js"></script>
 </body>
 

@@ -1,0 +1,16 @@
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\Misa.DemoCSharp\bin\Debug\net5.0\Misa.DemoCSharp.exe
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\Misa.DemoCSharp\bin\Debug\net5.0\Misa.DemoCSharp.deps.json
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\Misa.DemoCSharp\bin\Debug\net5.0\Misa.DemoCSharp.runtimeconfig.json
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\Misa.DemoCSharp\bin\Debug\net5.0\Misa.DemoCSharp.runtimeconfig.dev.json
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\Misa.DemoCSharp\bin\Debug\net5.0\Misa.DemoCSharp.dll
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\Misa.DemoCSharp\bin\Debug\net5.0\ref\Misa.DemoCSharp.dll
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\Misa.DemoCSharp\bin\Debug\net5.0\Misa.DemoCSharp.pdb
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\Misa.DemoCSharp\obj\Debug\net5.0\Misa.DemoCSharp.csproj.AssemblyReference.cache
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\Misa.DemoCSharp\obj\Debug\net5.0\Misa.DemoCSharp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\Misa.DemoCSharp\obj\Debug\net5.0\Misa.DemoCSharp.AssemblyInfoInputs.cache
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\Misa.DemoCSharp\obj\Debug\net5.0\Misa.DemoCSharp.AssemblyInfo.cs
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\Misa.DemoCSharp\obj\Debug\net5.0\Misa.DemoCSharp.csproj.CoreCompileInputs.cache
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\Misa.DemoCSharp\obj\Debug\net5.0\Misa.DemoCSharp.dll
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\Misa.DemoCSharp\obj\Debug\net5.0\ref\Misa.DemoCSharp.dll
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\Misa.DemoCSharp\obj\Debug\net5.0\Misa.DemoCSharp.pdb
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\Misa.DemoCSharp\obj\Debug\net5.0\Misa.DemoCSharp.genruntimeconfig.cache

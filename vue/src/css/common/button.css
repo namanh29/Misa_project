@@ -1,0 +1,88 @@
+/* Style button chứa icon */
+.btn-icon {
+    display: flex;
+    height: 40px;
+    border-radius: 4px;
+    background-color: #019160;
+    color: #ffffff;
+    align-items: center;
+    font-size: 13px;
+    font-family: GoogleSans-Regular;
+    padding-left: 16px;
+    padding-right: 16px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+.btn-icon:hover {
+    background-color: #2fbe8e;
+}
+.btn-icon .btn-text {
+    margin-left: 8px;
+}
+/* Style button default */
+.btn-default {
+    height: 40px;
+    border-radius: 4px;
+    background-color: #019160;
+    color: #fff;
+    font-size: 13px;
+    padding-left: 24px;
+    padding-right: 24px;
+    text-align: center;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+.btn-default:hover {
+    background-color: #2fbe8e;
+}
+
+.m-second-button {
+    border: 1px solid #bbb;
+    background-color: #f4f4f4;
+    border-radius: 4px;
+    height: 40px;
+    text-align: center;
+    padding-left: 24px;
+    padding-right: 24px;
+    outline: none;
+    cursor: pointer;
+}
+.m-second-button:hover {
+    background-color: #e9ebee;
+}
+.m-btn-refresh {
+    background-image: url('../../assets/icon/refresh.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 40px;
+    margin-left: 16px;
+}
+
+.btn-cancel {
+    border: none
+}
+.btn-x {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    background-image: url('../../assets/icon/x.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    background-color: #ffffff;
+    cursor: pointer;
+}
+.btn-x:hover {
+    background-color: #e5e5e5;
+    border-radius: 4px;
+}
+
+
+.btn-close {
+    width: 100px;
+    margin-left: 8px;
+}

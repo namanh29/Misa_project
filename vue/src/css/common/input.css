@@ -1,0 +1,38 @@
+input {
+    
+    height: 40px;
+    padding: 10px 16px;
+    
+    border: 1px solid #bbbbbb;
+    border-radius: 4px;
+    outline: none;
+}
+input::placeholder {
+    font-size: 11px;
+}
+.input-search {
+    padding-left: 40px; 
+}
+input:focus {
+    border: 1px solid #019160;
+}
+.input-label {
+    width: 250px;
+    height: 40px;
+    margin-left: 0px;
+}
+select {
+    
+    height: 40px;
+    outline: none;
+    border: 1px solid #bbbbbb;
+    border-radius: 4px;
+    padding-left: 16px;
+}
+select:focus {
+    border: 1px solid #019160;
+}
+
+.border-red {
+    border: 1px solid #ff4747 !important; 
+}
