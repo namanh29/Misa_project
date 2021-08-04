@@ -21,4 +21,14 @@ namespace MISA.Core.Enums
         /// </summary>
         Other = 2
     }
+
+    /// <summary>
+    /// Xác định trạng thái của object
+    /// </summary>
+    public enum EntityState
+    {
+        Add = 1,
+        Update = 2,
+        Delete = 3
+    }
 }

@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "d2BoBwp5KqKSN8cpdBA50sbYQtmiVwYYR3AWONHAQ+kYZOaz0aCxiH8piJN3F1WBf3seXl437yO0y7vlPHsqMw==",
+  "dgSpecHash": "D+9Ysd890gDrYpTIb18KuJ3oauOSjv9SackZYNdgHCfHUtirRHxNcBrMkIDneTMMTCqFa0IyyK63eu6jovNfxA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Nam Anh\\OneDrive\\Desktop\\Misa_project\\api_v2\\MISA.CukCuk\\MISA.CukCuk.Api\\MISA.CukCuk.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Nam Anh\\.nuget\\packages\\dapper\\2.0.90\\dapper.2.0.90.nupkg.sha512",
     "C:\\Users\\Nam Anh\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\Nam Anh\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\5.0.0\\microsoft.extensions.configuration.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\Nam Anh\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512",
     "C:\\Users\\Nam Anh\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\Nam Anh\\.nuget\\packages\\mysqlconnector\\1.3.11\\mysqlconnector.1.3.11.nupkg.sha512",
     "C:\\Users\\Nam Anh\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",

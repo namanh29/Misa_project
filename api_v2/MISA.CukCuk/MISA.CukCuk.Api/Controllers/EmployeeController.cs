@@ -1,238 +1,26 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MISA.Core.Entities;
+using MISA.Core.Interfaces.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Dapper;
-using MySqlConnector;
-using System.Data;
-using MISA.Core.Entities;
-using MISA.Core.Interfaces.Service;
-using MISA.Core.Interfaces.Infrastructure;
-using MISA.Infrastructure.Repositories;
-using MISA.Core.Consts;
 
-namespace MISA.CukCuk.Api
+namespace MISA.CukCuk.Api.Controllers
 {
-    /// <summary>
-    /// Api Danh mục nhân viên
-    /// CreatedBy: PNANH (25/7/2021)
-    /// </summary>
-    [Route("api/v1/employees")]
-    [ApiController]
-    public class EmployeeController : ControllerBase
+    public class EmployeeController : EntityController<Employee>
     {
-        ResponseError _responseError = new ResponseError();
         IEmployeeService _employeeService;
-        
-        IBaseRepository<Employee> _baseRepository;
-        public EmployeeController(IEmployeeService employeeService, IBaseRepository<Employee> baseRepository)
+        public EmployeeController(IEmployeeService employeeService):base(employeeService)
         {
-            _employeeService = employeeService; 
-            _baseRepository = baseRepository;
-
+            _employeeService = employeeService;
         }
 
-        #region Methods
-        /// <summary>
-        /// Lấy toàn bộ nhân viên
-        /// </summary>
-        /// <returns>Danh sách nhân viên</returns>
-        /// CreatedBy: PNANH (25/7/2021)
-        [HttpGet]
-        public IActionResult GetAll()
+        [HttpGet("filter")]
+        public IActionResult GetEmployeeFilter([FromQuery] string specs, [FromQuery]Guid? departmentId, [FromQuery]Guid? positionId)
         {
-            try
-            {
-                // Lay du lieu
-                //var employeeContext = new EmployeeContext();
-                var employees = _baseRepository.GetAll();
-                //var employees = _dbConnection.Query<Employee>("Proc_GetEmployees", commandType: CommandType.StoredProcedure);
-                
-                if (employees.Count() > 0)
-                {
-                    return Ok(employees); // StatusCode (200, "MISA")
-                }
-                else
-                {
-                    return NoContent();
-                }
-            }
-            catch (Exception ex)
-            {
-                _responseError.ErrorCode = MISAConst.MISACodeErrorException;
-                _responseError.DevMsg = ex.Message;
-                _responseError.UserMsg = Core.Properties.Resources.ErrorException;
-                return StatusCode(500, _responseError);
-            }
-
+            return Ok(_employeeService.GetEmployeesFilter(specs, departmentId, positionId));
         }
-
-        /// <summary>
-        /// Lấy danh sách nhân viên theo Id
-        /// </summary>
-        /// <param name="employeeId">id của nhân viên</param>
-        /// <returns>Danh sách nhân viên</returns>
-        /// CreatedBy: PNANH (25/7/2021)
-        [HttpGet("{employeeId}")]
-        public IActionResult Get(Guid employeeId)
-        {
-            try
-            {
-                // Lay du lieu
-                //var employeeContext = new EmployeeContext();
-                var employee = _baseRepository.GetById(employeeId);
-
-                if (employee != null)
-                {
-                    return Ok(employee); // StatusCode (200, "MISA")
-                }
-                else
-                {
-                    return NoContent();
-                }
-            }
-            catch (Exception ex)
-            {
-                _responseError.ErrorCode = MISAConst.MISACodeErrorException;
-                _responseError.DevMsg = ex.Message;
-                _responseError.UserMsg = Core.Properties.Resources.ErrorException;
-                return StatusCode(500, _responseError);
-            }
-
-        }
-
-        /// <summary>
-        /// Thêm mới nhân viên
-        /// </summary>
-        /// <param name="employee">Đối tượng employee sẽ thêm mới</param>
-        /// <returns>
-        /// 200 - thành công
-        /// 201 - thêm mới thành công
-        /// 400 - dữ liệu đầu vào không hợp lệ
-        /// 500 - exception
-        /// </returns>
-        [HttpPost]
-        public IActionResult Post([FromBody] Employee employee)
-        {
-            try {
-                
-                var serviceResult = _employeeService.Add(employee);
-                // Validate dữ liệu:                           
-                
-                if(serviceResult.Success == false)
-                {
-                    return BadRequest(serviceResult);
-                }
-               
-                // Sinh mới Id cho Employee
-                employee.EmployeeId = Guid.NewGuid();
-
-
-                // Lay du lieu
-                //var rowAffects = _dbConnection.Execute("Proc_InsertEmployee", employee, commandType: CommandType.StoredProcedure);
-
-                var rowAffects = (int)serviceResult.Data;
-                if (rowAffects > 0)
-                {
-                    return Created("Thêm thành công", employee);
-                }
-                else
-                {
-                    return NoContent();
-                }
-
-            }
-            catch (Exception ex)
-            {
-                _responseError.ErrorCode = MISAConst.MISACodeErrorException;
-                _responseError.DevMsg = ex.Message;
-                _responseError.UserMsg = Core.Properties.Resources.ErrorException;
-                return StatusCode(500, _responseError);
-            }
-        }
-
-
-        /// <summary>
-        /// Sửa thông tin nhân viên
-        /// </summary>
-        /// <param name="employee">Đối tượng employee cần sửa</param>
-        /// <param name="employeeId">Mã nhân viên cần sửa</param>
-        /// <returns>
-        /// 
-        /// </returns>
-        [HttpPut("{employeeId}")]
-        public IActionResult Put([FromBody] Employee employee, Guid employeeId)
-        {
-            try
-            {
-                employee.EmployeeId = employeeId;
-                
-                var serviceResult = _employeeService.Update(employee);
-                
-                // Validate dữ liệu:
-                if(serviceResult.Success == false)
-                {
-                    return BadRequest(serviceResult);
-                }
-
-                // Lay du lieu
-                var rowAffects = (int)serviceResult.Data;
-                if (rowAffects > 0)
-                {
-                    return Created("Sửa thành công", employee);
-                }
-                else
-                {
-                    return NoContent();
-                }
-
-            }
-            catch (Exception ex)
-            {
-                _responseError.ErrorCode = MISAConst.MISACodeErrorException;
-                _responseError.DevMsg = ex.Message;
-                _responseError.UserMsg = Core.Properties.Resources.ErrorException;
-                return StatusCode(500, _responseError);
-            }
-        }
-
-        [HttpDelete("{employeeId}")]
-        public IActionResult Delete(Guid employeeId)
-        {
-            try
-            {
-                var employeeContext = new EmployeeContext();
-
-                var rowAffects = employeeContext.Delete(employeeId);
-
-                // Them du lieu
-                // Tra ve ket qua
-                // - 200: Ok
-                // - 201: Them moi thanh cong du lieu vao database
-                // - 400: BadRequest - du lieu dau vao tu client khong hop le
-                // - 404: Khong tim thay resource phu hop
-                // - 500: Loi phia server
-                if (rowAffects > 0)
-                {
-                    return Ok(1); // StatusCode (200, "MISA")
-                }
-                else
-                {
-                    return NoContent();
-                }
-            }
-            catch (Exception ex)
-            {
-                _responseError.ErrorCode = MISAConst.MISACodeErrorException;
-                _responseError.DevMsg = ex.Message;
-                _responseError.UserMsg = Core.Properties.Resources.ErrorException;
-                return StatusCode(500, _responseError);
-            }
-        }
-
-        #endregion
-
     }
 }

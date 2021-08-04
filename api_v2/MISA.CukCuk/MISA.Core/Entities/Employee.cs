@@ -2,6 +2,7 @@
 using MISA.Core.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,16 +13,20 @@ namespace MISA.Core.Entities
     /// Thông tin nhân viên
     /// </summary>
     /// CreatedBy: PNAnh (24/7/2021)
-    public class Employee
+    public class Employee : BaseEntity
     {
         #region Properties
         /// <summary>
         /// Khóa chính
         /// </summary>
+        [PrimaryKey]
         public Guid EmployeeId { get; set; }    
         /// <summary>
         /// Mã nhân viên
         /// </summary>
+        [Required]
+        [CheckDuplicate]
+        [DisplayName("Mã nhân viên")]
         public string EmployeeCode { get; set; }
         /// <summary>
         /// Ten

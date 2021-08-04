@@ -117,13 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Add_Success" xml:space="preserve">
+    <value>Thêm thành công</value>
+  </data>
+  <data name="Delete_Success" xml:space="preserve">
+    <value>Xóa thành công</value>
+  </data>
   <data name="ErrorException" xml:space="preserve">
     <value>Có lỗi xảy ra, vui lòng liên hệ MISA</value>
   </data>
-  <data name="ValidateError_EmployeeCodeEmpty" xml:space="preserve">
-    <value>Mã nhân viên không được phép để trống, vui lòng kiểm tra lại!</value>
+  <data name="Invalid" xml:space="preserve">
+    <value>Dữ liệu không hợp lệ</value>
   </data>
-  <data name="ValidateError_EmployeeCodeExist" xml:space="preserve">
-    <value>Mã nhân viên đã tồn tại trong hệ thống, vui lòng nhập mã khác</value>
+  <data name="Update_Success" xml:space="preserve">
+    <value>Sửa thành công</value>
+  </data>
+  <data name="ValidateError_Dupliacate" xml:space="preserve">
+    <value>{0} đã tồn tại trong hệ thống, vui lòng nhập mã khác</value>
+  </data>
+  <data name="ValidateError_Empty" xml:space="preserve">
+    <value>{0} không được phép để trống, vui lòng kiểm tra lại!</value>
   </data>
 </root>

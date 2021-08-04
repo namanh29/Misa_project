@@ -61,6 +61,24 @@ namespace MISA.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thêm thành công.
+        /// </summary>
+        public static string Add_Success {
+            get {
+                return ResourceManager.GetString("Add_Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Xóa thành công.
+        /// </summary>
+        public static string Delete_Success {
+            get {
+                return ResourceManager.GetString("Delete_Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Có lỗi xảy ra, vui lòng liên hệ MISA.
         /// </summary>
         public static string ErrorException {
@@ -70,20 +88,38 @@ namespace MISA.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mã nhân viên không được phép để trống, vui lòng kiểm tra lại!.
+        ///   Looks up a localized string similar to Dữ liệu không hợp lệ.
         /// </summary>
-        public static string ValidateError_EmployeeCodeEmpty {
+        public static string Invalid {
             get {
-                return ResourceManager.GetString("ValidateError_EmployeeCodeEmpty", resourceCulture);
+                return ResourceManager.GetString("Invalid", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mã nhân viên đã tồn tại trong hệ thống, vui lòng nhập mã khác.
+        ///   Looks up a localized string similar to Sửa thành công.
         /// </summary>
-        public static string ValidateError_EmployeeCodeExist {
+        public static string Update_Success {
             get {
-                return ResourceManager.GetString("ValidateError_EmployeeCodeExist", resourceCulture);
+                return ResourceManager.GetString("Update_Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} đã tồn tại trong hệ thống, vui lòng nhập mã khác.
+        /// </summary>
+        public static string ValidateError_Dupliacate {
+            get {
+                return ResourceManager.GetString("ValidateError_Dupliacate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} không được phép để trống, vui lòng kiểm tra lại!.
+        /// </summary>
+        public static string ValidateError_Empty {
+            get {
+                return ResourceManager.GetString("ValidateError_Empty", resourceCulture);
             }
         }
     }

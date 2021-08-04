@@ -11,73 +11,27 @@ using System.Threading.Tasks;
 
 namespace MISA.Core.Services
 {
-    public class EmployeeService: IEmployeeService
+    public class EmployeeService: BaseService<Employee>, IEmployeeService
     {
-        public ServiceResult ServiceResult;
-        IEmployeeContext _employeeContext;
-        public EmployeeService(IEmployeeContext employeeContext)
-        {
-            ServiceResult = new ServiceResult();
-            _employeeContext = employeeContext;
+               
+        IEmployeeRepository _employeeRepository;
+        public EmployeeService(IEmployeeRepository employeeRepository) : base(employeeRepository)
+        {          
+            _employeeRepository = employeeRepository;
         }
 
-        /// <summary>
-        /// Hàm xử lý nghiệp vụ khi thêm nhân viên
-        /// </summary>
-        /// <param name="employee"></param>
-        /// <returns></returns>
-        public ServiceResult Add(Employee employee)
+
+        public List<Employee> GetEmployeeByDepartment(Guid departmentId)
         {
-            //var employeeContext = new EmployeeContext();
-            // 1. Check mã nhân viên đã có chưa
-            if (string.IsNullOrEmpty(employee.EmployeeCode))
-            {
-                ServiceResult.Success = false;
-                ServiceResult.MISACode = MISAConst.MISACodeErrorEmpty;
-                ServiceResult.UserMsg = Properties.Resources.ValidateError_EmployeeCodeEmpty;
-                return ServiceResult;
-            }
-            
-            // 2. Check mã nhân viên có trùng không
-            if (_employeeContext.CheckDuplicateEmployeeCode(employee.EmployeeCode))
-            {
-                ServiceResult.Success = false;
-                ServiceResult.MISACode = MISAConst.MISACodeErrorDuplicate;
-                ServiceResult.UserMsg = Properties.Resources.ValidateError_EmployeeCodeExist;
-                return ServiceResult;
-            }
-            ServiceResult.Data = _employeeContext.Add(employee);
-            return ServiceResult;
+            throw new NotImplementedException();
+        }
+    
+
+        public List<Employee> GetEmployeesFilter(string specs, Guid? departmentId, Guid? positionId)
+        {
+            return _employeeRepository.GetEmployeesFilter(specs, departmentId, positionId);
         }
 
-        /// <summary>
-        /// Hàm xử lý nghiệp vụ khi sửa nhân viên
-        /// </summary>
-        /// <param name="employee"></param>
-        /// <returns></returns>
-        public ServiceResult Update(Employee employee)
-        {
-            //var employeeContext = new EmployeeContext();
-            // 1. Check mã nhân viên đã có chưa
-            if (string.IsNullOrEmpty(employee.EmployeeCode))
-            {
-                ServiceResult.Success = false;
-                ServiceResult.MISACode = MISAConst.MISACodeErrorEmpty;
-                ServiceResult.UserMsg = Properties.Resources.ValidateError_EmployeeCodeEmpty;
-                return ServiceResult;
-            }
-
-            // 2. Check mã nhân viên có trùng không
-            if (_employeeContext.CheckDuplicateEmployeeCode(employee.EmployeeCode, employee.EmployeeId))
-            {
-                ServiceResult.Success = false;
-                ServiceResult.MISACode = MISAConst.MISACodeErrorDuplicate;
-                ServiceResult.UserMsg = Properties.Resources.ValidateError_EmployeeCodeExist;
-                return ServiceResult;
-            }
-            
-            ServiceResult.Data = _employeeContext.Update(employee);
-            return ServiceResult;
-        }
+        
     }
 }

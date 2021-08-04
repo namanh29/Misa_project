@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace MISA.Core.Interfaces.Service
 {
-    public interface IEmployeeService
+    public interface IEmployeeService: IBaseService<Employee>
     {
-        public ServiceResult Add(Employee employee);
-        public ServiceResult Update(Employee employee);
-
+        List<Employee> GetEmployeesFilter(string specs, Guid? departmentId, Guid? positionId);
+        List<Employee> GetEmployeeByDepartment(Guid departmentId);
     }
 }
