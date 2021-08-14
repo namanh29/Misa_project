@@ -18,6 +18,6 @@ namespace MISA.Core.Interfaces.Infrastructure
         /// <param name="positionId">Id vị trí</param>
         /// <returns>Danh sách nhân viên theo tiêu chí</returns>
         /// CreatedBy: PNANH (3/8/2021)
-        List<Employee> GetEmployeesFilter(string specs, Guid? departmentId, Guid? positionId);
+        Object GetEmployeesFilter(string specs, Guid? departmentId, Guid? positionId, int pageSize, int pageIndex);
     }
 }

@@ -138,4 +138,7 @@
   <data name="ValidateError_Empty" xml:space="preserve">
     <value>{0} không được phép để trống, vui lòng kiểm tra lại!</value>
   </data>
+  <data name="ValidateError_MaxLen" xml:space="preserve">
+    <value>{0} vượt quá {1} ký tự cho phép</value>
+  </data>
 </root>

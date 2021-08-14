@@ -122,5 +122,14 @@ namespace MISA.Core.Properties {
                 return ResourceManager.GetString("ValidateError_Empty", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} vượt quá {1} ký tự cho phép.
+        /// </summary>
+        public static string ValidateError_MaxLen {
+            get {
+                return ResourceManager.GetString("ValidateError_MaxLen", resourceCulture);
+            }
+        }
     }
 }

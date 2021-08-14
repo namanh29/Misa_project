@@ -13,15 +13,27 @@
                 </div>
             </div>
             <div class="popup-footer">
-                <button id="btn-cancel-popup" class="m-second-button btn-cancel" @click="btnCancel">{{btnCancelText}}</button>
-                <button id="btn-close" class="btn-default btn-close" @click="btnDelete" :style="{'background-color':bgColor}">{{btnConfirmText}}</button>
+                <BaseButton
+                    btnType="second-button btn-cancel"
+                    :btnText="btnCancelText"
+                    @click="btnCancel"
+                />
+                
+                <BaseButton
+                    btnType="btn-default btn-close"
+                    :btnText="btnConfirmText"
+                    @click="btnDelete"
+                    :bgColor="bgColor"
+                />
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import BaseButton from './BaseButton.vue';
 export default {
+  components: { BaseButton },
     props: {
         title: String,
         info: String,

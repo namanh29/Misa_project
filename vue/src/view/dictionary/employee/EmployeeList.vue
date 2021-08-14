@@ -3,10 +3,16 @@
     <div class="header-content">
       <div class="title">Danh sách nhân viên</div>
       <div class="content-feature">
-        <button class="btn-icon" id="btn-add" @click="btnAddOnClick()">
+        <!-- <button class="btn-icon" id="btn-add" @click="btnAddOnClick()">
           <div class="icon-add"></div>
           <div class="btn-text">Thêm nhân viên</div>
-        </button>
+        </button> -->
+        <BaseButton
+          btnText="Thêm nhân viên"
+          btnType="btn-icon"
+          icon="icon-add"
+          @click="btnAddOnClick"
+        />
       </div>
     </div>
     <div class="filter-bar">
@@ -16,25 +22,37 @@
           type="text"
           style="width: 275px"
           placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại"
+          @keyup.enter="getEmployeeFilter()"
+          v-model="employeeFilter"
         />
       
-        <BaseCombobox :comboboxItems="comboboxItems.positions" class="cbx" index="1"/>
+        <BaseCombobox :items="comboboxItems.positions" class="cbx" index="1" @update-item="updatePositions"/>
         
-        <BaseCombobox :comboboxItems="comboboxItems.departments" class="cbx" index="2"/>
+        <BaseCombobox :items="comboboxItems.departments" class="cbx" index="2"/>
       </div>
       <div class="filter-right">
-        <button id="btnDelete" class="m-second-button" @click="btnDeleteClick">
-          Xóa
-        </button>
-        <button
-          id="btn-refresh"
-          class="m-second-button m-btn-refresh"
+        
+        <BaseButton
+          btnText="Xóa"
+          btnType="second-button"
+          @click="btnDeleteClick"
+        />
+        
+        <BaseButton
+          btnType="btn-refresh second-button"
           @click="loadData"
-        ></button>
+        />
       </div>
     </div>
 
-    <div class="grid grid-employee">
+    <BaseTable
+      :data="Employees"
+      :fields="tableField"
+      :opened="opened"
+      @row-on-dblclick="rowOnDblClick"
+      @update-selected-items="updateItems"
+    />
+    <!-- <div class="grid grid-employee">
       <table border="0" cellspacing="0">
         <colgroup>
           <col style="width: 120px" />
@@ -85,7 +103,7 @@
           >
             <td>{{ employee.EmployeeCode }}</td>
             <td>{{ employee.FullName }}</td>
-            <td>{{ employee.GenderName }}</td>
+            <td>{{ employee.Gender }}</td>
             <td class="text-align-center">
               {{ formatDate(employee.DateOfBirth) }}
             </td>
@@ -98,7 +116,7 @@
           </tr>
         </tbody>
       </table>
-    </div>
+    </div> -->
 
     <div class="paging-bar">
       <div class="page-num">Hiển thị 1-10/1000 nhân viên</div>
@@ -130,7 +148,6 @@
       </div> -->
       <Pagination
         :total-pages="totalPages"
-        
         :current-page="currentPage"
         @pagechanged="onPageChange"
       />
@@ -141,8 +158,10 @@
       v-if="isShowDetail"
       @cancels="cancel()"
       @loadData="loadData()"
-      :employee="employeeCurrent"
+      :employeeProps="employeeCurrent"
       :formmode="formMode"
+      :departments="departments"
+      :positions="positions"
     />
     <BasePopup
       v-if="isShowPopupDel"
@@ -157,36 +176,25 @@
       <b>nhân viên này"</b> hay không?</p>
     </BasePopup>
 
-    <!-- <div id="toast">
-      <BaseToast 
-        v-if="isShowToastDel"
-        type="success"
-        message="Xóa thành công"
-      />
-      <BaseToast 
-        v-if="isShowToastAdd"
-        type="success"
-        message="Thêm thành công"
-        @cancel="cancelToast"
-      />
-    </div> -->
     <BaseLoader v-if="isShowLoader"/>
   </div>
 </template>
 
 <script>
-import axios from "axios";
-import EmployeeDetail from "./EmployeeDetail.vue";
-import Pagination from '../../../components/base/Pagination.vue';
 
+import EmployeeDetail from "./EmployeeDetail.vue";
+import EmployeeApi from '../../../api/employeeApi';
+import DepartmentApi from '../../../api/departmentApi';
+import PositionApi from '../../../api/positionApi'
+import BaseTable from '../../../components/base/BaseTable.vue';
 
 export default {
   name: "ThePage",
   components: {
     EmployeeDetail,
-    Pagination,
-   
+    BaseTable,
   },
+
   data() {
     return {
       Employees: [],
@@ -194,72 +202,134 @@ export default {
       employeeCurrent: {},
       formMode: "",
       comboboxItems: {
-        positions: [{value: 0, text: "Tất cả vị trí", isSelected: true}],
-        departments: [{value: 0, text: "Tất cả phòng ban", isSelected: true}],
+        positions: [{value: "", text: "Tất cả vị trí", isSelected: true}],
+        departments: [{value: "", text: "Tất cả phòng ban", isSelected: true}],
       },
+      departments: [],
+      positions: [],
+
+      tableField: [
+        {fieldName: "EmployeeCode", text: "Mã nhân viên"},
+        {fieldName: "FullName", text: "Họ tên"},
+        {fieldName: "GenderName", text: "Giới tính"},
+        {fieldName: "DateOfBirth", text: "Ngày sinh", textAlign: "text-align-center", format: "date"},
+        {fieldName: "PhoneNumber", text: "Điện thoại"},
+        {fieldName: "Email", text: "Email"},
+        {fieldName: "PositionName", text: "Chức vụ"},
+        {fieldName: "DepartmentName", text: "Phòng ban"},
+        {fieldName: "Salary", text: "Mức lương cơ bản", textAlign: "text-align-right", format: "money"},
+        {fieldName: "WorkStatusName", text: "Tình trạng công việc"},
+      ],
 
       opened: [],
       isShowPopupDel: false,
-      isShowToastAdd: false,
-      isShowToastDel: false,
       isShowLoader: false,
 
       // pagination
       currentPage: 1,
-      totalPages: 0
+      totalPages: 0,
+      employeeFilter: "",
+      positionFilter: "",
+      departmentFilter: ""
     };
   },
   created() {
     this.loadData();
     this.iShowLoader = false;
   },
-  props: {},
+  computed: {
+    cbxPosition(){
+      return this.comboboxItems.positions;
+    },
+    cbxDepartment(){
+      return this.comboboxItems.departments;
+    }
+  },
+  watch: {
+    comboboxItems: {
+      handler: function(val){
+        console.log(this.comboboxItems.positions);
+        val.positions.forEach((item) => {
+          if (item.isSelected == true) {
+            this.positionFilter = item.value;
+          }
+        });
+        val.departments.forEach((item) => {
+          if (item.isSelected == true) {
+            this.departmentFilter = item.value;
+          }
+        })
+      },
+      deep: true
+    },
+    
+    positionFilter(){
+      this.getEmployeeFilter()
+    },
+    departmentFilter(){
+      this.getEmployeeFilter()
+    },
+    
+  },
   methods: {
     // Ham lay du lieu tu api
-    loadData() {
+    async loadData() {
       this.Employees = [];
       let me = this;
       me.isShowLoader = true;
       // Goi api thuc hien lay du lieu
-      axios.get(`http://cukcuk.manhnv.net/v1/Employees/employeeFilter?pageSize=20&pageNumber=1&employeeFilter=nv`).then((res) => {
-        console.log(res.data);
-        me.totalPages = res.data.TotalPage;
-        setTimeout(function(){me.isShowLoader = false, me.Employees = res.data.Data;}, 500);
-        me.currentPage = 1;
-      });
+      // axios.get(`http://cukcuk.manhnv.net/v1/Employees/employeeFilter?pageSize=20&pageNumber=1&employeeFilter=nv`).then((res) => {
+      //   console.log(res.data);
+      //   me.totalPages = res.data.TotalPage;
+      //   setTimeout(function(){me.isShowLoader = false, me.Employees = res.data.Data;}, 500);
+      //   me.currentPage = 1;
+      // });
+     
+      const promise = await Promise.all([
+                EmployeeApi.getEmployeeFilter("", "", "", 10, 1),
+                DepartmentApi.getAll(),
+                PositionApi.getAll()
+            ]);
+      me.totalPages = promise[0].data.TotalPage;
+      me.currentPage = 1
+      setTimeout(function(){
+        me.isShowLoader = false;
+        me.Employees = promise[0].data.Data;  
+      }, 500);
+      
+      // axios.get("http://cukcuk.manhnv.net/v1/Positions").then((res) => {
+      //   //console.log(res.data);
+      //   res.data.forEach(function (item, index) {
+      //     me.comboboxItems.positions[index+1] = {
+      //       value: item.PositionId,
+      //       text: item.PositionName,
+      //       isSelected: false,
+      //     };
+      //   });
+      // });
 
-      axios.get("http://cukcuk.manhnv.net/v1/Positions").then((res) => {
-        //console.log(res.data);
-        res.data.forEach(function (item, index) {
-          me.comboboxItems.positions[index+1] = {
-            value: item.PositionId,
-            text: item.PositionName,
-            isSelected: false,
-          };
-        });
-      });
-      axios.get("http://cukcuk.manhnv.net/api/Department").then((res) => {
-        //console.log(res.data);
-        res.data.forEach(function (item, index) {
-          me.comboboxItems.departments[index+1] = {
-            value: item.DepartmentId,
-            text: item.DepartmentName,
-            isSelected: false,
-          };
-        });
-      });
+      promise[1].data.forEach(function(item, index){
+        me.comboboxItems.departments[index+1] = {
+          value: item.DepartmentId,
+          text: item.DepartmentName,
+          isSelected: false,
+        }
+      })
+      this.departments = promise[1].data;
+      promise[2].data.forEach(function(item, index){
+        me.comboboxItems.positions[index+1] = {
+          value: item.PositionId,
+          text: item.PositionName,
+          isSelected: false,
+        }
+      })
+      this.positions = promise[2].data;
     },
 
-    // Hàm hiển thị toast
-    onclick(){
-      this.cancelToast();
-      this.isShowToastAdd = true;
-      console.log(this.isShowToastAdd)
+    updatePositions(value){
+      this.comboboxItems.positions = [...value];
     },
-    // Ẩn toast
-    cancelToast(){
-      this.isShowToastAdd = false;
-    },
+
     // Click button them
     btnAddOnClick() {
       if (this.isShowDetail == false) {
@@ -268,45 +338,40 @@ export default {
       this.formMode = "add";
       console.log(this.isShowDetail);
     },
-
+    // Ẩn form chi tiết
     cancel() {
       this.isShowDetail = false;
       this.employeeCurrent = {};
     },
-
+    // Click chuột phải vào 1 hàng trong bảng
     rowOnDblClick(key) {
       this.isShowDetail = true;
       console.log(key.EmployeeId);
       this.formMode = "edit";
       this.employeeCurrent = key;
     },
-
-    btnDeleteClick() {
-      this.isShowPopupDel = true;
-      // var me = this;
-      // this.opened.forEach(function(item){
-      //   axios.delete(`http://cukcuk.manhnv.net/v1/Employees/${item}`).then((res)=>{
-      //     console.log(res);
-      //     me.loadData();
-      //   })
-      // })
+    updateItems(items){
+      this.opened = items
     },
+    // Sự kiện khu click button Xóa
+    btnDeleteClick() {
+      console.log(this.opened[0].EmployeeId)
+      if(this.opened.length > 0) {
+        this.isShowPopupDel = true;   
+      }
+      
+    },
+
     cancelPopup() {
       this.isShowPopupDel = false;
     },
-
-    deleteEmployee() {
+    // Hàm xóa nhân viên
+    async deleteEmployee() {
       var me = this;
-      this.opened.forEach(function (item) {
-        axios
-          .delete(`http://cukcuk.manhnv.net/v1/Employees/${item}`)
-          .then((res) => {
-            console.log(res);
-            me.loadData();
-            me.isShowPopupDel = false;
-            me.isShowToastDel = true;
-          });
-      });
+      
+      await EmployeeApi.delete(this.opened[0].EmployeeId); 
+      me.isShowPopupDel = false;
+      me.loadData(); 
     },
 
     toggle(id) {
@@ -317,23 +382,34 @@ export default {
         this.opened = [];
         this.opened.push(id);
       }
+      this.opened = {...this.opened}
     },
-
-    // Ham pagination
-    onPageChange(page) {
-      console.log(page)
-      this.currentPage = page;
-      
+    async getEmployeeFilter(){
+      this.currentPage = 1;
       this.Employees = [];
       let me = this;
       me.isShowLoader = true;
-      // Goi api thuc hien lay du lieu
+      console.log(me.comboboxItems)
       
-      axios.get(`http://cukcuk.manhnv.net/v1/Employees/employeeFilter?pageSize=20&pageNumber=${page}&employeeFilter=nv`).then((res) => {
-        console.log(res.data.Data);
-        setTimeout(function(){me.isShowLoader = false, me.Employees = res.data.Data;}, 500);
-        
-      });
+      const res = await EmployeeApi.getEmployeeFilter(me.employeeFilter, me.departmentFilter, me.positionFilter, 10, me.currentPage);
+      me.totalPages = res.data.TotalPage;
+      setTimeout(function(){me.isShowLoader = false, me.Employees = res.data.Data;}, 500);
+    },
+    // Ham pagination
+    async onPageChange(page) {
+      console.log(page)
+      this.currentPage = page;
+      this.Employees = [];
+      let me = this;
+      me.isShowLoader = true;
+
+      // Goi api thuc hien lay du lieu
+      // axios.get(`http://cukcuk.manhnv.net/v1/Employees/employeeFilter?pageSize=20&pageNumber=${page}&employeeFilter=nv`).then((res) => {
+      //   console.log(res.data.Data);
+      //   setTimeout(function(){me.isShowLoader = false, me.Employees = res.data.Data;}, 500);
+      // });
+      const res = await EmployeeApi.getEmployeeFilter(this.employeeFilter, this.departmentFilter, this.positionFilter, 10, page);
+      setTimeout(function(){me.isShowLoader = false, me.Employees = res.data.Data;}, 500);
     },
     /** -------------------------------------------
      * Format dữ liệu ngày tháng sang ngày/tháng/năm

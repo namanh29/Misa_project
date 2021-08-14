@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace MISA.Infrastructure
 {
-    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : BaseEntity
+    public class BaseRepository<TEntity> : IBaseRepository<TEntity>, IDisposable where TEntity : BaseEntity
     {
         #region DECLARE
         IConfiguration _configuration;
@@ -30,25 +30,55 @@ namespace MISA.Infrastructure
         }
         public int Add(TEntity entity)
         {
-
-            var rowAffects = _dbConnection.Execute($"Proc_Insert{_className}", entity, commandType: CommandType.StoredProcedure);
+            var rowAffects = 0;
+            _dbConnection.Open();
+            using (var transaction = _dbConnection.BeginTransaction())
+            {
+                try
+                {
+                    rowAffects = _dbConnection.Execute($"Proc_Insert{_className}", entity, commandType: CommandType.StoredProcedure);
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                }
+                
+            }
+            
             return rowAffects;
         }
 
         public int Delete(Guid entityId)
         {
-            DynamicParameters parameters = new DynamicParameters();
-            parameters.Add("@EntityId", entityId);
-            var sqlCommand = $"DELETE FROM {_className} WHERE {_className}Id = @EntityId";
-            // Lay du lieu
-            var rowAffects = _dbConnection.Execute(sqlCommand, parameters);
+            var rowAffects = 0;
+            _dbConnection.Open();
+            using (var transaction = _dbConnection.BeginTransaction())
+            {
+                try
+                {
+                    DynamicParameters parameters = new DynamicParameters();
+                    parameters.Add("@EntityId", entityId);
+                    var sqlCommand = $"DELETE FROM {_className} WHERE {_className}Id = @EntityId";
+                    // Lay du lieu
+                    rowAffects = _dbConnection.Execute(sqlCommand, parameters);
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+
+                    transaction.Rollback();
+                }
+                
+            }
+            
             return rowAffects;
         }
 
         public List<TEntity> GetAll()
         {
-            var sqlCommnad = $"SELECT * FROM {_className}";
-            var entities = _dbConnection.Query<TEntity>(sqlCommnad).ToList();
+            //var sqlCommnad = $"SELECT * FROM {_className}";
+            var entities = _dbConnection.Query<TEntity>($"Proc_Get{_className}s", commandType:CommandType.StoredProcedure).ToList();
             return entities;
         }
 
@@ -64,7 +94,22 @@ namespace MISA.Infrastructure
 
         public int Update(TEntity entity)
         {
-            var rowAffects = _dbConnection.Execute("Proc_UpdateEmployee", entity, commandType: CommandType.StoredProcedure);
+            var rowAffects = 0;
+            _dbConnection.Open();
+            using (var transaction = _dbConnection.BeginTransaction())
+            {
+                try
+                {
+                    rowAffects = _dbConnection.Execute($"Proc_Update{_className}", entity, commandType: CommandType.StoredProcedure);
+                    transaction.Commit();
+                }
+                catch (Exception)
+                {
+                    transaction.Rollback();
+                }
+                
+            }
+            
             return rowAffects;
         }
 
@@ -88,6 +133,14 @@ namespace MISA.Infrastructure
             }
             var entityReturn = _dbConnection.QueryFirstOrDefault<TEntity>(sqlCommand);
             return entityReturn;
+        }
+
+        public void Dispose()
+        {
+            if(_dbConnection.State == ConnectionState.Open)
+            {
+                _dbConnection.Close();
+            }
         }
     }
 

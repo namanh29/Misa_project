@@ -4,7 +4,10 @@
     <div class="dialog-content">
       <div class="dialog-header">
         <div class="header-title">Thông tin nhân viên</div>
-        <button id="btn-x-dialog" class="btn-x" @click="btnCancelClick()"></button>
+        <BaseButton
+          btnType="btn-x"
+          @click="btnCancelClick"
+        />
       </div>
       <div class="dialog-main">
         <div class="dialog-avatar">
@@ -56,11 +59,11 @@
                           :required="false"
                           >
               </BaseInput>
-              <div>
-                <div class="label">Giới tính</div>
-                
-                <BaseCombobox :comboboxItems="comboboxItems.genders" />
-              </div>
+              
+              <BaseCombobox 
+                label="Giới tính"
+                :selectedItem="employee.Gender"
+                :items="comboboxItems.genders" />          
             </div>
             <div class="label-infor">
               
@@ -114,12 +117,12 @@
             <div class="label-infor">
               <BaseCombobox
                   label="Vị trí"
-                  :comboboxItems="comboboxItems.positions"
+                  :items="comboboxItems.positions"
                   :selectedItem="employee.PositionName"
                 />
               <BaseCombobox
                   label="Phòng ban"
-                  :comboboxItems="comboboxItems.departments"
+                  :items="comboboxItems.departments"
                   :selectedItem="employee.DepartmentName"
                 />
             </div>
@@ -150,7 +153,7 @@
               </BaseInput>
               <BaseCombobox
                   label="Tình trạng công việc"
-                  :comboboxItems="comboboxItems.workStatus"
+                  :items="comboboxItems.workStatus"
                   :selectedItem="employee.WorkStatus"
                 />
             </div>
@@ -158,17 +161,22 @@
         </div>
       </div>
       <div class="dialog-footer">
-        <button id="btn-save" class="btn-icon" @click="btnSaveClick()">
+        <!-- <button id="btn-save" class="btn-icon" @click="btnSaveClick()">
           <div class="icon-save"><i class="far fa-save"></i></div>
           <div class="btn-text">Lưu</div>
-        </button>
-        <button
-          id="btn-cancel-dialog"
-          class="m-second-button btn-cancel"
-          @click="btnCancelClick()"
-        >
-          Hủy
-        </button>
+        </button> -->
+        <BaseButton
+          btnType="btn-icon"
+          btnText="Lưu"
+          icon="far fa-save"
+          @click="btnSaveClick"
+        />
+        
+        <BaseButton
+          btnType="second-button btn-cancel"
+          btnText="Hủy"
+          @click="btnCancelClick"
+        />
       </div>
     </div>
 
@@ -191,27 +199,36 @@
 </style>
 
 <script>
-import axios from "axios";
+
+import EmployeeApi from "../../../api/employeeApi"
 
 export default {
+  
   name: "EmployeeDetail",
 
   created() {
     this.createData();
   },
-
+  mounted() {
+    this.$refs['input1'].$refs['BaseInput'].focus()
+  },
   props: {
-    employee: Object,
+    employeeProps: Object,
     formmode: String,
+    departments: {
+      type: Array
+    },
+    positions: Array
   },
 
   data() {
     return {
+      employee: {...this.employeeProps},
       formMode: this.formmode,
       isShowPopup: false, 
-      dateOfBirth : this.formatDate(this.employee.DateOfBirth),
-      identityDate : this.formatDate(this.employee.IdentityDate),
-      joinDate: this.formatDate(this.employee.JoinDate),
+      dateOfBirth : this.formatDate(this.employeeProps.DateOfBirth),
+      identityDate : this.formatDate(this.employeeProps.IdentityDate),
+      joinDate: this.formatDate(this.employeeProps.JoinDate),
       
       comboboxItems: {
         genders: [
@@ -231,51 +248,41 @@ export default {
   },
 
   methods: {
-    createData() {
+    async createData() {
       let me = this;
-      // Goi api thuc hien lay du lieu
-      axios.get("http://cukcuk.manhnv.net/v1/Positions").then((res) => {
-        //console.log(res.data);
-        res.data.forEach(function (item, index) {
-          me.comboboxItems.positions[index] = {
-            value: item.PositionId,
-            text: item.PositionName,
-            isSelected: false,
-          };
-          if (
-            me.comboboxItems.positions[index].value == me.employee.PositionId
-          ) {
-            me.comboboxItems.positions[index].isSelected = true;
-            
-          }
-        });
-      });
-      axios.get("http://cukcuk.manhnv.net/api/Department").then((res) => {
-        //console.log(res.data);
-        res.data.forEach(function (item, index) {
-          me.comboboxItems.departments[index] = {
-            value: item.DepartmentId,
-            text: item.DepartmentName,
-            isSelected: false,
-          };
-          if (
-            me.comboboxItems.departments[index].value ==
-            me.employee.DepartmentId
+      
+      this.departments.forEach(function(item, index){
+        me.comboboxItems.departments[index] = {
+          value: item.DepartmentId,
+          text: item.DepartmentName,
+          isSelected: false,
+        }
+        if (
+            me.comboboxItems.departments[index].value == me.employee.DepartmentId
           ) {
             me.comboboxItems.departments[index].isSelected = true;
           }
-        });
-      });
-      console.log(me.comboboxItems.positions);
+      })
+
+      this.positions.forEach(function(item, index){
+        me.comboboxItems.positions[index] = {
+          value: item.PositionId,
+          text: item.PositionName,
+          isSelected: false,
+        }
+        if (
+            me.comboboxItems.positions[index].value == me.employee.PositionId
+          ) {
+            me.comboboxItems.positions[index].isSelected = true;
+          }
+      })
 
       this.comboboxItems.genders.forEach((item) => {
-        console.log(item);
         if (item.value == this.employee.Gender) {
           item.isSelected = true;
         }
       });
       this.comboboxItems.workStatus.forEach((item) => {
-        console.log(item);
         if (item.value == this.employee.WorkStatus) {
           item.isSelected = true;
         }
@@ -287,7 +294,7 @@ export default {
        
     },
 
-    btnSaveClick() {
+    async btnSaveClick() {
       var me = this;
       let isInvalid = false;
       const indexInvalid = [];
@@ -333,32 +340,26 @@ export default {
           this.employee.WorkStatus = item.value;
         }
       });
-      console.log(this.comboboxItems);
-      console.log(this.employee);
+      
+      
       if (this.formmode == "add") {
-        axios
-          .post("http://cukcuk.manhnv.net/v1/Employees", this.employee)
-          .then(function (res) {
-            console.log(res);
-            //alert("Thêm thành công!");
-            me.$store.commit('setToast', {
+        
+        await EmployeeApi.add(this.employee);
+         me.$store.commit('setToast', {
               type: 'success',
               message: "Thêm thành công"
             })
             me.$emit("cancels");
             me.$emit("loadData");
-          });
-      } else {
-        axios.put(`http://cukcuk.manhnv.net/v1/Employees/${this.employee.EmployeeId}`, this.employee).then(function(res){
-          console.log(res.data);
-          //alert("Sửa thành công!");
-          me.$store.commit('setToast', {
-            type: 'success',
-            message: "Sửa thành công"
-          })
-          me.$emit("cancels");
-          me.$emit("loadData");
-        });
+      } 
+      else {
+        await EmployeeApi.update(this.employee.EmployeeId, this.employee);
+         me.$store.commit('setToast', {
+              type: 'success',
+              message: "Sửa thành công"
+            })
+            me.$emit("cancels");
+            me.$emit("loadData");
       }
       
     },

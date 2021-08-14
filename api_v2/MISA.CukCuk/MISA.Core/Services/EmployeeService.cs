@@ -20,16 +20,19 @@ namespace MISA.Core.Services
             _employeeRepository = employeeRepository;
         }
 
-
+        protected override bool ValidateCustom(Employee entity)
+        {
+            return true;
+        }
         public List<Employee> GetEmployeeByDepartment(Guid departmentId)
         {
             throw new NotImplementedException();
         }
     
 
-        public List<Employee> GetEmployeesFilter(string specs, Guid? departmentId, Guid? positionId)
+        public object GetEmployeesFilter(string specs, Guid? departmentId, Guid? positionId, int pageSize, int pageIndex)
         {
-            return _employeeRepository.GetEmployeesFilter(specs, departmentId, positionId);
+            return _employeeRepository.GetEmployeesFilter(specs, departmentId, positionId, pageSize, pageIndex);
         }
 
         

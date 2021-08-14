@@ -30,29 +30,21 @@ namespace MISA.CukCuk.Api.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            try
-            {
-                // Lay du lieu
-                //var employeeContext = new EmployeeContext();
-                var entity = _baseService.GetAll();
-                //var employees = _dbConnection.Query<Employee>("Proc_GetEmployees", commandType: CommandType.StoredProcedure);
 
-                if (entity.Count() > 0)
-                {
-                    return Ok(entity); // StatusCode (200, "MISA")
-                }
-                else
-                {
-                    return NoContent();
-                }
-            }
-            catch (Exception ex)
+            // Lay du lieu
+            //var employeeContext = new EmployeeContext();
+            var entity = _baseService.GetAll();
+            //var employees = _dbConnection.Query<Employee>("Proc_GetEmployees", commandType: CommandType.StoredProcedure);
+
+            if (entity.Count() > 0)
             {
-                _responseError.ErrorCode = MISAConst.MISACodeErrorException;
-                _responseError.DevMsg = ex.Message;
-                _responseError.UserMsg = Core.Properties.Resources.ErrorException;
-                return StatusCode(500, _responseError);
+                return Ok(entity); // StatusCode (200, "MISA")
             }
+            else
+            {
+                return NoContent();
+            }
+
 
         }
 
@@ -65,28 +57,20 @@ namespace MISA.CukCuk.Api.Controllers
         [HttpGet("{entityId}")]
         public IActionResult Get(Guid entityId)
         {
-            try
-            {
-                // Lay du lieu
-                //var employeeContext = new EmployeeContext();
-                var entity = _baseService.GetById(entityId);
 
-                if (entity != null)
-                {
-                    return Ok(entity); // StatusCode (200, "MISA")
-                }
-                else
-                {
-                    return NoContent();
-                }
-            }
-            catch (Exception ex)
+            // Lay du lieu
+            //var employeeContext = new EmployeeContext();
+            var entity = _baseService.GetById(entityId);
+
+            if (entity != null)
             {
-                _responseError.ErrorCode = MISAConst.MISACodeErrorException;
-                _responseError.DevMsg = ex.Message;
-                _responseError.UserMsg = Core.Properties.Resources.ErrorException;
-                return StatusCode(500, _responseError);
+                return Ok(entity); // StatusCode (200, "MISA")
             }
+            else
+            {
+                return NoContent();
+            }
+
 
         }
 
@@ -103,35 +87,26 @@ namespace MISA.CukCuk.Api.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] TEntity entity)
         {
-            try
+
+            var serviceResult = _baseService.Add(entity);
+            // Validate dữ liệu:                           
+            if (serviceResult.Success == false)
             {
-                var serviceResult = _baseService.Add(entity);
-                // Validate dữ liệu:                           
-                if (serviceResult.Success == false)
-                {
-                    return BadRequest(serviceResult);
-                }          
-
-                var rowAffects = (int)serviceResult.Data;
-
-                
-                if (rowAffects > 0)
-                {
-                    return Created(Core.Properties.Resources.Add_Success, entity);
-                }
-                else
-                {
-                    return NoContent();
-                }
-
+                return BadRequest(serviceResult);
             }
-            catch (Exception ex)
+
+            var rowAffects = (int)serviceResult.Data;
+
+            if (rowAffects > 0)
             {
-                _responseError.ErrorCode = MISAConst.MISACodeErrorException;
-                _responseError.DevMsg = ex.Message;
-                _responseError.UserMsg = Core.Properties.Resources.ErrorException;
-                return StatusCode(500, _responseError);
+                return Created(Core.Properties.Resources.Add_Success, entity);
             }
+            else
+            {
+                return NoContent();
+            }
+
+
         }
 
 
@@ -146,65 +121,49 @@ namespace MISA.CukCuk.Api.Controllers
         [HttpPut("{entityId}")]
         public IActionResult Put([FromBody] TEntity entity, [FromRoute] Guid entityId)
         {
-            try
+
+            // Gan Id cho entity
+            var keyProperty = entity.GetType().GetProperty($"{typeof(TEntity).Name}Id");
+            keyProperty.SetValue(entity, entityId);
+
+            var serviceResult = _baseService.Update(entity);
+
+            // Validate dữ liệu:
+            if (serviceResult.Success == false)
             {
-                // Gan Id cho entity
-                var keyProperty = entity.GetType().GetProperty($"{typeof(TEntity).Name}Id");
-                keyProperty.SetValue(entity, entityId);
-
-                var serviceResult = _baseService.Update(entity);
-
-                // Validate dữ liệu:
-                if (serviceResult.Success == false)
-                {
-                    return BadRequest(serviceResult);
-                }
-
-                // Lay du lieu
-                int rowAffects = (int)serviceResult.Data;
-            
-                if (rowAffects > 0)
-                {
-                    return Created(Core.Properties.Resources.Update_Success, entity);
-                }
-                else
-                {
-                    return NoContent();
-                }
-
+                return BadRequest(serviceResult);
             }
-            catch (Exception ex)
+
+            // Lay du lieu
+            int rowAffects = (int)serviceResult.Data;
+
+            if (rowAffects > 0)
             {
-                _responseError.ErrorCode = MISAConst.MISACodeErrorException;
-                _responseError.DevMsg = ex.Message;
-                _responseError.UserMsg = Core.Properties.Resources.ErrorException;
-                return StatusCode(500, _responseError);
+                return Created(Core.Properties.Resources.Update_Success, entity);
             }
+            else
+            {
+                return NoContent();
+            }
+
+
         }
 
         [HttpDelete("{entityId}")]
         public IActionResult Delete(Guid entityId)
         {
-            try
-            {              
-                var rowAffects = _baseService.Delete(entityId).Data;
-              
-                if ((int)rowAffects > 0)
-                {
-                    return Ok(Core.Properties.Resources.Delete_Success); // StatusCode (200, "MISA")
-                }
-                else
-                {
-                    return NoContent();
-                }
-            }
-            catch (Exception ex)
+
+            var rowAffects = _baseService.Delete(entityId).Data;
+
+            if ((int)rowAffects > 0)
             {
-                _responseError.ErrorCode = MISAConst.MISACodeErrorException;
-                _responseError.DevMsg = ex.Message;
-                _responseError.UserMsg = Core.Properties.Resources.ErrorException;
-                return StatusCode(500, _responseError);
+                return Ok(Core.Properties.Resources.Delete_Success); // StatusCode (200, "MISA")
             }
+            else
+            {
+                return NoContent();
+            }
+
         }
 
         #endregion

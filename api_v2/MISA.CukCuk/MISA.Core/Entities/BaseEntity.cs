@@ -22,8 +22,23 @@ namespace MISA.Core.Entities
     {
 
     }
+    [AttributeUsage(AttributeTargets.Property)]
+    public class MaxLength:Attribute
+    {
+        public int Value { get; set; }
+        public string ErrorMsg { get; set; }
+        public MaxLength(int length)
+        {
+            this.Value = length;
+            
+        }
+    }
     public class BaseEntity
     {
         public EntityState EntityState { get; set; } = EntityState.Add;
+        public DateTime? CreatedDate { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime? ModifiedDate { get; set; }
+        public string ModifiedBy { get; set; }
     }
 }

@@ -38,7 +38,7 @@ const routes = [
   },
   {
     path: '/dic/purchase',
-    name: "Setting",
+    name: "Purchase",
     component: CustomerList,
     meta: { title: "Mua hàng" }
   }

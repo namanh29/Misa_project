@@ -10,7 +10,7 @@ namespace MISA.Core.Interfaces.Service
 {
     public interface IEmployeeService: IBaseService<Employee>
     {
-        List<Employee> GetEmployeesFilter(string specs, Guid? departmentId, Guid? positionId);
+        object GetEmployeesFilter(string specs, Guid? departmentId, Guid? positionId, int pageSize, int pageIndex);
         List<Employee> GetEmployeeByDepartment(Guid departmentId);
     }
 }

@@ -33,3 +33,4 @@ C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api_v2\MISA.CukCuk\MISA.CukCuk.Ap
 C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api_v2\MISA.CukCuk\MISA.CukCuk.Api\bin\Debug\net5.0\MISA.Infrastructure.pdb
 C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api_v2\MISA.CukCuk\MISA.CukCuk.Api\bin\Debug\net5.0\Dapper.dll
 C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api_v2\MISA.CukCuk\MISA.CukCuk.Api\bin\Debug\net5.0\MySqlConnector.dll
+C:\Users\Nam Anh\OneDrive\Desktop\Misa_project\api_v2\MISA.CukCuk\MISA.CukCuk.Api\bin\Debug\net5.0\Newtonsoft.Json.dll

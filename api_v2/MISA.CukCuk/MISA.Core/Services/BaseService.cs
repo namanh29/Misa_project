@@ -25,6 +25,7 @@ namespace MISA.Core.Services
             entity.EntityState = Enums.EntityState.Add;
             // Validate
             var isValid = Validate(entity);
+            
             if (isValid == true)
             {
                 _serviceResult.Success = true;
@@ -79,16 +80,17 @@ namespace MISA.Core.Services
             var properties = entity.GetType().GetProperties();
             foreach(var property in properties)
             {
-                var attr = property.GetCustomAttributes(typeof(DisplayNameAttribute), true);
-                
+                var propertyValue = property.GetValue(entity);
+                var displayNameAttr = property.GetCustomAttributes(typeof(DisplayNameAttribute), true);
+                var displayName = string.Empty;
+                if(displayNameAttr.Length > 0)
+                {
+                    displayName = (displayNameAttr[0] as DisplayNameAttribute).DisplayName;
+                }
                 // Kiểm tra xem có attribute cần phải validate không
                 if (property.IsDefined(typeof(Required), false))
                 {
-                    // Check bắt buộc nhập
-                    //var displayName = attr.Cast<DisplayNameAttribute>().Single().DisplayName;
-                    var displayName = (attr[0] as DisplayNameAttribute).DisplayName;
-                    var propertyValue = property.GetValue(entity);
-                    
+                    // Check bắt buộc nhập                                                    
                     if(string.IsNullOrEmpty((string)propertyValue))
                     {
                         isValidate = false;
@@ -99,8 +101,7 @@ namespace MISA.Core.Services
                     }
                 }
                 if(property.IsDefined(typeof(CheckDuplicate), false))
-                {
-                    var displayName = attr.Cast<DisplayNameAttribute>().Single().DisplayName;
+                {                  
                     // Check trùng dữ liệu                    
                     var entityDuplicate = _baseRepository.GetByProperty(entity, property);
                     if(entityDuplicate != null)
@@ -112,9 +113,36 @@ namespace MISA.Core.Services
                         messageError.Add(string.Format(Properties.Resources.ValidateError_Dupliacate, $"{displayName}"));
                     }
                 }
+                if (property.IsDefined(typeof(MaxLength), false))
+                {
+                    var attrMaxLength = property.GetCustomAttributes(typeof(MaxLength), true)[0];                 
+                    var maxLength = (attrMaxLength as MaxLength).Value;                  
+                    if (propertyValue.ToString().Trim().Length > maxLength)
+                    {
+                        isValidate = false;
+                        _serviceResult.Success = false;
+                        _serviceResult.MISACode = MISAConst.MISACodeErrorDuplicate;
+                        _serviceResult.UserMsg = Properties.Resources.Invalid;
+                        messageError.Add(string.Format(Properties.Resources.ValidateError_MaxLen, $"{displayName}", $"{maxLength}"));
+                    }
+                }
             }
             _serviceResult.Data = messageError;
+            if (isValidate == true)
+            {
+                isValidate = ValidateCustom(entity);
+            }
             return isValidate;
         }
+
+        /// <summary>
+        /// Hàm thực hiện kiểm tra dữ liệu / nghiệp vụ tùy chỉnh 
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        protected virtual bool ValidateCustom(TEntity entity)
+        {
+            return true;
+        } 
     }
 }

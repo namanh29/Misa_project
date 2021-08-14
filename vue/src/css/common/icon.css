@@ -14,7 +14,9 @@
     height: 16px;
     text-align: center;
 }
-i .far .fa-save {
+.far .fa-save {
     display: block;
     color: white;
+    width: 16px;
+    height: 16px;
 } 

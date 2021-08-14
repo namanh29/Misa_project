@@ -58,7 +58,6 @@ export default {
     // },
     created() {
         this.dropdownItems.forEach(item=>{
-            console.log(item);
             if(item.isSelected === true){
                 this.ddInput = item.text;
             }

@@ -36,7 +36,7 @@ export default {
     props: {
         label: String,
         selectedPosition: Number,
-        comboboxItems: Array,
+        items: Array,
         selectedItem: {
             type: [String, Number],
         },
@@ -44,17 +44,25 @@ export default {
     },
     data() {
         return {
+            comboboxItems: this.items, 
             isShow : false,
             cbxInput: this.selectedItem,
             cbxItems: [],
             currentFocus: 0,
-            cbxActive: false
+            cbxActive: false,
         }
     },
-    
+    // watch: {
+    //     items: {
+    //         handler: function(val){
+    //             this.comboboxItems = val;
+    //         },
+    //         deep: true
+    //     }
+    // },
     created() {
         this.comboboxItems.forEach(item=>{
-            console.log(item);
+            //console.log(item);
             if(item.isSelected === true){
                 this.cbxInput = item.text;
             }
@@ -83,8 +91,9 @@ export default {
                 }
                 
             })
-            
-            
+            this.comboboxItems = [...this.comboboxItems]
+            console.log(this.comboboxItems)
+            // this.$emit("update-item", this.comboboxItems) 
         },
 
         autocomplete(){
@@ -128,12 +137,7 @@ export default {
                 else if (event.keyCode == 13) {
                     event.preventDefault();
                     if(this.currentFocus > -1){
-                        // let text = $(this).text();
-                        // let value = $(this).attr('value');
-                        // $('input').val(text);
-                        // $('.combobox-list').hide();
-
-                        // $('input').attr('key', value);
+                        
                         this.clickItem(this.cbxItems[this.currentFocus].text);
                     }
                 }

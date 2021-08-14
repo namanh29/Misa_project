@@ -9,7 +9,7 @@
 <style scoped>
 .loader-modal {
     
-    position: fixed; /* Stay in place */
+    position: absolute; /* Stay in place */
     z-index: 999; /* Sit on top */
     left: 0;
     top: 0;

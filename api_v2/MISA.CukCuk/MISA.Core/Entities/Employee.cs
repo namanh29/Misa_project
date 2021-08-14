@@ -20,20 +20,21 @@ namespace MISA.Core.Entities
         /// Khóa chính
         /// </summary>
         [PrimaryKey]
-        public Guid EmployeeId { get; set; }    
+        public Guid EmployeeId { get; set; }
         /// <summary>
         /// Mã nhân viên
         /// </summary>
         [Required]
         [CheckDuplicate]
         [DisplayName("Mã nhân viên")]
+        [MaxLength(20)]
         public string EmployeeCode { get; set; }
         /// <summary>
         /// Ten
         /// </summary>
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        
+
         /// <summary>
         /// Họ và tên
         /// </summary>
@@ -42,6 +43,15 @@ namespace MISA.Core.Entities
         /// Giới tính
         /// </summary>
         public Gender? Gender { get; set; }
+        public string GenderName
+        {
+            get
+            {
+                if (this.Gender == Enums.Gender.Male) return "Nam";
+                else if (this.Gender == Enums.Gender.Female) return "Nữ";
+                else return "Không xác định";
+            }
+        }
         public DateTime? DateOfBirth { get; set; }
         /// <summary>
         /// Số điện thoại
@@ -63,8 +73,18 @@ namespace MISA.Core.Entities
         public int EducationalBackground { get; set; }
         public Guid QualificationId { get; set; }
         public Guid DepartmentId { get; set; }
+        public string DepartmentName { get; set; }
         public Guid PositionId { get; set; }
+        public string PositionName { get; set; }
         public int WorkStatus { get; set; }
+        public string WorkStatusName
+        {
+            get
+            {
+                if (WorkStatus == 1) return "Đang làm việc";
+                else return "Nghỉ hưu";
+            }
+        }
         public string PersonalTaxCode { get; set; }
         public double Salary { get; set; }
 
